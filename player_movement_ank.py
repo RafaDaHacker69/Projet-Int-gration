@@ -2,7 +2,7 @@ import pygame
 
 class Player:
     def __init__(self, x_position, y_position, width, height, controls):
-        # Initial player setup
+        # Configuration initiale du joueur
         self.x_position = x_position
         self.y_position = y_position
         self.width = width
@@ -13,9 +13,9 @@ class Player:
         self.max_speed = 6
         self.gravity = 0.3
         self.jump_force = 7
-        self.acceleration = 0.5  # Acceleration when moving
-        self.friction = 0.1  # Deceleration when no keys are pressed
-        self.controls = controls  # Controls (e.g., 'wasd' or 'arrows')
+        self.acceleration = 0.5  # Accélération lors du déplacement
+        self.friction = 0.1  # Décélération lorsque aucune touche n'est enfoncée
+        self.controls = controls  # Contrôles (ex. 'wasd' ou 'arrows')
 
     def handle_input(self, keys):
         move_direction = 0
@@ -36,10 +36,10 @@ class Player:
                 self.on_ground = False
                 self.velocity_y = -self.jump_force
 
-        # Apply acceleration
+        # Appliquer l'accélération
         self.velocity_x += move_direction * self.acceleration
 
-        # Limit max speed
+        # Limiter la vitesse maximale
         self.velocity_x = max(-self.max_speed, min(self.velocity_x, self.max_speed))
 
     def apply_gravity(self):
@@ -54,7 +54,7 @@ class Player:
             self.velocity_x = min(0, self.velocity_x + self.friction)
 
     def check_collisions(self, base_y_position):
-        # Ground collision check
+        # Vérification des collisions avec le sol
         if self.y_position >= base_y_position:
             self.y_position = base_y_position
             self.velocity_y = 0
@@ -62,7 +62,7 @@ class Player:
 
     def update_position(self):
         self.x_position += self.velocity_x
-        self.apply_friction()  # Apply friction after updating position
+        self.apply_friction()  # Appliquer la friction après la mise à jour de la position
 
     def draw(self, game_display, color):
         pygame.draw.rect(game_display, color, (self.x_position, self.y_position, self.width, self.height))
