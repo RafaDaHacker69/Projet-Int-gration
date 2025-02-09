@@ -22,8 +22,13 @@ rect2 = pygame.Surface((100,80),pygame.SRCALPHA)
 #rect.fill("green")
 #rect2.fill("yellow")
 
+#Bras des personnages
 pygame.draw.rect(rect,(255,0,0),(45,30,40,20))
 pygame.draw.rect(rect2,(0, 120, 250),(15,30,40,20))
+
+#Mains des personnages
+pygame.draw.rect(rect,(0,0,0),(85,30,10,20))
+pygame.draw.rect(rect2,(0,0,0),(5,30,10,20))
 
 posx = player1.x_position
 posy = player1.y_position
