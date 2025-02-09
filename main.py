@@ -150,6 +150,10 @@ while game_running:
     if keys[pygame.K_c]:
         pygame.draw.rect(rect, (0, 255, 0), (85, 30, 10, 20))
 
+    if keys[pygame.K_n]:
+        pygame.draw.rect(rect2, (0, 255, 0), (5, 30, 10, 20))
+
+
 
 # Rotation bras
     rect_rotated = pygame.transform.rotate(rect, i)
@@ -180,6 +184,8 @@ while game_running:
                 t2 = 0
             if game_event.key == pygame.K_c:
                 pygame.draw.rect(rect, (0, 0, 0), (85, 30, 10, 20))
+            if game_event.key == pygame.K_n:
+                pygame.draw.rect(rect2,(0,0,0),(5,30,10,20))
 
     pygame.display.update()
 
