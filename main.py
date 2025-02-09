@@ -1,8 +1,8 @@
-import pygame
+
 import pygame.event
 from player_movement_ank import Player
 from Bras_Rotatif import Bras_Rotatif
-
+from Boules_De_Neiges import Boules_De_Neiges
 pygame.init()
 
 game_display = pygame.display.set_mode((1240, 680))
@@ -27,8 +27,8 @@ player2_image_flip = None
 player1_image_flip = pygame.transform.flip(player_image1, True, False)
 player2_image_flip = pygame.transform.flip(player_image2, False, False)
 
-bras_rotatif = Bras_Rotatif(0,0.01,0,0)
-bras_rotatif2 = Bras_Rotatif(0,0.01,0,0)
+bras_rotatif = Bras_Rotatif(0,0.001,0,0,0.03,False,False,0)
+bras_rotatif2 = Bras_Rotatif(0,0.001,0,0,0.03,False,False,0)
 
 rect = pygame.Surface((100,80),pygame.SRCALPHA)
 rect2 = pygame.Surface((100,80),pygame.SRCALPHA)
@@ -140,19 +140,42 @@ while game_running:
 
 # Physique rotation bras
     if keys[pygame.K_LSHIFT]:
-        t += 0.1
-        i -= bras_rotatif.Calcul_de_vitesse_angulaire(omega, t, bras_rotatif.alpha, bras_rotatif.theta)
-    if keys[pygame.K_m]:
-        t2 += 0.1
-        i2 += bras_rotatif.Calcul_de_vitesse_angulaire(omega2, t2, bras_rotatif2.alpha, bras_rotatif2.theta)
+        t += 0.01
+        i -= bras_rotatif.calcul_de_vitesse_angulaire(t,omega)
+        print(f"Accélération angulaire {bras_rotatif.alpha}:")
+        print(f"Vitesse angulaire {bras_rotatif.v}:")
+        print(f"Angle théta {bras_rotatif.theta}:")
+        print(f"Temps {t}:")
+        print(f"I {i}:")
+        if i<-360:
+            i=0
 
-#Ouverture de la main
+    if keys[pygame.K_m]:
+        t2 += 0.01
+        i2 += bras_rotatif2.calcul_de_vitesse_angulaire(t2,omega2)
+        if i2>360:
+            i2=0
+#Ramasser une boule de neige
+    if bras_rotatif.ferme and bras_rotatif.boule == False and -65 > i > -115:
+        boule = Boules_De_Neiges(0.01, 0.01)
+
+        bras_rotatif.boule = True
+        print(f"Boule de neige {bras_rotatif.boule}:")
+
+    if bras_rotatif2.ferme and bras_rotatif2.boule == False and 115 > i2 > 65:
+        boule = Boules_De_Neiges(0.01, 0.01)
+        #pygame.draw.circle(0,(255,255,255),0,boule.r)
+        bras_rotatif2.boule = True
+        print(f"Boule de neige {bras_rotatif2.boule}:")
+
+
+#Fermeture de la main
     if keys[pygame.K_c]:
         pygame.draw.rect(rect, (0, 255, 0), (85, 30, 10, 20))
-
+        bras_rotatif.ferme=True
     if keys[pygame.K_n]:
         pygame.draw.rect(rect2, (0, 255, 0), (5, 30, 10, 20))
-
+        bras_rotatif2.ferme = True
 
 
 # Rotation bras
@@ -180,13 +203,25 @@ while game_running:
         if game_event.type == pygame.KEYUP:
             if game_event.key == pygame.K_LSHIFT:
                 t = 0
+                bras_rotatif.omega = 0.03
+                omega=0
+                print(f" Shift Up {t}:")
             if game_event.key == pygame.K_m:
                 t2 = 0
+                bras_rotatif2.omega = 0.03
+                omega2=0
             if game_event.key == pygame.K_c:
                 pygame.draw.rect(rect, (0, 0, 0), (85, 30, 10, 20))
+                bras_rotatif.ferme = False
+                bras_rotatif.boule = False
+                #print(f"Boule de neige {bras_rotatif.boule}:")
             if game_event.key == pygame.K_n:
                 pygame.draw.rect(rect2,(0,0,0),(5,30,10,20))
+                bras_rotatif2.ferme = False
+                bras_rotatif2.boule = False
+                print(f"Boule de neige {bras_rotatif.boule}:")
 
+    #print(f"Angle du bras {i2}:")
     pygame.display.update()
 
     game_clock.tick(60)
