@@ -5,7 +5,7 @@ pygame.init()
 
 game_display = pygame.display.set_mode((1240, 680))
 game_clock = pygame.time.Clock()
-
+#I HATE NIGGERAS
 BACKGROUND_COLOR = pygame.Color('white')
 display_width, display_height = game_display.get_size()
 
