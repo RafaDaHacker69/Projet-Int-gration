@@ -53,6 +53,13 @@ class Player:
         elif self.velocity_x < 0:
             self.velocity_x = min(0, self.velocity_x + self.friction)
 
+    def get_movement_direction(self):
+        if self.velocity_x > 0:
+            return "right"
+        elif self.velocity_x < 0:
+            return "left"
+        return "idle"
+
     def check_collisions(self, base_y_position):
         # Vérification des collisions avec le sol
         if self.y_position >= base_y_position:

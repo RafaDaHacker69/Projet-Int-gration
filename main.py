@@ -19,6 +19,11 @@ Image_Witdh=player_image1.get_width()
 Image_Height = player_image1.get_height()
 player1_image_flip = None
 
+player_image2 = pygame.image.load("IMAGES/Cat.jpg").convert_alpha()
+Image_Witdh=player_image2.get_width()
+Image_Height = player_image2.get_height()
+player2_image_flip = None
+
 bras_rotatif = Bras_Rotatif(0,0.01,0,0)
 bras_rotatif2 = Bras_Rotatif(0,0.01,0,0)
 
@@ -99,15 +104,32 @@ while game_running:
         player2.x_position = display_width / 2
         posx2 = player2.x_position
 
+#flip image functions
+    direction1 = player1.get_movement_direction()
+    direction2 = player2.get_movement_direction()
+
+    if direction1 == "right":
+        player1_image_flip = pygame.transform.flip(player_image1,False,False)
+    else:
+        player1_image_flip = pygame.transform.flip(player_image1, True, False)
+
+    if direction2 == "right":
+        player2_image_flip = pygame.transform.flip(player_image2,False,False)
+    else:
+        player2_image_flip = pygame.transform.flip(player_image2, True, False)
+
     # Rendu graphique
     game_display.fill(BACKGROUND_COLOR)
 
     #player1.draw(game_display, (0, 120, 250))
-    player_rect = player_image1.get_rect(center=(player1.x_position+140, player1.y_position+120))
-    imageFinal1 = pygame.transform.scale_by(player_image1, 0.3)
-    game_display.blit(imageFinal1, player_rect)
+    player_rect1 = player_image1.get_rect(center=(player1.x_position+140, player1.y_position+120))
+    imageFinal1 = pygame.transform.scale_by(player1_image_flip, 0.3)
+    game_display.blit(imageFinal1, player_rect1)
 
-    player2.draw(game_display, (255, 0, 0))
+    #player2.draw(game_display, (255, 0, 0))
+    player_rect2 = player_image1.get_rect(center=(player2.x_position + 140, player2.y_position + 120))
+    imageFinal2 = pygame.transform.scale_by(player2_image_flip, 0.3)
+    game_display.blit(imageFinal2, player_rect2)
 
     pygame.draw.rect(game_display, (0, 0, 0), (0, player_y_Baseposition + 40, display_width, 5))
     pygame.draw.rect(game_display, (255, 0, 0), (display_width / 2, 0, 1, display_height))
