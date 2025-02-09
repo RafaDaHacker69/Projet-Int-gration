@@ -19,7 +19,6 @@ class Player:
 
     def handle_input(self, keys):
         move_direction = 0
-
         if self.controls == 'wasd':
             if keys[pygame.K_a]:
                 move_direction = -1
