@@ -19,16 +19,16 @@ bras_rotatif2 = Bras_Rotatif(0,0.01,0,0)
 
 rect = pygame.Surface((100,80),pygame.SRCALPHA)
 rect2 = pygame.Surface((100,80),pygame.SRCALPHA)
-rect.fill("green")
-rect2.fill("yellow")
+#rect.fill("green")
+#rect2.fill("yellow")
 
 pygame.draw.rect(rect,(255,0,0),(45,30,40,20))
-pygame.draw.rect(rect2,(255,0,0),(15,30,40,20))
+pygame.draw.rect(rect2,(0, 120, 250),(15,30,40,20))
 
-posx = 100
-posy = 100
-posx2 = 1000
-posy2 = 100
+posx = player1.x_position
+posy = player1.y_position
+posx2 = player2.x_position
+posy2 = player2.y_position
 
 game_display.blit(rect,(posx,posy))
 
@@ -77,13 +77,17 @@ while game_running:
     # Limites de l'écran pour le déplacement des joueurs
     if player1.x_position < 0:
         player1.x_position = 0
+        posx = player1.x_position
     elif player1.x_position + player1.width > display_width / 2:  # Prevents clipping
         player1.x_position = display_width / 2 - player1.width
+        posx = player1.x_position
 
     if player2.x_position > display_width - 20:
         player2.x_position = display_width - 20
+        posx2 = player2.x_position
     elif player2.x_position < display_width / 2:
         player2.x_position = display_width / 2
+        posx2 = player2.x_position
 
     # Rendu graphique
     game_display.fill(BACKGROUND_COLOR)
@@ -116,10 +120,10 @@ while game_running:
     diff_x2 = rectangle_rot_centre_x2 - rec_centre_x2
     diff_y2 = rectangle_rot_centre_y2 - rec_centre_y2
 
-
-
-    game_display.blit(rect_rotated, (posx - diff_x, posy - diff_y))
-    game_display.blit(rect_rotated2, (posx2 - diff_x2, posy2 - diff_y2))
+    #game_display.blit(rect_rotated, (posx - diff_x, posy - diff_y))
+    #game_display.blit(rect_rotated2, (posx2 - diff_x2, posy2 - diff_y2))
+    game_display.blit(rect_rotated, (player1.x_position - diff_x -30, player1.y_position - diff_y-30))
+    game_display.blit(rect_rotated2, (player2.x_position - diff_x2-40, player2.y_position - diff_y2-30))
 
 
     for game_event in pygame.event.get():
