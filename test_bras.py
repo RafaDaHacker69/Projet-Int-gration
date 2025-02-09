@@ -1,5 +1,6 @@
 import pygame
 from Bras_Rotatif import Bras_Rotatif
+import pygame.event
 
 # Initialisation de pygame
 pygame.init()
@@ -10,7 +11,7 @@ screen = pygame.display.set_mode((400, 300))
 posx = 100
 posy = 100
 
-bras_rotatif = Bras_Rotatif(0,0.1,0,0)
+bras_rotatif = Bras_Rotatif(0,0.01,0,0)
 
 rectjoueur = pygame.Surface((20,75))
 rectjoueur.fill((255,255,255))
@@ -45,8 +46,10 @@ while running:
         posx=posx+0.1
     if keys[pygame.K_LSHIFT]:
 
-        t+=1
+        t+=0.001
         i-=bras_rotatif.Calcul_de_vitesse_angulaire(omega,t,bras_rotatif.alpha,bras_rotatif.theta)
+
+
     rect_rotated = pygame.transform.rotate(rect, i)
     rectangle_rot_taille = rect_rotated.get_rect()
     rectangle_rot_centre_x = rectangle_rot_taille.center[0]
@@ -63,6 +66,9 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False  # Arrête la boucle si la fenêtre est fermée
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_LSHIFT:
+                t = 0
 
 
 
