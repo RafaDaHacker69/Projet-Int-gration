@@ -2,7 +2,7 @@ import pygame
 from player import Player
 
 pygame.init()
-#tet
+
 game_display = pygame.display.set_mode((1240, 680))
 game_clock = pygame.time.Clock()
 
