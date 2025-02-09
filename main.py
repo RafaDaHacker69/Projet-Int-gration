@@ -19,8 +19,8 @@ bras_rotatif2 = Bras_Rotatif(0,0.01,0,0)
 
 rect = pygame.Surface((100,80),pygame.SRCALPHA)
 rect2 = pygame.Surface((100,80),pygame.SRCALPHA)
-#rect.fill("green")
-#rect2.fill("yellow")
+rect.fill("green")
+rect2.fill("yellow")
 
 pygame.draw.rect(rect,(255,0,0),(45,30,40,20))
 pygame.draw.rect(rect2,(255,0,0),(15,30,40,20))
