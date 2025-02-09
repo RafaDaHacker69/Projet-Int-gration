@@ -5,7 +5,7 @@ pygame.init()
 
 game_display = pygame.display.set_mode((1240, 680))
 game_clock = pygame.time.Clock()
-#I HATE NIGGER
+
 BACKGROUND_COLOR = pygame.Color('white')
 display_width, display_height = game_display.get_size()
 
@@ -22,27 +22,27 @@ while game_running:
 
     keys = pygame.key.get_pressed()
 
-    # Handle input
+    # Gérer l'entrée utilisateur
     player1.handle_input(keys)
     player2.handle_input(keys)
 
-    # Apply friction
+    # Appliquer la friction
     player1.apply_friction()
     player2.apply_friction()
 
-    # Apply gravity
+    # Appliquer la gravité
     player1.apply_gravity()
     player2.apply_gravity()
 
-    # Update positions
+    # Mettre à jour les positions
     player1.update_position()
     player2.update_position()
 
-    # Check for ground collisions
+    # Vérifier les collisions avec le sol
     player1.check_collisions(player_y_Baseposition)
     player2.check_collisions(player_y_Baseposition)
 
-    # Screen boundaries for player movement
+    # Limites de l'écran pour le déplacement des joueurs
     if player1.x_position < 0:
         player1.x_position = 0
     elif player1.x_position > display_width / 2 - 20:
@@ -53,7 +53,7 @@ while game_running:
     elif player2.x_position < display_width / 2:
         player2.x_position = display_width / 2
 
-    # Rendering
+    # Rendu graphique
     game_display.fill(BACKGROUND_COLOR)
 
     player1.draw(game_display, (0, 120, 250))
