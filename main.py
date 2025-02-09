@@ -45,8 +45,8 @@ while game_running:
     # Limites de l'écran pour le déplacement des joueurs
     if player1.x_position < 0:
         player1.x_position = 0
-    elif player1.x_position > display_width / 2 - 20:
-        player1.x_position = display_width / 2 - 20
+    elif player1.x_position + player1.width > display_width / 2:  # Prevents clipping
+        player1.x_position = display_width / 2 - player1.width
 
     if player2.x_position > display_width - 20:
         player2.x_position = display_width - 20
