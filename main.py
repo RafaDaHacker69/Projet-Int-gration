@@ -1,5 +1,7 @@
 import pygame
+import pygame.event
 from player_movement_ank import Player
+from Bras_Rotatif import Bras_Rotatif
 
 pygame.init()
 
@@ -12,13 +14,43 @@ display_width, display_height = game_display.get_size()
 player1 = Player(display_width * 0.2, display_height * 0.8, 30, 40, controls='wasd')
 player2 = Player(display_width * 0.7, display_height * 0.8, 30, 40, controls='arrows')
 
+bras_rotatif = Bras_Rotatif(0,0.01,0,0)
+bras_rotatif2 = Bras_Rotatif(0,0.01,0,0)
+
+rect = pygame.Surface((100,80),pygame.SRCALPHA)
+rect2 = pygame.Surface((100,80),pygame.SRCALPHA)
+#rect.fill("green")
+#rect2.fill("yellow")
+
+pygame.draw.rect(rect,(255,0,0),(45,30,40,20))
+pygame.draw.rect(rect2,(255,0,0),(15,30,40,20))
+
+posx = 100
+posy = 100
+posx2 = 1000
+posy2 = 100
+
+game_display.blit(rect,(posx,posy))
+
+
+
 player_y_Baseposition = display_height * 0.8
+
+i=0
+i2=0
+t=0
+t2=0
+omega=0
+omega2=0
+rec_taille=rect.get_rect()
+rec_centre_x=rec_taille.center[0]
+rec_centre_y=rec_taille.center[1]
+rec_taille2=rect2.get_rect()
+rec_centre_x2=rec_taille2.center[0]
+rec_centre_y2=rec_taille2.center[1]
 
 game_running = True
 while game_running:
-    for game_event in pygame.event.get():
-        if game_event.type == pygame.QUIT:
-            game_running = False
 
     keys = pygame.key.get_pressed()
 
@@ -61,6 +93,41 @@ while game_running:
 
     pygame.draw.rect(game_display, (0, 0, 0), (0, player_y_Baseposition + 40, display_width, 5))
     pygame.draw.rect(game_display, (255, 0, 0), (display_width / 2, 0, 1, display_height))
+
+
+    if keys[pygame.K_LSHIFT]:
+        t += 0.1
+        i -= bras_rotatif.Calcul_de_vitesse_angulaire(omega, t, bras_rotatif.alpha, bras_rotatif.theta)
+    if keys[pygame.K_m]:
+        t2 += 0.1
+        i2 += bras_rotatif.Calcul_de_vitesse_angulaire(omega2, t2, bras_rotatif2.alpha, bras_rotatif2.theta)
+
+    rect_rotated = pygame.transform.rotate(rect, i)
+    rectangle_rot_taille = rect_rotated.get_rect()
+    rectangle_rot_centre_x = rectangle_rot_taille.center[0]
+    rectangle_rot_centre_y = rectangle_rot_taille.center[1]
+    diff_x = rectangle_rot_centre_x - rec_centre_x
+    diff_y = rectangle_rot_centre_y - rec_centre_y
+
+    rect_rotated2 = pygame.transform.rotate(rect2, i2)
+    rectangle_rot_taille2 = rect_rotated2.get_rect()
+    rectangle_rot_centre_x2 = rectangle_rot_taille2.center[0]
+    rectangle_rot_centre_y2 = rectangle_rot_taille2.center[1]
+    diff_x2 = rectangle_rot_centre_x2 - rec_centre_x2
+    diff_y2 = rectangle_rot_centre_y2 - rec_centre_y2
+
+
+
+    game_display.blit(rect_rotated, (posx - diff_x, posy - diff_y))
+    game_display.blit(rect_rotated2, (posx2 - diff_x2, posy2 - diff_y2))
+
+
+    for game_event in pygame.event.get():
+        if game_event.type == pygame.QUIT:
+            game_running = False
+        if game_event.type == pygame.KEYUP:
+            if game_event.key == pygame.K_LSHIFT:
+                t = 0
 
     pygame.display.update()
 

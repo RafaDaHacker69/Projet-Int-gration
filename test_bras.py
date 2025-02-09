@@ -1,4 +1,4 @@
-import pygame
+
 from Bras_Rotatif import Bras_Rotatif
 import pygame.event
 
