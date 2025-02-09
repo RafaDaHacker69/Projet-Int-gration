@@ -111,12 +111,12 @@ while game_running:
 
     if direction1 == "right":
         player1_image_flip = pygame.transform.flip(player_image1,False,False)
-    else:
+    elif direction1 == "left":
         player1_image_flip = pygame.transform.flip(player_image1, True, False)
 
     if direction2 == "right":
         player2_image_flip = pygame.transform.flip(player_image2,False,False)
-    else:
+    elif direction2 == "left":
         player2_image_flip = pygame.transform.flip(player_image2, True, False)
 
     # Rendu graphique
