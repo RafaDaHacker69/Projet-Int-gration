@@ -24,6 +24,9 @@ Image_Witdh=player_image2.get_width()
 Image_Height = player_image2.get_height()
 player2_image_flip = None
 
+player1_image_flip = pygame.transform.flip(player_image1, True, False)
+player2_image_flip = pygame.transform.flip(player_image2, False, False)
+
 bras_rotatif = Bras_Rotatif(0,0.01,0,0)
 bras_rotatif2 = Bras_Rotatif(0,0.01,0,0)
 
@@ -110,14 +113,14 @@ while game_running:
     direction2 = player2.get_movement_direction()
 
     if direction1 == "right":
-        player1_image_flip = pygame.transform.flip(player_image1,False,False)
+        player1_image_flip = pygame.transform.flip(player_image1,True,False)
     elif direction1 == "left":
-        player1_image_flip = pygame.transform.flip(player_image1, True, False)
+        player1_image_flip = pygame.transform.flip(player_image1, False, False)
 
     if direction2 == "right":
-        player2_image_flip = pygame.transform.flip(player_image2,False,False)
+        player2_image_flip = pygame.transform.flip(player_image2,True,False)
     elif direction2 == "left":
-        player2_image_flip = pygame.transform.flip(player_image2, True, False)
+        player2_image_flip = pygame.transform.flip(player_image2, False, False)
 
     # Rendu graphique
     game_display.fill(BACKGROUND_COLOR)
