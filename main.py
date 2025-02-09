@@ -132,6 +132,8 @@ while game_running:
         if game_event.type == pygame.KEYUP:
             if game_event.key == pygame.K_LSHIFT:
                 t = 0
+            if game_event.key == pygame.K_m:
+                t2 = 0
 
     pygame.display.update()
 
