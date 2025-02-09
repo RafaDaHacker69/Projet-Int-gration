@@ -60,7 +60,7 @@ while game_running:
     player2.draw(game_display, (255, 0, 0))
 
     pygame.draw.rect(game_display, (0, 0, 0), (0, player_y_Baseposition + 40, display_width, 5))
-    pygame.draw.rect(game_display, (255, 0, 0), (display_width / 2, 0, 10, display_height))
+    pygame.draw.rect(game_display, (255, 0, 0), (display_width / 2, 0, 1, display_height))
 
     pygame.display.update()
 
