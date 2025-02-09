@@ -39,6 +39,7 @@ pygame.draw.rect(rect2,(0, 120, 250),(15,30,40,20))
 #Mains des personnages
 pygame.draw.rect(rect,(0,0,0),(85,30,10,20))
 pygame.draw.rect(rect2,(0,0,0),(5,30,10,20))
+
 #variables bras
 posx = player1.x_position
 posy = player1.y_position
@@ -142,6 +143,11 @@ while game_running:
         t2 += 0.1
         i2 += bras_rotatif.Calcul_de_vitesse_angulaire(omega2, t2, bras_rotatif2.alpha, bras_rotatif2.theta)
 
+#Ouverture de la main
+    if keys[pygame.K_c]:
+        pygame.draw.rect(rect, (0, 255, 0), (85, 30, 10, 20))
+
+
 # Rotation bras
     rect_rotated = pygame.transform.rotate(rect, i)
     rectangle_rot_taille = rect_rotated.get_rect()
@@ -169,6 +175,8 @@ while game_running:
                 t = 0
             if game_event.key == pygame.K_m:
                 t2 = 0
+            if game_event.key == pygame.K_c:
+                pygame.draw.rect(rect, (0, 0, 0), (85, 30, 10, 20))
 
     pygame.display.update()
 
