@@ -69,8 +69,6 @@ rec_centre_x2=rec_taille2.center[0]
 rec_centre_y2=rec_taille2.center[1]
 
 #creation obstacles
-
-
 Obstacle_collision = [
     Obstacle(200, 450, 100, 20),  # Floating platform
     Obstacle(400, 350, 150, 20),  # Another platform
@@ -102,10 +100,6 @@ while game_running:
     # Vérifier les collisions avec le sol
     player1.check_collisions(player_y_Baseposition)
     player2.check_collisions(player_y_Baseposition)
-
-    # Vérifier les collisions avec les obstacles
-    player1.check_collisions(Obstacle_collision)
-    player2.check_collisions(Obstacle_collision)
 
     # Limites de l'écran pour le déplacement des joueurs
     if player1.x_position < 0:
