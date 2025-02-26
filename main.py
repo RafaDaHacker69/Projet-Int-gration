@@ -3,6 +3,8 @@ import pygame.event
 from player_movement_ank import Player
 from Bras_Rotatif import Bras_Rotatif
 from Boules_De_Neiges import Boules_De_Neiges
+from Obstacle_collision import Obstacle
+
 pygame.init()
 
 game_display = pygame.display.set_mode((1240, 680))
@@ -67,6 +69,8 @@ rec_centre_x2=rec_taille2.center[0]
 rec_centre_y2=rec_taille2.center[1]
 
 #creation obstacles
+
+
 Obstacle_collision = [
     Obstacle(200, 450, 100, 20),  # Floating platform
     Obstacle(400, 350, 150, 20),  # Another platform
