@@ -38,13 +38,13 @@ class Bras_Rotatif:
         if keys[touche]:
             self.t += 0.01
             if not self.inverse:
-                self.theta -= self.calcul_de_vitesse_angulaire()
-                if -abs(self.theta) < -360:
-                    self.theta = 0
+                self.theta -= self.calcul_de_vitesse_angulaire()*0.0001
+                # if -abs(self.theta) < -360:
+                #     self.theta = 0
             if self.inverse:
-                self.theta += self.calcul_de_vitesse_angulaire()
-                if self.theta > 360:
-                    self.theta = 0
+                self.theta += self.calcul_de_vitesse_angulaire()*0.0001
+                # if self.theta > 360:
+                #     self.theta = 0
         return self.theta
 
     def tourner_bras(self, rect,screen):

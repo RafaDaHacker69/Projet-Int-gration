@@ -29,8 +29,8 @@ player2_image_flip = None
 player1_image_flip = pygame.transform.flip(player_image1, True, False)
 player2_image_flip = pygame.transform.flip(player_image2, False, False)
 
-bras_rotatif = Bras_Rotatif(0,0.001,0,0,0.03,False,False,0,0,0,0,False,0)
-bras_rotatif2 = Bras_Rotatif(0,0.001,0,0,0.03,False,False,0,0,0,0,True,0)
+bras_rotatif = Bras_Rotatif(0,1,0,0,0.03,False,False,0,0,0,0,False,0)
+bras_rotatif2 = Bras_Rotatif(0,0.000000000001,0,0,1000,False,False,0,0,0,0,True,0)
 
 rect = pygame.Surface((100,80),pygame.SRCALPHA)
 rect2 = pygame.Surface((100,80),pygame.SRCALPHA)
@@ -154,10 +154,10 @@ while game_running:
         if game_event.type == pygame.KEYUP:
             if game_event.key == pygame.K_LSHIFT:
                 bras_rotatif.t = 0
-                bras_rotatif.omega = 0.03
+                bras_rotatif.omega = 0
             if game_event.key == pygame.K_m:
                 bras_rotatif2.t = 0
-                bras_rotatif2.omega = 0.03
+                bras_rotatif2.omega = 0
             if game_event.key == pygame.K_c:
                 pygame.draw.rect(rect, (0, 0, 0), (85, 30, 10, 20))
                 bras_rotatif.ferme = False
