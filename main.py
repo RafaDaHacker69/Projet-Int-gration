@@ -61,9 +61,6 @@ t=0
 t2=0
 omega=0
 omega2=0
-rec_taille=rect.get_rect()
-rec_centre_x=rec_taille.center[0]
-rec_centre_y=rec_taille.center[1]
 rec_taille2=rect2.get_rect()
 rec_centre_x2=rec_taille2.center[0]
 rec_centre_y2=rec_taille2.center[1]
@@ -164,45 +161,19 @@ while game_running:
         if i2>360:
             i2=0
 #Ramasser une boule de neige
-    if bras_rotatif.ferme and bras_rotatif.boule == False and -65 > i > -115:
-        boule = Boules_De_Neiges(0.01, 0.01)
-
-        bras_rotatif.boule = True
-        print(f"Boule de neige {bras_rotatif.boule}:")
-
-    if bras_rotatif2.ferme and bras_rotatif2.boule == False and 115 > i2 > 65:
-        boule = Boules_De_Neiges(0.01, 0.01)
-        #pygame.draw.circle(0,(255,255,255),0,boule.r)
-        bras_rotatif2.boule = True
-        print(f"Boule de neige {bras_rotatif2.boule}:")
-
-
+    bras_rotatif.ramasser_boule(i,-115,-65)
+    bras_rotatif2.ramasser_boule(i2,65,115)
 #Fermeture de la main
-    if keys[pygame.K_c]:
-        pygame.draw.rect(rect, (0, 255, 0), (85, 30, 10, 20))
-        bras_rotatif.ferme=True
-    if keys[pygame.K_n]:
-        pygame.draw.rect(rect2, (0, 255, 0), (5, 30, 10, 20))
-        bras_rotatif2.ferme = True
-
-
+    bras_rotatif.fermer_main(keys,pygame.K_c)
+    bras_rotatif2.fermer_main(keys,pygame.K_n)
 # Rotation bras
-    rect_rotated = pygame.transform.rotate(rect, i)
-    rectangle_rot_taille = rect_rotated.get_rect()
-    rectangle_rot_centre_x = rectangle_rot_taille.center[0]
-    rectangle_rot_centre_y = rectangle_rot_taille.center[1]
-    diff_x = rectangle_rot_centre_x - rec_centre_x
-    diff_y = rectangle_rot_centre_y - rec_centre_y
+    posx = player1.x_position
+    posy = player1.y_position
+    posx2 = player2.x_position
+    posy2 = player2.y_position
 
-    rect_rotated2 = pygame.transform.rotate(rect2, i2)
-    rectangle_rot_taille2 = rect_rotated2.get_rect()
-    rectangle_rot_centre_x2 = rectangle_rot_taille2.center[0]
-    rectangle_rot_centre_y2 = rectangle_rot_taille2.center[1]
-    diff_x2 = rectangle_rot_centre_x2 - rec_centre_x2
-    diff_y2 = rectangle_rot_centre_y2 - rec_centre_y2
-
-    game_display.blit(rect_rotated, (player1.x_position - diff_x -30, player1.y_position - diff_y-30))
-    game_display.blit(rect_rotated2, (player2.x_position - diff_x2-40, player2.y_position - diff_y2-30))
+    bras_rotatif.tourner_bras(rect,i,game_display,posx,posy)
+    bras_rotatif.tourner_bras(rect2, i2, game_display, posx2, posy2)
 
 # Key binding
     for game_event in pygame.event.get():
@@ -227,7 +198,7 @@ while game_running:
                 pygame.draw.rect(rect2,(0,0,0),(5,30,10,20))
                 bras_rotatif2.ferme = False
                 bras_rotatif2.boule = False
-                print(f"Boule de neige {bras_rotatif.boule}:")
+                #print(f"Boule de neige {bras_rotatif.boule}:")
 
     #print(f"Angle du bras {i2}:")
     pygame.display.update()
