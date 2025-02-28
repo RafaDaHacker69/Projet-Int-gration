@@ -29,8 +29,8 @@ player2_image_flip = None
 player1_image_flip = pygame.transform.flip(player_image1, True, False)
 player2_image_flip = pygame.transform.flip(player_image2, False, False)
 
-bras_rotatif = Bras_Rotatif(0,0.001,0,0,0.03,False,False,0,0)
-bras_rotatif2 = Bras_Rotatif(0,0.001,0,0,0.03,False,False,0,0)
+bras_rotatif = Bras_Rotatif(0,0.001,0,0,0.03,False,False,0,0,0,0)
+bras_rotatif2 = Bras_Rotatif(0,0.001,0,0,0.03,False,False,0,0,0,0)
 
 rect = pygame.Surface((100,80),pygame.SRCALPHA)
 rect2 = pygame.Surface((100,80),pygame.SRCALPHA)
@@ -45,23 +45,13 @@ pygame.draw.rect(rect2,(0, 120, 250),(15,30,40,20))
 pygame.draw.rect(rect,(0,0,0),(85,30,10,20))
 pygame.draw.rect(rect2,(0,0,0),(5,30,10,20))
 
-#variables bras
-posx = player1.x_position
-posy = player1.y_position
-posx2 = player2.x_position
-posy2 = player2.y_position
-
-game_display.blit(rect,(posx,posy))
-
+game_display.blit(rect,(bras_rotatif.posx,bras_rotatif.posy))
 player_y_Baseposition = display_height * 0.8
 
 i=0
 i2=0
 omega=0
 omega2=0
-rec_taille2=rect2.get_rect()
-rec_centre_x2=rec_taille2.center[0]
-rec_centre_y2=rec_taille2.center[1]
 
 #creation obstacles
 Obstacle_collision = [
@@ -144,20 +134,23 @@ while game_running:
 # Physique rotation bras
     i=bras_rotatif.activer_rotation(keys,pygame.K_LSHIFT,i,omega,False)
     i2=bras_rotatif2.activer_rotation(keys,pygame.K_m,i2,omega2,True)
+
 #Ramasser une boule de neige
     bras_rotatif.ramasser_boule(i,-115,-65)
     bras_rotatif2.ramasser_boule(i2,65,115)
+
 #Fermeture de la main
     bras_rotatif.fermer_main(keys,pygame.K_c)
     bras_rotatif2.fermer_main(keys,pygame.K_n)
-# Rotation bras
-    posx = player1.x_position
-    posy = player1.y_position
-    posx2 = player2.x_position
-    posy2 = player2.y_position
 
-    bras_rotatif.tourner_bras(rect,i,game_display,posx,posy)
-    bras_rotatif.tourner_bras(rect2, i2, game_display, posx2, posy2)
+# Rotation bras
+    bras_rotatif.posx = player1.x_position
+    bras_rotatif.posy = player1.y_position
+    bras_rotatif2.posx = player2.x_position
+    bras_rotatif2.posy = player2.y_position
+
+    bras_rotatif.tourner_bras(rect,i,game_display)
+    bras_rotatif2.tourner_bras(rect2, i2, game_display)
 
 # Key binding
     for game_event in pygame.event.get():
@@ -165,12 +158,11 @@ while game_running:
             game_running = False
         if game_event.type == pygame.KEYUP:
             if game_event.key == pygame.K_LSHIFT:
-                t = 0
+                bras_rotatif.t = 0
                 bras_rotatif.omega = 0.03
                 omega=0
-                print(f" Shift Up {t}:")
             if game_event.key == pygame.K_m:
-                t2 = 0
+                bras_rotatif2.t = 0
                 bras_rotatif2.omega = 0.03
                 omega2=0
             if game_event.key == pygame.K_c:
@@ -183,8 +175,6 @@ while game_running:
                 bras_rotatif2.ferme = False
                 bras_rotatif2.boule = False
                 #print(f"Boule de neige {bras_rotatif.boule}:")
-
-    #print(f"Angle du bras {i2}:")
     pygame.display.update()
 
     game_clock.tick(60)

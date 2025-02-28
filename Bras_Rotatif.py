@@ -2,7 +2,7 @@ from Boules_De_Neiges import Boules_De_Neiges
 import pygame
 class Bras_Rotatif:
 
-    def __init__(self,r, alpha, theta, m, omega0, ferme, boule,v,t):
+    def __init__(self, r, alpha, theta, m, omega0, ferme, boule, v, t, posx, posy):
 
         self.y = r  # Hauteur (rayon du bras)
         self.m = m  # Masse en kg
@@ -13,6 +13,8 @@ class Bras_Rotatif:
         self.boule = boule
         self.v = v
         self.t = t
+        self.posx = posx
+        self.posy = posy
 
     def calcul_de_vitesse_angulaire(self, t, omega):
         omega = self.omega0 + self.alpha * self.t
@@ -33,8 +35,7 @@ class Bras_Rotatif:
                     i = 0
         return i
 
-
-    def tourner_bras(self, rect, i, screen, posx, posy):
+    def tourner_bras(self, rect, i, screen,):
         rec_taille = rect.get_rect()
         rec_centre_x = rec_taille.center[0]
         rec_centre_y = rec_taille.center[1]
@@ -44,7 +45,7 @@ class Bras_Rotatif:
         rectangle_rot_centre_y = rectangle_rot_taille.center[1]
         diff_x = rectangle_rot_centre_x - rec_centre_x
         diff_y = rectangle_rot_centre_y - rec_centre_y
-        screen.blit(rect_rotated, (posx - diff_x - 30, posy - diff_y - 30))
+        screen.blit(rect_rotated, (self.posx - diff_x - 30, self.posy - diff_y - 30))
 
     def fermer_main(self, keys, touche):
         if keys[touche]:
