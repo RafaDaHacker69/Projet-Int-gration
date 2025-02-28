@@ -29,8 +29,8 @@ player2_image_flip = None
 player1_image_flip = pygame.transform.flip(player_image1, True, False)
 player2_image_flip = pygame.transform.flip(player_image2, False, False)
 
-bras_rotatif = Bras_Rotatif(0,0.001,0,0,0.03,False,False,0,0,0,0)
-bras_rotatif2 = Bras_Rotatif(0,0.001,0,0,0.03,False,False,0,0,0,0)
+bras_rotatif = Bras_Rotatif(0,0.001,0,0,0.03,False,False,0,0,0,0,False,0)
+bras_rotatif2 = Bras_Rotatif(0,0.001,0,0,0.03,False,False,0,0,0,0,True,0)
 
 rect = pygame.Surface((100,80),pygame.SRCALPHA)
 rect2 = pygame.Surface((100,80),pygame.SRCALPHA)
@@ -47,11 +47,6 @@ pygame.draw.rect(rect2,(0,0,0),(5,30,10,20))
 
 game_display.blit(rect,(bras_rotatif.posx,bras_rotatif.posy))
 player_y_Baseposition = display_height * 0.8
-
-i=0
-i2=0
-omega=0
-omega2=0
 
 #creation obstacles
 Obstacle_collision = [
@@ -132,12 +127,12 @@ while game_running:
     pygame.draw.rect(game_display, (255, 0, 0), (display_width / 2, 0, 1, display_height))
 
 # Physique rotation bras
-    i=bras_rotatif.activer_rotation(keys,pygame.K_LSHIFT,i,omega,False)
-    i2=bras_rotatif2.activer_rotation(keys,pygame.K_m,i2,omega2,True)
+    bras_rotatif.theta=bras_rotatif.activer_rotation(keys,pygame.K_LSHIFT)
+    bras_rotatif2.theta=bras_rotatif2.activer_rotation(keys,pygame.K_m)
 
 #Ramasser une boule de neige
-    bras_rotatif.ramasser_boule(i,-115,-65)
-    bras_rotatif2.ramasser_boule(i2,65,115)
+    bras_rotatif.ramasser_boule(bras_rotatif.theta,-115,-65)
+    bras_rotatif2.ramasser_boule(bras_rotatif2,65,115)
 
 #Fermeture de la main
     bras_rotatif.fermer_main(keys,pygame.K_c)
@@ -149,8 +144,8 @@ while game_running:
     bras_rotatif2.posx = player2.x_position
     bras_rotatif2.posy = player2.y_position
 
-    bras_rotatif.tourner_bras(rect,i,game_display)
-    bras_rotatif2.tourner_bras(rect2, i2, game_display)
+    bras_rotatif.tourner_bras(rect,game_display)
+    bras_rotatif2.tourner_bras(rect2,game_display)
 
 # Key binding
     for game_event in pygame.event.get():
@@ -160,11 +155,9 @@ while game_running:
             if game_event.key == pygame.K_LSHIFT:
                 bras_rotatif.t = 0
                 bras_rotatif.omega = 0.03
-                omega=0
             if game_event.key == pygame.K_m:
                 bras_rotatif2.t = 0
                 bras_rotatif2.omega = 0.03
-                omega2=0
             if game_event.key == pygame.K_c:
                 pygame.draw.rect(rect, (0, 0, 0), (85, 30, 10, 20))
                 bras_rotatif.ferme = False
@@ -176,7 +169,8 @@ while game_running:
                 bras_rotatif2.boule = False
                 #print(f"Boule de neige {bras_rotatif.boule}:")
     pygame.display.update()
-
+    # print(f"theta1  :{bras_rotatif.theta}")
+    # print(f"theta2 :{bras_rotatif2.theta}")
     game_clock.tick(60)
 
 pygame.quit()

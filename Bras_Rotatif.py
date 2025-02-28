@@ -1,12 +1,13 @@
+import math
+
 from Boules_De_Neiges import Boules_De_Neiges
 import pygame
 class Bras_Rotatif:
 
-    def __init__(self, r, alpha, theta, m, omega0, ferme, boule, v, t, posx, posy):
-
+    def __init__(self, r, alpha, theta, m, omega0, ferme, boule, v, t, posx, posy, inverse, omega):
         self.y = r  # Hauteur (rayon du bras)
         self.m = m  # Masse en kg
-        self.theta = theta
+        self.theta = theta *-1
         self.alpha = alpha
         self.omega0 = omega0
         self.ferme = ferme
@@ -15,31 +16,45 @@ class Bras_Rotatif:
         self.t = t
         self.posx = posx
         self.posy = posy
+        self.inverse = inverse
+        self.omega = omega
+        if inverse:
+            self.theta = self.theta *-1
 
-    def calcul_de_vitesse_angulaire(self, t, omega):
-        omega = self.omega0 + self.alpha * self.t
-        self.v = omega
-        self.theta = self.theta + omega * t + 0.5 * self.alpha * self.t ** 2
-        return self.theta
+    def calcul_de_vitesse_angulaire(self):
+        self.omega = self.omega0 + self.alpha * self.t
+        self.v = self.omega
+        if self.inverse:
+            self.theta = abs(((self.theta + self.omega * self.t + 0.5 * self.alpha * self.t ** 2) * 180) / math.pi)
+            print(f"theta2  :{self.theta}")
+            return self.theta
+        elif not self.inverse:
+            self.theta = -abs(((self.theta + self.omega * self.t + 0.5 * self.alpha * self.t ** 2) * 180) / math.pi)
+            print(f"theta1  :{self.theta}")
+            return self.theta
 
-    def activer_rotation(self,keys,touche,i,omega,inverse):
+
+    def activer_rotation(self,keys,touche):
         if keys[touche]:
             self.t += 0.01
-            if not inverse:
-                i -= self.calcul_de_vitesse_angulaire(self.t, omega)
-                if i < -360:
-                    i = 0
-            if inverse:
-                i += self.calcul_de_vitesse_angulaire(self.t, omega)
-                if i > 360:
-                    i = 0
-        return i
+            if not self.inverse:
+                self.theta -= self.calcul_de_vitesse_angulaire()
+                if -abs(self.theta) < -360:
+                    self.theta = 0
+            if self.inverse:
+                self.theta += self.calcul_de_vitesse_angulaire()
+                if self.theta > 360:
+                    self.theta = 0
+        return self.theta
 
-    def tourner_bras(self, rect, i, screen,):
+    def tourner_bras(self, rect,screen):
         rec_taille = rect.get_rect()
         rec_centre_x = rec_taille.center[0]
         rec_centre_y = rec_taille.center[1]
-        rect_rotated = pygame.transform.rotate(rect, i)
+        if not self.inverse:
+            rect_rotated = pygame.transform.rotate(rect, -abs(self.theta))
+        if self.inverse:
+            rect_rotated = pygame.transform.rotate(rect, self.theta)
         rectangle_rot_taille = rect_rotated.get_rect()
         rectangle_rot_centre_x = rectangle_rot_taille.center[0]
         rectangle_rot_centre_y = rectangle_rot_taille.center[1]
