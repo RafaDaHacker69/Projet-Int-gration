@@ -17,8 +17,21 @@ class Bras_Rotatif:
     def calcul_de_vitesse_angulaire(self, t, omega):
         omega = self.omega0 + self.alpha * self.t
         self.v = omega
-        self.theta = self.theta + omega * t + 0.5 * self.alpha * t ** 2
+        self.theta = self.theta + omega * t + 0.5 * self.alpha * self.t ** 2
         return self.theta
+
+    def activer_rotation(self,keys,touche,i,omega,inverse):
+        if keys[touche]:
+            self.t += 0.01
+            if not inverse:
+                i -= self.calcul_de_vitesse_angulaire(self.t, omega)
+                if i < -360:
+                    i = 0
+            if inverse:
+                i += self.calcul_de_vitesse_angulaire(self.t, omega)
+                if i > 360:
+                    i = 0
+        return i
 
 
     def tourner_bras(self, rect, i, screen, posx, posy):

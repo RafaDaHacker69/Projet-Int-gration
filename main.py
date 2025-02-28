@@ -29,8 +29,8 @@ player2_image_flip = None
 player1_image_flip = pygame.transform.flip(player_image1, True, False)
 player2_image_flip = pygame.transform.flip(player_image2, False, False)
 
-bras_rotatif = Bras_Rotatif(0,0.001,0,0,0.03,False,False,0)
-bras_rotatif2 = Bras_Rotatif(0,0.001,0,0,0.03,False,False,0)
+bras_rotatif = Bras_Rotatif(0,0.001,0,0,0.03,False,False,0,0)
+bras_rotatif2 = Bras_Rotatif(0,0.001,0,0,0.03,False,False,0,0)
 
 rect = pygame.Surface((100,80),pygame.SRCALPHA)
 rect2 = pygame.Surface((100,80),pygame.SRCALPHA)
@@ -57,8 +57,6 @@ player_y_Baseposition = display_height * 0.8
 
 i=0
 i2=0
-t=0
-t2=0
 omega=0
 omega2=0
 rec_taille2=rect2.get_rect()
@@ -144,22 +142,8 @@ while game_running:
     pygame.draw.rect(game_display, (255, 0, 0), (display_width / 2, 0, 1, display_height))
 
 # Physique rotation bras
-    if keys[pygame.K_LSHIFT]:
-        t += 0.01
-        i -= bras_rotatif.calcul_de_vitesse_angulaire(t,omega)
-        print(f"Accélération angulaire {bras_rotatif.alpha}:")
-        print(f"Vitesse angulaire {bras_rotatif.v}:")
-        print(f"Angle théta {bras_rotatif.theta}:")
-        print(f"Temps {t}:")
-        print(f"I {i}:")
-        if i<-360:
-            i=0
-
-    if keys[pygame.K_m]:
-        t2 += 0.01
-        i2 += bras_rotatif2.calcul_de_vitesse_angulaire(t2,omega2)
-        if i2>360:
-            i2=0
+    i=bras_rotatif.activer_rotation(keys,pygame.K_LSHIFT,i,omega,False)
+    i2=bras_rotatif2.activer_rotation(keys,pygame.K_m,i2,omega2,True)
 #Ramasser une boule de neige
     bras_rotatif.ramasser_boule(i,-115,-65)
     bras_rotatif2.ramasser_boule(i2,65,115)
