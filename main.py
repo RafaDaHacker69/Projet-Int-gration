@@ -29,8 +29,8 @@ player2_image_flip = None
 player1_image_flip = pygame.transform.flip(player_image1, True, False)
 player2_image_flip = pygame.transform.flip(player_image2, False, False)
 
-bras_rotatif = Bras_Rotatif(0,1,0,0,0.03,False,False,0,0,0,0,False,0)
-bras_rotatif2 = Bras_Rotatif(0,0.000000000001,0,0,1000,False,False,0,0,0,0,True,0)
+bras_rotatif = Bras_Rotatif(0,1,0,0,1000,False,False,0,0,0,0,False,0)
+bras_rotatif2 = Bras_Rotatif(0,1,0,0,1000,False,False,0,0,0,0,True,0)
 
 rect = pygame.Surface((100,80),pygame.SRCALPHA)
 rect2 = pygame.Surface((100,80),pygame.SRCALPHA)
@@ -55,6 +55,8 @@ Obstacle_collision = [
     Obstacle(600, 500, 50, 100)  # Wall
 ]
 #End variables
+
+tempo =0
 
 game_running = True
 while game_running:
@@ -161,6 +163,10 @@ while game_running:
             if game_event.key == pygame.K_n:
                 bras_rotatif2.ouvrir_main()
     pygame.display.update()
+    print(f"t  :{bras_rotatif2.t}")
+    print(f"omega  :{bras_rotatif2.omega}")
+    print(f"theta  :{bras_rotatif2.theta}")
+
     # print(f"theta1  :{bras_rotatif.theta}")
     # print(f"theta2 :{bras_rotatif2.theta}")
     game_clock.tick(60)
