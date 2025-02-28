@@ -153,21 +153,13 @@ while game_running:
             game_running = False
         if game_event.type == pygame.KEYUP:
             if game_event.key == pygame.K_LSHIFT:
-                bras_rotatif.t = 0
-                bras_rotatif.omega = 0
+                bras_rotatif.arreter_rotation()
             if game_event.key == pygame.K_m:
-                bras_rotatif2.t = 0
-                bras_rotatif2.omega = 0
+                bras_rotatif2.arreter_rotation()
             if game_event.key == pygame.K_c:
-                pygame.draw.rect(rect, (0, 0, 0), (85, 30, 10, 20))
-                bras_rotatif.ferme = False
-                bras_rotatif.boule = False
-                #print(f"Boule de neige {bras_rotatif.boule}:")
+                bras_rotatif.ouvrir_main()
             if game_event.key == pygame.K_n:
-                pygame.draw.rect(rect2,(0,0,0),(5,30,10,20))
-                bras_rotatif2.ferme = False
-                bras_rotatif2.boule = False
-                #print(f"Boule de neige {bras_rotatif.boule}:")
+                bras_rotatif2.ouvrir_main()
     pygame.display.update()
     # print(f"theta1  :{bras_rotatif.theta}")
     # print(f"theta2 :{bras_rotatif2.theta}")

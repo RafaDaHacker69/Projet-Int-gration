@@ -71,3 +71,11 @@ class Bras_Rotatif:
             boule = Boules_De_Neiges(0.01, 0.01)
             self.boule = True
             print(f"Boule de neige {self.boule}:")
+
+    def arreter_rotation(self):
+        self.t = 0
+        self.omega = 0
+
+    def ouvrir_main(self):
+        self.ferme = False
+        self.boule = False
