@@ -5,5 +5,3 @@ class Boules_De_Neiges:
 
         self.r = r #rayon
         self.m = m #masse
-
-    #def grossir_boule(self):

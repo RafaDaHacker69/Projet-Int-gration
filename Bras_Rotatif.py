@@ -1,23 +1,24 @@
 import math
-
 from Boules_De_Neiges import Boules_De_Neiges
 import pygame
 class Bras_Rotatif:
 
-    def __init__(self, longueur, alpha, theta, largeur, omega0, ferme, boule, v, t, posx, posy, inverse, omega):
-        self.longueur = longueur
-        self.largeur = largeur
+    def __init__(self, alpha, theta, omega0, v, inverse):
+        self.longueur = 40
+        self.largeur = 20
         self.theta = theta *-1
         self.alpha = alpha
         self.omega0 = omega0
-        self.ferme = ferme
-        self.boule = boule
+        self.ferme = False
+        self.boule = False
         self.v = v
-        self.t = t
-        self.posx = posx
-        self.posy = posy
+        self.t = 0
+        self.posx = 0
+        self.posy = 0
         self.inverse = inverse
-        self.omega = omega
+        self.omega = 0
+        self.boule_obj = None
+        self.frame_counter = 0
         if inverse:
             self.theta = self.theta *-1
 
@@ -67,8 +68,8 @@ class Bras_Rotatif:
             self.ferme = True
 
     def ramasser_boule(self,lim_min, lim_max):
-        if self.ferme and not self.boule and lim_min < self.theta < lim_max:
-            boule = Boules_De_Neiges(0.01, 0.01)
+        if self.ferme and not self.boule and self.boule_obj is None and lim_min < self.theta < lim_max:
+            self.boule_obj = Boules_De_Neiges(0.01, 0.01)
             self.boule = True
             print(f"Boule de neige {self.boule}:")
 
@@ -80,6 +81,7 @@ class Bras_Rotatif:
     def ouvrir_main(self):
         self.ferme = False
         self.boule = False
+        self.boule_obj = None
 
     def creation_bras_main(self,r,g,b):
         rect = pygame.Surface((100, 80), pygame.SRCALPHA)
@@ -91,3 +93,13 @@ class Bras_Rotatif:
             pygame.draw.rect(rect, (r, g, b), (15, 30, self.longueur, self.largeur))  # bras droite
             pygame.draw.rect(rect, (0, 0, 0), (5, 30, 10, 20)) #main droite
         return rect
+
+    def grossir_boule(self, lim_min, lim_max):
+        if self.boule and self.boule_obj and lim_min < self.theta < lim_max and self.ferme:
+            self.frame_counter += 1
+            if self.frame_counter > 20:
+                self.boule_obj.r += 1
+                self.boule_obj.m = self.boule_obj.r ** 2
+                self.frame_counter = 0
+        #print(f"rayon : {self.boule_obj.r}, masse : {self.boule_obj.m}")
+

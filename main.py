@@ -28,8 +28,8 @@ player2_image_flip = None
 player1_image_flip = pygame.transform.flip(player_image1, True, False)
 player2_image_flip = pygame.transform.flip(player_image2, False, False)
 
-bras_rotatif = Bras_Rotatif(40,1,0,20,1000,False,False,0,0,0,0,False,0)
-bras_rotatif2 = Bras_Rotatif(40,1,0,20,1000,False,False,0,0,0,0,True,0)
+bras_rotatif = Bras_Rotatif(1,0,1000,0,False)
+bras_rotatif2 = Bras_Rotatif(1,0,1000,0,True)
 
 bras_rect = bras_rotatif.creation_bras_main(255,0,0)
 bras_rect2 = bras_rotatif2.creation_bras_main(0,120,250)
@@ -137,7 +137,13 @@ while game_running:
     bras_rotatif.tourner_bras(bras_rect,game_display)
     bras_rotatif2.tourner_bras(bras_rect2,game_display)
 
-# Key binding
+# Grossir la boule
+    if bras_rotatif.boule_obj is not None:
+        bras_rotatif.grossir_boule(65, 115)
+    if bras_rotatif2.boule_obj is not None:
+        bras_rotatif2.grossir_boule(65, 115)
+
+    # Key binding
     for game_event in pygame.event.get():
         if game_event.type == pygame.QUIT:
             game_running = False
