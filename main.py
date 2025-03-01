@@ -131,6 +131,8 @@ while game_running:
 #Dessiner la boule
     if bras_rotatif.boule:
         bras_rotatif.dessiner_cercle_main(game_display)
+    if bras_rotatif2.boule:
+        bras_rotatif2.dessiner_cercle_main(game_display)
 
 #Rotation bras
     bras_rotatif.posx = player1.x_position

@@ -34,7 +34,6 @@ class Bras_Rotatif:
             #print(f"theta1  :{self.theta}")
             return self.theta
 
-
     def activer_rotation(self,keys,touche):
         if keys[touche]:
             self.t += 0.01
@@ -61,7 +60,9 @@ class Bras_Rotatif:
         rectangle_rot_centre_y = rectangle_rot_taille.center[1]
         diff_x = rectangle_rot_centre_x - rec_centre_x
         diff_y = rectangle_rot_centre_y - rec_centre_y
-        screen.blit(rect_rotated, (self.posx - diff_x - 30, self.posy - diff_y - 30))
+        pos_bras_x = self.posx - diff_x - 30
+        pos_bras_y = self.posy - diff_y - 30
+        screen.blit(rect_rotated, (pos_bras_x, pos_bras_y))
 
     def fermer_main(self, keys, touche):
         if keys[touche]:
@@ -102,13 +103,17 @@ class Bras_Rotatif:
                 self.boule_obj.r += 1
                 self.boule_obj.m = self.boule_obj.r ** 2
                 self.frame_counter = 0
-        print(f"rayon : {self.boule_obj.r}, masse : {self.boule_obj.m}")
+        #print(f"rayon : {self.boule_obj.r}, masse : {self.boule_obj.m}")
 
     def dessiner_cercle_main(self, screen):
         if self.boule and self.boule_obj:
-            circle_radius = self.boule_obj.r
-            circle_x = self.posx + 45  # X de la main (ajuste si nécessaire)
-            circle_y = self.posy + 30  # Y de la main (ajuste si nécessaire)
+            angle_rad = math.radians(self.theta)
+            if self.inverse :
+                angle_rad = -angle_rad
+            offset_x = (self.longueur + 0) * math.cos(angle_rad) + 20
+            offset_y = (self.longueur + 0) * math.sin(angle_rad) + 10
+            circle_x = self.posx + offset_x
+            circle_y = self.posy + offset_y
+            pygame.draw.circle(screen, (173, 216, 230), (circle_x, circle_y), self.boule_obj.r)
 
-            pygame.draw.circle(screen, (173,216,230), (circle_x,circle_y), circle_radius)
 
