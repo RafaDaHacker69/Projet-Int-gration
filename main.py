@@ -44,8 +44,6 @@ Obstacle_collision = [
 ]
 #End variables
 
-tempo =0
-
 game_running = True
 while game_running:
 
