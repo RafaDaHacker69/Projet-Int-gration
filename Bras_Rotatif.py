@@ -81,6 +81,8 @@ class Bras_Rotatif:
         self.theta = self.theta % 360
 
     def ouvrir_main(self):
+        if self.boule_obj is not None and self.boule:
+            self.lancement_projectile()
         self.ferme = False
         self.boule = False
         self.boule_obj = None
@@ -119,4 +121,6 @@ class Bras_Rotatif:
             circle_y = self.posy + offset_y
             pygame.draw.circle(screen, (173, 216, 230), (circle_x, circle_y), self.boule_obj.r)
 
+    def lancement_projectile(self):
+        print("projectile lancé")
 
