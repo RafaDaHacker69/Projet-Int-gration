@@ -67,11 +67,12 @@ class Bras_Rotatif:
         if keys[touche]:
             self.ferme = True
 
-    def ramasser_boule(self,lim_min, lim_max):
+    def ramasser_boule(self,lim_min, lim_max,screen):
         if self.ferme and not self.boule and self.boule_obj is None and lim_min < self.theta < lim_max:
             self.boule_obj = Boules_De_Neiges(0.01, 0.01)
             self.boule = True
             print(f"Boule de neige {self.boule}:")
+            self.dessiner_cercle_main(screen)
 
     def arreter_rotation(self):
         self.t = 0
@@ -101,5 +102,13 @@ class Bras_Rotatif:
                 self.boule_obj.r += 1
                 self.boule_obj.m = self.boule_obj.r ** 2
                 self.frame_counter = 0
-        #print(f"rayon : {self.boule_obj.r}, masse : {self.boule_obj.m}")
+        print(f"rayon : {self.boule_obj.r}, masse : {self.boule_obj.m}")
+
+    def dessiner_cercle_main(self, screen):
+        if self.boule and self.boule_obj:
+            circle_radius = self.boule_obj.r
+            circle_x = self.posx + 45  # X de la main (ajuste si nécessaire)
+            circle_y = self.posy + 30  # Y de la main (ajuste si nécessaire)
+
+            pygame.draw.circle(screen, (173,216,230), (circle_x,circle_y), circle_radius)
 
