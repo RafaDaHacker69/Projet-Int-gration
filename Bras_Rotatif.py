@@ -26,11 +26,11 @@ class Bras_Rotatif:
         self.v = self.omega
         if self.inverse:
             self.theta = abs(((self.theta + self.omega * self.t + 0.5 * self.alpha * self.t ** 2) * 180) / math.pi)
-            print(f"theta2  :{self.theta}")
+            #print(f"theta2  :{self.theta}")
             return self.theta
         elif not self.inverse:
             self.theta = -abs(((self.theta + self.omega * self.t + 0.5 * self.alpha * self.t ** 2) * 180) / math.pi)
-            print(f"theta1  :{self.theta}")
+            #print(f"theta1  :{self.theta}")
             return self.theta
 
 
@@ -75,7 +75,7 @@ class Bras_Rotatif:
     def arreter_rotation(self):
         self.t = 0
         self.omega = 0
-        self.theta = 0
+        self.theta = self.theta % 360
 
     def ouvrir_main(self):
         self.ferme = False
