@@ -1,4 +1,3 @@
-
 import pygame.event
 from player_movement_ank import Player
 from Bras_Rotatif import Bras_Rotatif
@@ -29,23 +28,12 @@ player2_image_flip = None
 player1_image_flip = pygame.transform.flip(player_image1, True, False)
 player2_image_flip = pygame.transform.flip(player_image2, False, False)
 
-bras_rotatif = Bras_Rotatif(0,1,0,0,1000,False,False,0,0,0,0,False,0)
-bras_rotatif2 = Bras_Rotatif(0,1,0,0,1000,False,False,0,0,0,0,True,0)
+bras_rotatif = Bras_Rotatif(40,1,0,20,1000,False,False,0,0,0,0,False,0)
+bras_rotatif2 = Bras_Rotatif(40,1,0,20,1000,False,False,0,0,0,0,True,0)
 
-rect = pygame.Surface((100,80),pygame.SRCALPHA)
-rect2 = pygame.Surface((100,80),pygame.SRCALPHA)
-#rect.fill("green")
-#rect2.fill("yellow")
+bras_rect = bras_rotatif.creation_bras_main(255,0,0)
+bras_rect2 = bras_rotatif2.creation_bras_main(0,120,250)
 
-#Bras des personnages
-pygame.draw.rect(rect,(255,0,0),(45,30,40,20))
-pygame.draw.rect(rect2,(0, 120, 250),(15,30,40,20))
-
-#Mains des personnages
-pygame.draw.rect(rect,(0,0,0),(85,30,10,20))
-pygame.draw.rect(rect2,(0,0,0),(5,30,10,20))
-
-game_display.blit(rect,(bras_rotatif.posx,bras_rotatif.posy))
 player_y_Baseposition = display_height * 0.8
 
 #creation obstacles
@@ -146,8 +134,8 @@ while game_running:
     bras_rotatif2.posx = player2.x_position
     bras_rotatif2.posy = player2.y_position
 
-    bras_rotatif.tourner_bras(rect,game_display)
-    bras_rotatif2.tourner_bras(rect2,game_display)
+    bras_rotatif.tourner_bras(bras_rect,game_display)
+    bras_rotatif2.tourner_bras(bras_rect2,game_display)
 
 # Key binding
     for game_event in pygame.event.get():
@@ -162,7 +150,6 @@ while game_running:
                 bras_rotatif.ouvrir_main()
             if game_event.key == pygame.K_n:
                 bras_rotatif2.ouvrir_main()
-
     #print(f"Theta2 = {bras_rotatif2.theta}")
     pygame.display.update()
     game_clock.tick(60)

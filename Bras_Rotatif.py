@@ -4,9 +4,9 @@ from Boules_De_Neiges import Boules_De_Neiges
 import pygame
 class Bras_Rotatif:
 
-    def __init__(self, r, alpha, theta, m, omega0, ferme, boule, v, t, posx, posy, inverse, omega):
-        self.y = r  # Hauteur (rayon du bras)
-        self.m = m  # Masse en kg
+    def __init__(self, longueur, alpha, theta, largeur, omega0, ferme, boule, v, t, posx, posy, inverse, omega):
+        self.longueur = longueur
+        self.largeur = largeur
         self.theta = theta *-1
         self.alpha = alpha
         self.omega0 = omega0
@@ -47,7 +47,7 @@ class Bras_Rotatif:
                     self.theta = 0
         return self.theta
 
-    def tourner_bras(self, rect,screen):
+    def tourner_bras(self, rect, screen):
         rec_taille = rect.get_rect()
         rec_centre_x = rec_taille.center[0]
         rec_centre_y = rec_taille.center[1]
@@ -80,3 +80,14 @@ class Bras_Rotatif:
     def ouvrir_main(self):
         self.ferme = False
         self.boule = False
+
+    def creation_bras_main(self,r,g,b):
+        rect = pygame.Surface((100, 80), pygame.SRCALPHA)
+        #rect.fill("green")
+        if not self.inverse:
+            pygame.draw.rect(rect, (r, g, b), (45, 30, self.longueur, self.largeur))  # bras
+            pygame.draw.rect(rect, (0, 0, 0), (85, 30, 10, 20))  # main
+        if self.inverse:
+            pygame.draw.rect(rect, (r, g, b), (15, 30, self.longueur, self.largeur))  # bras droite
+            pygame.draw.rect(rect, (0, 0, 0), (5, 30, 10, 20)) #main droite
+        return rect
