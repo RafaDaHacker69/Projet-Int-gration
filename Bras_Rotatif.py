@@ -110,8 +110,11 @@ class Bras_Rotatif:
             angle_rad = math.radians(self.theta)
             if self.inverse :
                 angle_rad = -angle_rad
-            offset_x = (self.longueur + 0) * math.cos(angle_rad) + 20
-            offset_y = (self.longueur + 0) * math.sin(angle_rad) + 10
+                offset_x = (self.longueur + 0) * math.cos(angle_rad) + 20
+                offset_y = (self.longueur + 0) * math.sin(angle_rad) + 10
+            else :
+                offset_x = (self.longueur + 0) * math.cos(angle_rad) + 20
+                offset_y = (self.longueur + 0) * math.sin(angle_rad) + 10
             circle_x = self.posx + offset_x
             circle_y = self.posy + offset_y
             pygame.draw.circle(screen, (173, 216, 230), (circle_x, circle_y), self.boule_obj.r)
