@@ -41,10 +41,6 @@ rect2 = pygame.Surface((100,80),pygame.SRCALPHA)
 pygame.draw.rect(rect,(255,0,0),(45,30,40,20))
 pygame.draw.rect(rect2,(0, 120, 250),(15,30,40,20))
 
-#Mains des personnages
-pygame.draw.rect(rect,(0,0,0),(85,30,10,20))
-pygame.draw.rect(rect2,(0,0,0),(5,30,10,20))
-
 game_display.blit(rect,(bras_rotatif.posx,bras_rotatif.posy))
 player_y_Baseposition = display_height * 0.8
 
@@ -133,8 +129,8 @@ while game_running:
     bras_rotatif2.theta=bras_rotatif2.activer_rotation(keys,pygame.K_m)
 
 #Ramasser une boule de neige
-    bras_rotatif.ramasser_boule(bras_rotatif.theta,-115,-65)
-    bras_rotatif2.ramasser_boule(bras_rotatif2,65,115)
+    bras_rotatif.ramasser_boule(65,115)
+    bras_rotatif2.ramasser_boule(65,115)
 
 #Fermeture de la main
     bras_rotatif.fermer_main(keys,pygame.K_c)
@@ -162,6 +158,8 @@ while game_running:
                 bras_rotatif.ouvrir_main()
             if game_event.key == pygame.K_n:
                 bras_rotatif2.ouvrir_main()
+
+    #print(f"Theta2 = {bras_rotatif2.theta}")
     pygame.display.update()
     game_clock.tick(60)
 

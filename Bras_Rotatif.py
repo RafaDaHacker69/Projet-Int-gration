@@ -66,8 +66,8 @@ class Bras_Rotatif:
         if keys[touche]:
             self.ferme = True
 
-    def ramasser_boule(self, i, lim_min, lim_max):
-        if self.ferme and not self.boule and lim_min < i < lim_max:
+    def ramasser_boule(self,lim_min, lim_max):
+        if self.ferme and not self.boule and lim_min < self.theta < lim_max:
             boule = Boules_De_Neiges(0.01, 0.01)
             self.boule = True
             print(f"Boule de neige {self.boule}:")
