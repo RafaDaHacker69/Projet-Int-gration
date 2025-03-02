@@ -23,14 +23,14 @@ class Bras_Rotatif:
             self.theta = self.theta *-1
 
     def calcul_de_vitesse_angulaire(self):
-        self.omega = self.omega0 + self.alpha * self.t
+        self.omega = self.omega0 + (self.alpha * self.t)
         self.v = self.omega
         if self.inverse:
-            self.theta = abs(((self.theta + self.omega * self.t + 0.5 * self.alpha * self.t ** 2) * 180) / math.pi)
+            self.theta = abs(((self.theta + (self.omega * self.t) + (0.5 * self.alpha * self.t ** 2)) * 180) / math.pi)
             #print(f"theta2  :{self.theta}")
             return self.theta
         elif not self.inverse:
-            self.theta = -abs(((self.theta + self.omega * self.t + 0.5 * self.alpha * self.t ** 2) * 180) / math.pi)
+            self.theta = -abs(((self.theta + (self.omega * self.t) + (0.5 * self.alpha * self.t ** 2)) * 180) / math.pi)
             #print(f"theta1  :{self.theta}")
             return self.theta
 
