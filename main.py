@@ -159,7 +159,7 @@ while game_running:
                 bras_rotatif.ouvrir_main()
             if game_event.key == pygame.K_n:
                 bras_rotatif2.ouvrir_main()
-    #print(f"Theta2 = {bras_rotatif2.theta}")
+    print(f"Theta = {bras_rotatif.theta}")
     pygame.display.update()
     game_clock.tick(60)
 

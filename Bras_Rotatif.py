@@ -70,7 +70,7 @@ class Bras_Rotatif:
 
     def ramasser_boule(self,lim_min, lim_max,screen):
         if self.ferme and not self.boule and self.boule_obj is None and lim_min < self.theta < lim_max:
-            self.boule_obj = Boules_De_Neiges(0.01, 0.01)
+            self.boule_obj = Boules_De_Neiges(10, 10,0)
             self.boule = True
             print(f"Boule de neige {self.boule}:")
             self.dessiner_cercle_main(screen)
@@ -82,7 +82,8 @@ class Bras_Rotatif:
 
     def ouvrir_main(self):
         if self.boule_obj is not None and self.boule:
-            self.lancement_projectile()
+            self.boule_obj.theta = self.theta + 90
+            Boules_De_Neiges.lancement_projectile(self.boule_obj)
         self.ferme = False
         self.boule = False
         self.boule_obj = None
@@ -120,7 +121,3 @@ class Bras_Rotatif:
             circle_x = self.posx + offset_x
             circle_y = self.posy + offset_y
             pygame.draw.circle(screen, (173, 216, 230), (circle_x, circle_y), self.boule_obj.r)
-
-    def lancement_projectile(self):
-        print("projectile lancé")
-
