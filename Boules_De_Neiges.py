@@ -18,6 +18,7 @@ class Boules_De_Neiges:
         self.theta = math.radians(self.theta) #angle en radians
         self.lance = True
         #print(f"x : {self.x}, y : {self.y}, theta : {self.theta}, vitesse : {self.vitesse}, lance : {self.lance}")
+        print("boule de neige lancé")
 
     def trajectoire_projectile(self,screen):
         self.t += 0.1
@@ -28,7 +29,7 @@ class Boules_De_Neiges:
         self.limites_projectile(screen)
 
         pygame.draw.circle(screen, (173, 216, 230), (int(self.x), int(self.y)), self.r)
-        #print(f"x : {self.x}, y : {self.y}")
+        print(f"x : {self.x}, y : {self.y}")
 
 
     def limites_projectile(self,screen):
