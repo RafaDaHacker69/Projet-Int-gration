@@ -47,7 +47,7 @@ while running:
     if keys[pygame.K_LSHIFT]:
 
         t+=0.001
-        i-=bras_rotatif.Calcul_de_vitesse_angulaire(omega,t,bras_rotatif.alpha,bras_rotatif.theta)
+        i-=bras_rotatif.calcul_de_vitesse_angulaire()
 
 
     rect_rotated = pygame.transform.rotate(rect, i)

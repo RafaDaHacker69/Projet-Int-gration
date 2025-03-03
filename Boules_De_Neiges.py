@@ -12,6 +12,8 @@ class Boules_De_Neiges:
         self.x = 0
         self.y = 0
         self.lance = False
+        self.Vx = 0
+        self.Vy = 0
 
     def lancement_projectile(self):
         #print(f"theta : {self.theta}")
@@ -21,28 +23,35 @@ class Boules_De_Neiges:
         print("boule de neige lancé")
 
     def trajectoire_projectile(self,screen):
-        self.t += 0.1
-        Vx = self.vitesse * math.cos(self.theta)
-        self.x = self.x + (Vx * self.t)
-        Vy = self.vitesse * math.sin(self.theta)
-        self.y = self.y - ((Vy * self.t) + (((-9.81) * self.t ** 2) / 2))
-        self.limites_projectile(screen)
+        if self.lance:
+            self.t += 0.1
+            self.Vx = self.vitesse * math.cos(self.theta)
+            self.x = self.x + (self.Vx * self.t)
+            self.Vy = self.vitesse * math.sin(self.theta)
+            self.y = self.y - ((self.Vy * self.t) + (((-9.81) * self.t ** 2) / 2))
+            self.limites_projectile(screen)
 
-        pygame.draw.circle(screen, (173, 216, 230), (int(self.x), int(self.y)), self.r)
-        print(f"x : {self.x}, y : {self.y}")
+            pygame.draw.circle(screen, (173, 216, 230), (int(self.x), int(self.y)), self.r)
+            print(f"x : {self.x}, y : {self.y}")
+
 
 
     def limites_projectile(self,screen):
         width = screen.get_width()
-        height = screen.get_height()
         if self.x < 0:
             self.x = 0
+            self.lance = False
         elif self.x > width:
             self.x = width
-        if self.y > 590:
+            self.lance = False
+        if self.y < 0:
+            self.y = 0
+            self.lance = False
+        elif self.y > 590:
             self.y = 590
-        elif self.y < height:
-            self.y = height
+            self.lance = False
+
+    #def collision_boule(self):
 
 
 

@@ -102,7 +102,7 @@ class Bras_Rotatif:
         return rect
 
     def grossir_boule(self, lim_min, lim_max):
-        if self.boule and self.boule_obj and lim_min < self.theta < lim_max and self.ferme:
+        if self.boule and self.boule_obj and lim_min < self.theta < lim_max and self.ferme and self.boule_obj.r < 34:
             self.frame_counter += 1
             if self.frame_counter > 20:
                 self.boule_obj.r += 1
@@ -126,4 +126,4 @@ class Bras_Rotatif:
             self.boule_obj.y = circle_y
             self.boule_obj.vitesse = (self.omega * self.longueur)/2000 #Vitesse tangeantielle est égale au rayon * vitesse angulaire
             pygame.draw.circle(screen, (173, 216, 230), (circle_x, circle_y), self.boule_obj.r)
-            print(f"x : {circle_x}, y : {circle_y}")
+            #print(f"x : {circle_x}, y : {circle_y}")

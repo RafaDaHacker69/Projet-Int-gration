@@ -150,10 +150,8 @@ while game_running:
 # Trajectoire de la boule
     if bras_rotatif.boule_obj is not None and bras_rotatif.boule_obj.lance:
         bras_rotatif.boule_obj.trajectoire_projectile(game_display)
-        #bras_rotatif.boule_obj.limites_projectile(game_display)
     if bras_rotatif2.boule_obj is not None and bras_rotatif2.boule_obj.lance:
         bras_rotatif2.boule_obj.trajectoire_projectile(game_display)
-        #bras_rotatif2.boule_obj.limites_projectile(game_display)
 
     for game_event in pygame.event.get():
         if game_event.type == pygame.QUIT:
