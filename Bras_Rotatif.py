@@ -1,9 +1,10 @@
 import math
+import time
 from Boules_De_Neiges import Boules_De_Neiges
 import pygame
 class Bras_Rotatif:
 
-    def __init__(self, alpha, theta, omega0, v, inverse):
+    def __init__(self, alpha, theta, omega0, inverse):
         self.longueur = 40
         self.largeur = 20
         self.theta = theta *-1
@@ -11,7 +12,7 @@ class Bras_Rotatif:
         self.omega0 = omega0
         self.ferme = False
         self.boule = False
-        self.v = v
+        self.v = 0
         self.t = 0
         self.posx = 0
         self.posy = 0
@@ -24,7 +25,6 @@ class Bras_Rotatif:
 
     def calcul_de_vitesse_angulaire(self):
         self.omega = self.omega0 + (self.alpha * self.t)
-        self.v = self.omega
         if self.inverse:
             self.theta = abs(((self.theta + (self.omega * self.t) + (0.5 * self.alpha * self.t ** 2)) * 180) / math.pi)
             #print(f"theta2  :{self.theta}")
@@ -69,7 +69,7 @@ class Bras_Rotatif:
             self.ferme = True
 
     def ramasser_boule(self,lim_min, lim_max,screen):
-        if self.ferme and not self.boule and self.boule_obj is None and lim_min < self.theta < lim_max:
+        if self.ferme and not self.boule and lim_min < self.theta < lim_max:
             self.boule_obj = Boules_De_Neiges(10, 10)
             self.boule = True
             print(f"Boule de neige {self.boule}:")
@@ -77,16 +77,18 @@ class Bras_Rotatif:
 
     def arreter_rotation(self):
         self.t = 0
-        self.omega = 0
         self.theta = self.theta % 360
+        self.omega = 0
 
     def ouvrir_main(self):
         if self.boule_obj is not None and self.boule:
-            self.boule_obj.theta = self.theta + 90
+            if self.inverse:
+                self.boule_obj.theta = (self.theta + 270)
+            else :
+                self.boule_obj.theta = -abs(self.theta + 90)
             Boules_De_Neiges.lancement_projectile(self.boule_obj)
         self.ferme = False
         self.boule = False
-        self.boule_obj = None
 
     def creation_bras_main(self,r,g,b):
         rect = pygame.Surface((100, 80), pygame.SRCALPHA)
@@ -112,7 +114,7 @@ class Bras_Rotatif:
         if self.boule and self.boule_obj:
             angle_rad = math.radians(self.theta)
             if self.inverse :
-                angle_rad = -angle_rad
+                angle_rad = -angle_rad + math.pi
                 offset_x = (self.longueur + 0) * math.cos(angle_rad) + 20
                 offset_y = (self.longueur + 0) * math.sin(angle_rad) + 10
             else :
@@ -120,4 +122,8 @@ class Bras_Rotatif:
                 offset_y = (self.longueur + 0) * math.sin(angle_rad) + 10
             circle_x = self.posx + offset_x
             circle_y = self.posy + offset_y
+            self.boule_obj.x = circle_x
+            self.boule_obj.y = circle_y
+            self.boule_obj.vitesse = (self.omega * self.longueur)/2000 #Vitesse tangeantielle est égale au rayon * vitesse angulaire
             pygame.draw.circle(screen, (173, 216, 230), (circle_x, circle_y), self.boule_obj.r)
+            print(f"x : {circle_x}, y : {circle_y}")

@@ -28,8 +28,8 @@ player2_image_flip = None
 player1_image_flip = pygame.transform.flip(player_image1, True, False)
 player2_image_flip = pygame.transform.flip(player_image2, False, False)
 
-bras_rotatif = Bras_Rotatif(1,0,1000,0,False)
-bras_rotatif2 = Bras_Rotatif(1,0,1000,0,True)
+bras_rotatif = Bras_Rotatif(1,0,1000,False)
+bras_rotatif2 = Bras_Rotatif(1,0,1000,True)
 
 bras_rect = bras_rotatif.creation_bras_main(255,0,0)
 bras_rect2 = bras_rotatif2.creation_bras_main(0,120,250)
@@ -147,6 +147,14 @@ while game_running:
     if bras_rotatif2.boule_obj is not None:
         bras_rotatif2.grossir_boule(65, 115)
 
+# Trajectoire de la boule
+    if bras_rotatif.boule_obj is not None and bras_rotatif.boule_obj.lance:
+        bras_rotatif.boule_obj.trajectoire_projectile(game_display)
+        #bras_rotatif.boule_obj.limites_projectile(game_display)
+    if bras_rotatif2.boule_obj is not None and bras_rotatif2.boule_obj.lance:
+        bras_rotatif2.boule_obj.trajectoire_projectile(game_display)
+        #bras_rotatif2.boule_obj.limites_projectile(game_display)
+
     for game_event in pygame.event.get():
         if game_event.type == pygame.QUIT:
             game_running = False
@@ -159,7 +167,7 @@ while game_running:
                 bras_rotatif.ouvrir_main()
             if game_event.key == pygame.K_n:
                 bras_rotatif2.ouvrir_main()
-    print(f"Theta = {bras_rotatif.theta}")
+    #print(f"Theta = {bras_rotatif.theta}")
     pygame.display.update()
     game_clock.tick(60)
 
