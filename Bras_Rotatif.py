@@ -70,7 +70,7 @@ class Bras_Rotatif:
 
     def ramasser_boule(self,lim_min, lim_max,screen):
         if self.ferme and not self.boule and self.boule_obj is None and lim_min < self.theta < lim_max:
-            self.boule_obj = Boules_De_Neiges(10, 10,0)
+            self.boule_obj = Boules_De_Neiges(10, 10)
             self.boule = True
             print(f"Boule de neige {self.boule}:")
             self.dessiner_cercle_main(screen)
