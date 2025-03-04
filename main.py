@@ -11,18 +11,19 @@ pygame.display.set_caption('CP (Club Pinguin)')
 game_clock = pygame.time.Clock()
 
 BACKGROUND_COLOR = pygame.Color('white')
-bg = pygame.image.load('Bg.jpg')
+bg = pygame.image.load('IMAGES/Bg.jpg').convert_alpha()
+sol = pygame.image.load('IMAGES/sol.png').convert_alpha()
 display_width, display_height = game_display.get_size()
 
 player1 = Player(display_width * 0.2, display_height * 0.8, 30, 40, controls='wasd')
 player2 = Player(display_width * 0.7, display_height * 0.8, 30, 40, controls='arrows')
 
-player_image1 = pygame.image.load("IMAGES/Cat.jpg").convert_alpha()
+player_image1 = pygame.image.load("IMAGES/Cat-removebg.png").convert_alpha()
 Image_Witdh=player_image1.get_width()
 Image_Height = player_image1.get_height()
 player1_image_flip = None
 
-player_image2 = pygame.image.load("IMAGES/Dog.jpg").convert_alpha()
+player_image2 = pygame.image.load("IMAGES/Dog-removebg.png").convert_alpha()
 Image_Witdh2=player_image2.get_width()
 Image_Height2 = player_image2.get_height()
 player2_image_flip = None
@@ -102,6 +103,8 @@ while game_running:
 
     # Rendu graphique
     game_display.fill(BACKGROUND_COLOR)
+    game_display.blit(bg, (0, 0))
+    game_display.blit(sol,(0,585))
 
     #player1.draw(game_display, (0, 120, 250))
     player_rect1 = player_image1.get_rect(center=(player1.x_position+140, player1.y_position+120))
@@ -114,7 +117,7 @@ while game_running:
     game_display.blit(imageFinal2, player_rect2)
 
     pygame.draw.rect(game_display, (0, 0, 0), (0, player_y_Baseposition + 40, display_width, 5))
-    pygame.draw.rect(game_display, (255, 0, 0), (display_width / 2, 0, 1, display_height))
+    #pygame.draw.rect(game_display, (255, 0, 0), (display_width / 2, 0, 1, display_height))
 
 #Physique rotation bras
     bras_rotatif.theta=bras_rotatif.activer_rotation(keys,pygame.K_LSHIFT)
