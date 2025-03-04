@@ -101,7 +101,7 @@ while game_running:
     elif direction2 == "left":
         player2_image_flip = pygame.transform.flip(player_image2, False, False)
 
-    # Rendu graphique
+#Rendu graphique
     game_display.fill(BACKGROUND_COLOR)
     game_display.blit(bg, (0, 0))
     game_display.blit(sol,(0,585))
@@ -116,28 +116,31 @@ while game_running:
     imageFinal2 = pygame.transform.scale_by(player2_image_flip, 0.27)
     game_display.blit(imageFinal2, player_rect2)
 
-    pygame.draw.rect(game_display, (0, 0, 0), (0, player_y_Baseposition + 40, display_width, 5))
+    #Ligne du sol
+    #pygame.draw.rect(game_display, (0, 0, 0), (0, player_y_Baseposition + 40, display_width, 5))
+
+    #Ligne du centre
     #pygame.draw.rect(game_display, (255, 0, 0), (display_width / 2, 0, 1, display_height))
 
-#Physique rotation bras
+    #Physique rotation bras
     bras_rotatif.theta=bras_rotatif.activer_rotation(keys,pygame.K_LSHIFT)
     bras_rotatif2.theta=bras_rotatif2.activer_rotation(keys,pygame.K_m)
 
-#Ramasser une boule de neige
+    #Ramasser une boule de neige
     bras_rotatif.ramasser_boule(65,115,game_display)
     bras_rotatif2.ramasser_boule(65,115,game_display)
 
-#Fermeture de la main
+    #Fermeture de la main
     bras_rotatif.fermer_main(keys,pygame.K_c)
     bras_rotatif2.fermer_main(keys,pygame.K_n)
 
-#Dessiner la boule
+    #Dessiner la boule
     if bras_rotatif.boule:
         bras_rotatif.dessiner_cercle_main(game_display)
     if bras_rotatif2.boule:
         bras_rotatif2.dessiner_cercle_main(game_display)
 
-#Rotation bras
+    #Rotation bras
     bras_rotatif.posx = player1.x_position
     bras_rotatif.posy = player1.y_position
     bras_rotatif2.posx = player2.x_position
@@ -146,13 +149,13 @@ while game_running:
     bras_rotatif.tourner_bras(bras_rect,game_display)
     bras_rotatif2.tourner_bras(bras_rect2,game_display)
 
-# Grossir la boule
+    #Grossir la boule
     if bras_rotatif.boule_obj is not None:
         bras_rotatif.grossir_boule(65, 115)
     if bras_rotatif2.boule_obj is not None:
         bras_rotatif2.grossir_boule(65, 115)
 
-# Trajectoire de la boule
+    #Trajectoire de la boule
     if bras_rotatif.boule_obj is not None and bras_rotatif.boule_obj.lance:
         bras_rotatif.boule_obj.trajectoire_projectile(game_display)
     if bras_rotatif2.boule_obj is not None and bras_rotatif2.boule_obj.lance:
