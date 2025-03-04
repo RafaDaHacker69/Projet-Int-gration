@@ -112,8 +112,8 @@ while game_running:
     game_display.blit(imageFinal1, player_rect1)
 
     #player2.draw(game_display, (255, 0, 0))
-    player_rect2 = player_image2.get_rect(center=(player2.x_position + 300, player2.y_position + 400))
-    imageFinal2 = pygame.transform.scale_by(player2_image_flip, 0.12)
+    player_rect2 = player_image2.get_rect(center=(player2.x_position + 170, player2.y_position + 125))
+    imageFinal2 = pygame.transform.scale_by(player2_image_flip, 0.27)
     game_display.blit(imageFinal2, player_rect2)
 
     pygame.draw.rect(game_display, (0, 0, 0), (0, player_y_Baseposition + 40, display_width, 5))
