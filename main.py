@@ -7,9 +7,11 @@ from Obstacle_collision import Obstacle
 pygame.init()
 
 game_display = pygame.display.set_mode((1240, 680))
+pygame.display.set_caption('CP (Club Pinguin)')
 game_clock = pygame.time.Clock()
 
 BACKGROUND_COLOR = pygame.Color('white')
+bg = pygame.image.load('Bg.jpg')
 display_width, display_height = game_display.get_size()
 
 player1 = Player(display_width * 0.2, display_height * 0.8, 30, 40, controls='wasd')
