@@ -107,12 +107,16 @@ while game_running:
     game_display.blit(sol,(0,585))
 
     #player1.draw(game_display, (0, 120, 250))
-    player_rect1 = player_image1.get_rect(center=(player1.x_position+140, player1.y_position+120))
+    Decalage_x_p1 = 140
+    Decalage_y_p1 = 120
+    player_rect1 = player_image1.get_rect(center=(player1.x_position+Decalage_x_p1, player1.y_position+Decalage_y_p1))
     imageFinal1 = pygame.transform.scale_by(player1_image_flip, 0.3)
     game_display.blit(imageFinal1, player_rect1)
 
     #player2.draw(game_display, (255, 0, 0))
-    player_rect2 = player_image2.get_rect(center=(player2.x_position + 170, player2.y_position + 125))
+    Decalage_x_p2 = 170
+    Decalage_y_p2 = 125
+    player_rect2 = player_image2.get_rect(center=(player2.x_position + Decalage_x_p2, player2.y_position + Decalage_y_p2))
     imageFinal2 = pygame.transform.scale_by(player2_image_flip, 0.27)
     game_display.blit(imageFinal2, player_rect2)
 
@@ -160,6 +164,12 @@ while game_running:
         bras_rotatif.boule_obj.trajectoire_projectile(game_display)
     if bras_rotatif2.boule_obj is not None and bras_rotatif2.boule_obj.lance:
         bras_rotatif2.boule_obj.trajectoire_projectile(game_display)
+
+    #Check collisions de boules
+    if bras_rotatif.boule_obj is not None:
+        bras_rotatif.boule_obj.check_collision_boule(player2)
+    if bras_rotatif2.boule_obj is not None:
+        bras_rotatif2.boule_obj.check_collision_boule(player1)
 
     for game_event in pygame.event.get():
         if game_event.type == pygame.QUIT:

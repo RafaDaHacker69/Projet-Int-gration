@@ -62,7 +62,7 @@ class Bras_Rotatif:
         diff_y = rectangle_rot_centre_y - rec_centre_y
         pos_bras_x = self.posx - diff_x - 30
         pos_bras_y = self.posy - diff_y - 30
-        image_bras = pygame.image.load("IMAGES/BrasOuvert.png").convert_alpha()
+        #image_bras = pygame.image.load("IMAGES/BrasOuvert.png").convert_alpha()
         screen.blit(rect_rotated, (pos_bras_x, pos_bras_y))
 
     def fermer_main(self, keys, touche):

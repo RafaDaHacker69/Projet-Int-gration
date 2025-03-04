@@ -32,7 +32,7 @@ class Boules_De_Neiges:
             self.limites_projectile(screen)
 
             pygame.draw.circle(screen, (173, 216, 230), (int(self.x), int(self.y)), self.r)
-            print(f"x : {self.x}, y : {self.y}")
+            #print(f"x : {self.x}, y : {self.y}")
 
     def limites_projectile(self,screen):
         width = screen.get_width()
@@ -49,7 +49,13 @@ class Boules_De_Neiges:
             self.y = 590
             self.lance = False
 
-    #def collision_boule(self):
+    def check_collision_boule(self,Player):
+        player_pos_x = Player.x_position
+        player_pos_y = Player.y_position
+        #print(player_pos_x, player_pos_y)
+        if player_pos_x <= self.x <= player_pos_x + 30 and player_pos_y <= self.y < player_pos_y + 40:
+            print("Collision")
+            self.lance = False
 
 
 
