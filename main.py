@@ -7,7 +7,7 @@ from Obstacle_collision import Obstacle
 pygame.init()
 
 game_display = pygame.display.set_mode((1240, 680))
-pygame.display.set_caption('CP (Club Pinguin)')
+pygame.display.set_caption('CP (Club Penguin)')
 game_clock = pygame.time.Clock()
 
 BACKGROUND_COLOR = pygame.Color('white')

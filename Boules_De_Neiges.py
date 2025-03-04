@@ -34,8 +34,6 @@ class Boules_De_Neiges:
             pygame.draw.circle(screen, (173, 216, 230), (int(self.x), int(self.y)), self.r)
             print(f"x : {self.x}, y : {self.y}")
 
-
-
     def limites_projectile(self,screen):
         width = screen.get_width()
         if self.x < 0:

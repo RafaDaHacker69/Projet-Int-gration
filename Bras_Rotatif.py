@@ -65,7 +65,6 @@ class Bras_Rotatif:
         image_bras = pygame.image.load("IMAGES/BrasOuvert.png").convert_alpha()
         screen.blit(rect_rotated, (pos_bras_x, pos_bras_y))
 
-
     def fermer_main(self, keys, touche):
         if keys[touche]:
             self.ferme = True
