@@ -14,18 +14,22 @@ class Boules_De_Neiges:
         self.lance = False
         self.Vx = 0
         self.Vy = 0
+        self.collision = False
 
     def lancement_projectile(self):
         #print(f"theta : {self.theta}")
         self.theta = math.radians(self.theta) #angle en radians
         self.lance = True
+        self.collision = False
         #print(f"x : {self.x}, y : {self.y}, theta : {self.theta}, vitesse : {self.vitesse}, lance : {self.lance}")
         print("boule de neige lancé")
 
     def trajectoire_projectile(self,screen):
         if self.lance:
             self.t += 0.1
+            k = 0.7 # "resistence de l'air"
             self.Vx = self.vitesse * math.cos(self.theta)
+            self.Vx = self.Vx * k
             self.x = self.x + (self.Vx * self.t)
             self.Vy = self.vitesse * math.sin(self.theta)
             self.y = self.y - ((self.Vy * self.t) + (((-9.81) * self.t ** 2) / 2))
@@ -39,23 +43,32 @@ class Boules_De_Neiges:
         if self.x < 0:
             self.x = 0
             self.lance = False
+            self.collision = True
         elif self.x > width:
             self.x = width
             self.lance = False
-        if self.y < 0:
-            self.y = 0
-            self.lance = False
+            self.collision = True
+        # if self.y < 0:
+        #     self.y = 0
+        #     self.lance = False
         elif self.y > 590:
             self.y = 590
             self.lance = False
+            self.collision = True
 
-    def check_collision_boule(self,Player):
+    def check_collision_boule(self,Player,screen):
         player_pos_x = Player.x_position
         player_pos_y = Player.y_position
         #print(player_pos_x, player_pos_y)
-        if player_pos_x <= self.x <= player_pos_x + 30 and player_pos_y <= self.y < player_pos_y + 40:
+
+        #Hitboxes
+        #pygame.draw.rect(screen, (255, 0, 0), (player_pos_x,player_pos_y-40,30,80))
+
+        if player_pos_x <= self.x <= player_pos_x + 30 and player_pos_y-40 <= self.y < player_pos_y + 80 and not self.collision :
             print("Collision")
             self.lance = False
+            self.collision = True
+
 
 
 

@@ -167,9 +167,9 @@ while game_running:
 
     #Check collisions de boules
     if bras_rotatif.boule_obj is not None:
-        bras_rotatif.boule_obj.check_collision_boule(player2)
+        bras_rotatif.boule_obj.check_collision_boule(player2,game_display)
     if bras_rotatif2.boule_obj is not None:
-        bras_rotatif2.boule_obj.check_collision_boule(player1)
+        bras_rotatif2.boule_obj.check_collision_boule(player1,game_display)
 
     for game_event in pygame.event.get():
         if game_event.type == pygame.QUIT:
