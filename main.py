@@ -180,7 +180,7 @@ while game_running:
     if bras_rotatif.boule_obj is not None:
         bras_rotatif.mise_a_jour_last_speed()
     if bras_rotatif2.boule_obj is not None:
-        bras_rotatif.mise_a_jour_last_speed()
+        bras_rotatif2.mise_a_jour_last_speed()
 
     #Gestionnaire d'évènements
     for game_event in pygame.event.get():
