@@ -134,5 +134,5 @@ class Bras_Rotatif:
     def mise_a_jour_last_speed(self):
         if not self.boule_obj.lance:
             self.frame_counter +=1
-            if self.frame_counter >= 20:
+            if self.frame_counter >= 35:
                 self.last_omega = 0
