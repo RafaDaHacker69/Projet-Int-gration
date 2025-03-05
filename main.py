@@ -1,13 +1,16 @@
 import pygame.event
+
+from Menu import Menu
 from player_movement_ank import Player
 from Bras_Rotatif import Bras_Rotatif
-from Boules_De_Neiges import Boules_De_Neiges
 from Obstacle_collision import Obstacle
 
 pygame.init()
 
 game_display = pygame.display.set_mode((1240, 680))
 pygame.display.set_caption('CP (Club Penguin)')
+menu = Menu(game_display)
+menu.show_menu()
 game_clock = pygame.time.Clock()
 
 BACKGROUND_COLOR = pygame.Color('white')
