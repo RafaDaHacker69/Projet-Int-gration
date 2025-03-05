@@ -9,8 +9,10 @@ pygame.init()
 
 game_display = pygame.display.set_mode((1240, 680))
 pygame.display.set_caption('CP (Club Penguin)')
+
 menu = Menu(game_display)
 menu.show_menu()
+
 game_clock = pygame.time.Clock()
 
 BACKGROUND_COLOR = pygame.Color('white')
@@ -174,6 +176,13 @@ while game_running:
     if bras_rotatif2.boule_obj is not None:
         bras_rotatif2.boule_obj.check_collision_boule(player1,game_display)
 
+    #Compteur de frames de la dernière vitesse
+    if bras_rotatif.boule_obj is not None:
+        bras_rotatif.mise_a_jour_last_speed()
+    if bras_rotatif2.boule_obj is not None:
+        bras_rotatif.mise_a_jour_last_speed()
+
+    #Gestionnaire d'évènements
     for game_event in pygame.event.get():
         if game_event.type == pygame.QUIT:
             game_running = False
@@ -186,6 +195,7 @@ while game_running:
                 bras_rotatif.ouvrir_main()
             if game_event.key == pygame.K_n:
                 bras_rotatif2.ouvrir_main()
+
     #print(f"Theta = {bras_rotatif.theta}")
     pygame.display.update()
     game_clock.tick(60)

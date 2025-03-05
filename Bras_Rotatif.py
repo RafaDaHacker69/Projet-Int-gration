@@ -20,11 +20,13 @@ class Bras_Rotatif:
         self.omega = 0
         self.boule_obj = None
         self.frame_counter = 0
+        self.last_omega = 0
         if inverse:
             self.theta = self.theta *-1
 
     def calcul_de_vitesse_angulaire(self):
         self.omega = self.omega0 + (self.alpha * self.t)
+        self.last_omega = self.omega
         if self.inverse:
             self.theta = abs(((self.theta + (self.omega * self.t) + (0.5 * self.alpha * self.t ** 2)) * 180) / math.pi)
             #print(f"theta2  :{self.theta}")
@@ -125,6 +127,12 @@ class Bras_Rotatif:
             circle_y = self.posy + offset_y
             self.boule_obj.x = circle_x
             self.boule_obj.y = circle_y
-            self.boule_obj.vitesse = (self.omega * self.longueur)/2000 #Vitesse tangeantielle est égale au rayon * vitesse angulaire
+            self.boule_obj.vitesse = (self.last_omega * self.longueur)/2000 #Vitesse tangeantielle est égale au rayon * vitesse angulaire
             pygame.draw.circle(screen, (173, 216, 230), (circle_x, circle_y), self.boule_obj.r)
             #print(f"x : {circle_x}, y : {circle_y}")
+
+    def mise_a_jour_last_speed(self):
+        if not self.boule_obj.lance:
+            self.frame_counter +=1
+            if self.frame_counter >= 20:
+                self.last_omega = 0
