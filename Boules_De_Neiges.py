@@ -69,6 +69,8 @@ class Boules_De_Neiges:
             print("Collision")
             self.lance = False
             self.collision = True
+            Vf = ((self.m*self.Vx)+(80*Player.velocity_x))/(self.m+80)
+            Player.velocity_x = Vf
 
 
 
