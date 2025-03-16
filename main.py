@@ -42,7 +42,7 @@ bras_rotatif2 = Bras_Rotatif(1,0,1000,True)
 bras_rect = bras_rotatif.creation_bras_main(255,0,0)
 bras_rect2 = bras_rotatif2.creation_bras_main(0,120,250)
 
-player_y_Baseposition = display_height * 0.8
+player_y_Baseposition = display_height*0.88
 
 #creation obstacles
 Obstacle_collision = [
@@ -57,26 +57,12 @@ while game_running:
 
     keys = pygame.key.get_pressed()
 
-    # Gérer l'entrée utilisateur
-    player1.handle_input(keys)
-    player2.handle_input(keys)
-
-    # Appliquer la friction
-    player1.apply_friction()
-    player2.apply_friction()
-
-    # Appliquer la gravité
-    player1.apply_gravity()
-    player2.apply_gravity()
-
-    # Mettre à jour les positions
-    player1.update_position()
-    player2.update_position()
-
-    # Vérifier les collisions avec le sol
-    player1.check_collisions(player_y_Baseposition)
-    player2.check_collisions(player_y_Baseposition)
-
+    for player in (player1, player2):
+        player.handle_input(keys)
+        player.apply_friction()
+        player.apply_gravity()
+        player.update_position(Obstacle_collision)
+        player.check_ground_collision(player_y_Baseposition)
     # Limites de l'écran pour le déplacement des joueurs
     if player1.x_position < 0:
         player1.x_position = 0
@@ -111,19 +97,36 @@ while game_running:
     game_display.blit(bg, (0, 0))
     game_display.blit(sol,(0,585))
 
-    #player1.draw(game_display, (0, 120, 250))
+    hitbox_width = 70
+    hitbox_height = 85
     Decalage_x_p1 = 140
     Decalage_y_p1 = 120
-    player_rect1 = player_image1.get_rect(center=(player1.x_position+Decalage_x_p1, player1.y_position+Decalage_y_p1))
-    imageFinal1 = pygame.transform.scale_by(player1_image_flip, 0.3)
-    game_display.blit(imageFinal1, player_rect1)
-
-    #player2.draw(game_display, (255, 0, 0))
     Decalage_x_p2 = 170
     Decalage_y_p2 = 125
-    player_rect2 = player_image2.get_rect(center=(player2.x_position + Decalage_x_p2, player2.y_position + Decalage_y_p2))
+
+    player_hitbox1 = pygame.Rect(player1.x_position - hitbox_width // 2,
+                                 player1.y_position - hitbox_height // 2,
+                                 hitbox_width, hitbox_height)
+
+    player_hitbox2 = pygame.Rect(player2.x_position - hitbox_width // 2,
+                                 player2.y_position - hitbox_height // 2,
+                                 hitbox_width, hitbox_height)
+
+    pygame.draw.rect(game_display, (0, 255, 0, 128), player_hitbox1, 2)  # Transparent Green Border
+    pygame.draw.rect(game_display, (0, 255, 0, 128), player_hitbox2, 2)  # Transparent Green Border
+
+    #player1.draw(game_display, (0, 120, 250))
+    #player_rect1 = player_image1.get_rect(center=(player1.x_position+Decalage_x_p1, player1.y_position+Decalage_y_p1))
+    imageFinal1 = pygame.transform.scale_by(player1_image_flip, 0.3)
+    image_rect1 = imageFinal1.get_rect(center=player_hitbox1.center)
+
+    #player2.draw(game_display, (255, 0, 0))
+    #player_rect2 = player_image2.get_rect(center=(player2.x_position + Decalage_x_p2, player2.y_position + Decalage_y_p2))
     imageFinal2 = pygame.transform.scale_by(player2_image_flip, 0.27)
-    game_display.blit(imageFinal2, player_rect2)
+    image_rect2 = imageFinal2.get_rect(center=player_hitbox2.center)
+
+    game_display.blit(imageFinal1, image_rect1.topleft)
+    game_display.blit(imageFinal2, image_rect2.topleft)
 
     #Ligne du sol
     #pygame.draw.rect(game_display, (0, 0, 0), (0, player_y_Baseposition + 40, display_width, 5))
@@ -181,6 +184,13 @@ while game_running:
         bras_rotatif.mise_a_jour_last_speed()
     if bras_rotatif2.boule_obj is not None:
         bras_rotatif2.mise_a_jour_last_speed()
+
+    #Obstacles Collisions
+    for obstacle in Obstacle_collision:
+        obstacle.draw(game_display, (0, 0, 0))  # Draw each obstacle
+
+    if player_hitbox1.collidelist(Obstacle_collision) >= 0:
+        print(player_hitbox1.collidelist(Obstacle_collision))
 
     #Gestionnaire d'évènements
     for game_event in pygame.event.get():
