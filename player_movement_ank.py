@@ -65,9 +65,12 @@ class Player:
         next_x = self.x_position + self.velocity_x
         next_y = self.y_position + self.velocity_y
 
-        # Create Rects for movement prediction
+        # Create rects for movement prediction
         player_rect_x = pygame.Rect(next_x, self.y_position, self.width, self.height)
         player_rect_y = pygame.Rect(self.x_position, next_y, self.width, self.height)
+
+        # Track if player is colliding
+        self.on_ground = False
 
         # Check horizontal movement collision
         for obstacle in obstacles:
@@ -77,18 +80,18 @@ class Player:
                 elif self.velocity_x < 0:  # Moving left
                     self.x_position = obstacle.rect.right
                 self.velocity_x = 0  # Stop horizontal movement
-                break  # Stop checking other obstacles
+                break  # Ensure only the first collision is handled
 
         # Check vertical movement collision
         for obstacle in obstacles:
             if player_rect_y.colliderect(obstacle.rect):
                 if self.velocity_y > 0:  # Falling down
                     self.y_position = obstacle.rect.top - self.height
-                    self.on_ground = True
+                    self.on_ground = True  # Reset ground state
                 elif self.velocity_y < 0:  # Jumping up
                     self.y_position = obstacle.rect.bottom
                 self.velocity_y = 0  # Stop vertical movement
-                break  # Stop checking other obstacles
+                break  # Ensure only the first collision is handled
 
     def update_position(self, obstacles):
         self.apply_gravity()

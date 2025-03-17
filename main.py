@@ -46,9 +46,9 @@ player_y_Baseposition = display_height*0.88
 
 #creation obstacles
 Obstacle_collision = [
-    Obstacle(200, 450, 100, 20),  # Floating platform
-    Obstacle(400, 350, 150, 20),  # Another platform
-    Obstacle(600, 500, 50, 100)  # Wall
+    Obstacle(200, 100, 100, 20),  # Floating platform
+    Obstacle(400, 300, 150, 20),  # Another platform
+    Obstacle(400, 550, 50, 80)  # Wall
 ]
 #End variables
 
@@ -99,16 +99,12 @@ while game_running:
 
     hitbox_width = 70
     hitbox_height = 85
-    Decalage_x_p1 = 140
-    Decalage_y_p1 = 120
-    Decalage_x_p2 = 170
-    Decalage_y_p2 = 125
 
-    player_hitbox1 = pygame.Rect(player1.x_position - hitbox_width // 2,
+    player_hitbox1 = pygame.Rect(player1.x_position - hitbox_width // 3,
                                  player1.y_position - hitbox_height // 2,
                                  hitbox_width, hitbox_height)
 
-    player_hitbox2 = pygame.Rect(player2.x_position - hitbox_width // 2,
+    player_hitbox2 = pygame.Rect(player2.x_position - hitbox_width // 3,
                                  player2.y_position - hitbox_height // 2,
                                  hitbox_width, hitbox_height)
 
