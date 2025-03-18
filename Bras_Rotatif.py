@@ -24,29 +24,29 @@ class Bras_Rotatif:
         if inverse:
             self.theta = self.theta *-1
 
-    def calcul_de_vitesse_angulaire(self):
-        self.omega = self.omega0 + (self.alpha * self.t)
+    def calcul_de_delta_theta(self):
+        if self.alpha == 0:
+            self.omega = self.omega0
+        else:
+            self.omega = self.omega0 + (self.alpha * self.t)
         self.last_omega = self.omega
+        delta_theta = (((self.omega * self.t) + (0.5 * self.alpha * (self.t ** 2))) * 180) / math.pi  # Calcul de l'angle
         if self.inverse:
-            self.theta = abs(((self.theta + (self.omega * self.t) + (0.5 * self.alpha * self.t ** 2)) * 180) / math.pi)
-            #print(f"theta2  :{self.theta}")
-            return self.theta
-        elif not self.inverse:
-            self.theta = -abs(((self.theta + (self.omega * self.t) + (0.5 * self.alpha * self.t ** 2)) * 180) / math.pi)
-            #print(f"theta1  :{self.theta}")
-            return self.theta
+            delta_theta = abs(delta_theta)
+        else:
+            delta_theta = -abs(delta_theta)
+        #print(f"theta : {self.theta}")
+        return delta_theta
 
-    def activer_rotation(self,keys,touche):
+    def activer_rotation(self, keys, touche):
         if keys[touche]:
-            self.t += 0.01
+            self.t += 0.000001 # Incrémentation du temps
             if not self.inverse:
-                self.theta -= self.calcul_de_vitesse_angulaire()*0.0001
-                if -abs(self.theta) < -360:
-                    self.theta = 0
+                self.theta = self.theta % 360
+                self.theta -= self.calcul_de_delta_theta()
             if self.inverse:
-                self.theta += self.calcul_de_vitesse_angulaire()*0.0001
-                if self.theta > 360:
-                    self.theta = 0
+                self.theta = self.theta % 360
+                self.theta += self.calcul_de_delta_theta()  # Ajustez le facteur ici si nécessaire
         return self.theta
 
     def tourner_bras(self, rect, screen):
@@ -55,6 +55,8 @@ class Bras_Rotatif:
         rec_centre_y = rec_taille.center[1]
         if not self.inverse:
             rect_rotated = pygame.transform.rotate(rect, -abs(self.theta))
+            print(f"theta : {self.theta}")
+            print(f"t : {self.t}")
         if self.inverse:
             rect_rotated = pygame.transform.rotate(rect, self.theta)
         rectangle_rot_taille = rect_rotated.get_rect()
@@ -80,7 +82,6 @@ class Bras_Rotatif:
 
     def arreter_rotation(self):
         self.t = 0
-        self.theta = self.theta % 360
         self.omega = 0
 
     def ouvrir_main(self):

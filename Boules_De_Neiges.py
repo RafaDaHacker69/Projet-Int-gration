@@ -26,7 +26,7 @@ class Boules_De_Neiges:
 
     def trajectoire_projectile(self,screen):
         if self.lance:
-            self.t += 0.1
+            self.t += 1
             k = 0.7 # "resistence de l'air"
             self.Vx = self.vitesse * math.cos(self.theta)
             self.Vx = self.Vx * k
