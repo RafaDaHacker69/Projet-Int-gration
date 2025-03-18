@@ -27,16 +27,14 @@ class Boules_De_Neiges:
     def trajectoire_projectile(self,screen):
         if self.lance:
             self.t += 1
-            k = 0.7 # "resistence de l'air"
             self.Vx = self.vitesse * math.cos(self.theta)
-            self.Vx = self.Vx * k
             self.x = self.x + (self.Vx * self.t)
             self.Vy = self.vitesse * math.sin(self.theta)
-            self.y = self.y - ((self.Vy * self.t) + (((-9.81) * self.t ** 2) / 2))
+            self.y -= ((self.Vy * self.t) + ((-9.81) * self.t ** 2))
             self.limites_projectile(screen)
 
             pygame.draw.circle(screen, (173, 216, 230), (int(self.x), int(self.y)), self.r)
-            #print(f"x : {self.x}, y : {self.y}")
+            print(f"x : {self.x}, y : {self.y}")
 
     def limites_projectile(self,screen):
         width = screen.get_width()

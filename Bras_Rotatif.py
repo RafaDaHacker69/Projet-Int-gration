@@ -40,7 +40,7 @@ class Bras_Rotatif:
 
     def activer_rotation(self, keys, touche):
         if keys[touche]:
-            self.t += 0.000001 # Incrémentation du temps
+            self.t += 0.001 # Incrémentation du temps
             if not self.inverse:
                 self.theta = self.theta % 360
                 self.theta -= self.calcul_de_delta_theta()
@@ -55,8 +55,8 @@ class Bras_Rotatif:
         rec_centre_y = rec_taille.center[1]
         if not self.inverse:
             rect_rotated = pygame.transform.rotate(rect, -abs(self.theta))
-            print(f"theta : {self.theta}")
-            print(f"t : {self.t}")
+            #print(f"theta : {self.theta}")
+            #print(f"t : {self.t}")
         if self.inverse:
             rect_rotated = pygame.transform.rotate(rect, self.theta)
         rectangle_rot_taille = rect_rotated.get_rect()
@@ -128,7 +128,7 @@ class Bras_Rotatif:
             circle_y = self.posy + offset_y
             self.boule_obj.x = circle_x
             self.boule_obj.y = circle_y
-            self.boule_obj.vitesse = (self.last_omega * self.longueur)/2000 #Vitesse tangeantielle est égale au rayon * vitesse angulaire
+            self.boule_obj.vitesse = (self.last_omega * self.longueur)/2 #Vitesse tangeantielle est égale au rayon * vitesse angulaire
             pygame.draw.circle(screen, (173, 216, 230), (circle_x, circle_y), self.boule_obj.r)
             #print(f"x : {circle_x}, y : {circle_y}")
 

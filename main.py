@@ -36,8 +36,8 @@ player2_image_flip = None
 player1_image_flip = pygame.transform.flip(player_image1, True, False)
 player2_image_flip = pygame.transform.flip(player_image2, False, False)
 
-bras_rotatif = Bras_Rotatif(0,0,100,False)
-bras_rotatif2 = Bras_Rotatif(0,0,100,True)
+bras_rotatif = Bras_Rotatif(1,0,1,False)
+bras_rotatif2 = Bras_Rotatif(1,0,1,True)
 
 bras_rect = bras_rotatif.creation_bras_main(255,0,0)
 bras_rect2 = bras_rotatif2.creation_bras_main(0,120,250)
