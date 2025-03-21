@@ -20,8 +20,8 @@ bg = pygame.image.load('IMAGES/Bg.jpg').convert_alpha()
 sol = pygame.image.load('IMAGES/sol.png').convert_alpha()
 display_width, display_height = game_display.get_size()
 
-player1 = Player(display_width * 0.2, display_height * 0.8, 30, 40, controls='wasd')
-player2 = Player(display_width * 0.7, display_height * 0.8, 30, 40, controls='arrows')
+player1 = Player(display_width * 0.2, display_height * 0.8, 30, 40, controles='wasd')
+player2 = Player(display_width * 0.7, display_height * 0.8, 30, 40, controles='arrows')
 
 player_image1 = pygame.image.load("IMAGES/Cat-removebg.png").convert_alpha()
 Image_Witdh=player_image1.get_width()
@@ -64,19 +64,19 @@ while game_running:
         player.update_position(Obstacle_collision)
         player.check_ground_collision(player_y_Baseposition)
     # Limites de l'écran pour le déplacement des joueurs
-    if player1.x_position < 0:
-        player1.x_position = 0
-        posx = player1.x_position
-    elif player1.x_position + player1.width > display_width / 2:  # Prevents clipping
-        player1.x_position = display_width / 2 - player1.width
-        posx = player1.x_position
+    if player1.position_x < 0:
+        player1.position_x = 0
+        posx = player1.position_x
+    elif player1.position_x + player1.largeur > display_width / 2:  # Prevents clipping
+        player1.position_x = display_width / 2 - player1.largeur
+        posx = player1.position_x
 
-    if player2.x_position > display_width - 20:
-        player2.x_position = display_width - 20
-        posx2 = player2.x_position
-    elif player2.x_position < display_width / 2:
-        player2.x_position = display_width / 2
-        posx2 = player2.x_position
+    if player2.position_x > display_width - 20:
+        player2.position_x = display_width - 20
+        posx2 = player2.position_x
+    elif player2.position_x < display_width / 2:
+        player2.position_x = display_width / 2
+        posx2 = player2.position_x
 
 #flip image functions
     direction1 = player1.get_movement_direction()
@@ -100,12 +100,12 @@ while game_running:
     hitbox_width = 70
     hitbox_height = 85
 
-    player_hitbox1 = pygame.Rect(player1.x_position - hitbox_width // 3,
-                                 player1.y_position - hitbox_height // 2,
+    player_hitbox1 = pygame.Rect(player1.position_x - hitbox_width // 3,
+                                 player1.position_y - hitbox_height // 2,
                                  hitbox_width, hitbox_height)
 
-    player_hitbox2 = pygame.Rect(player2.x_position - hitbox_width // 3,
-                                 player2.y_position - hitbox_height // 2,
+    player_hitbox2 = pygame.Rect(player2.position_x - hitbox_width // 3,
+                                 player2.position_y - hitbox_height // 2,
                                  hitbox_width, hitbox_height)
 
     pygame.draw.rect(game_display, (0, 255, 0, 128), player_hitbox1, 2)  # Transparent Green Border
@@ -149,10 +149,10 @@ while game_running:
         bras_rotatif2.dessiner_cercle_main(game_display)
 
     #Rotation bras
-    bras_rotatif.posx = player1.x_position
-    bras_rotatif.posy = player1.y_position
-    bras_rotatif2.posx = player2.x_position
-    bras_rotatif2.posy = player2.y_position
+    bras_rotatif.posx = player1.position_x
+    bras_rotatif.posy = player1.position_y
+    bras_rotatif2.posx = player2.position_x
+    bras_rotatif2.posy = player2.position_y
 
     bras_rotatif.tourner_bras(bras_rect,game_display)
     bras_rotatif2.tourner_bras(bras_rect2,game_display)

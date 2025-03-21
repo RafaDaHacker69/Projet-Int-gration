@@ -2,112 +2,103 @@ import pygame
 
 
 class Player:
-    def __init__(self, x_position, y_position, width, height, controls):
-        self.x_position = x_position
-        self.y_position = y_position
-        self.width = width
-        self.height = height
-        self.velocity_x = 0
-        self.velocity_y = 0
-        self.on_ground = False
-        self.max_speed = 6
-        self.gravity = 0.2
-        self.jump_force = 7
+    def __init__(self, position_x, position_y, largeur, hauteur, controles):
+        self.position_x = position_x
+        self.position_y = position_y
+        self.largeur = largeur
+        self.hauteur = hauteur
+        self.vitesse_x = 0
+        self.vitesse_y = 0
+        self.au_sol = False
+        self.vitesse_max = 6
+        self.gravite = 0.2
+        self.force_saut = 7
         self.acceleration = 0.5
         self.friction = 0.1
-        self.controls = controls
+        self.controles = controles
 
     def handle_input(self, keys):
-        move_direction = 0
-        if self.controls == 'wasd':
+        direction_mouvement = 0
+        if self.controles == 'wasd':
             if keys[pygame.K_a]:
-                move_direction = -1
+                direction_mouvement = -1
             elif keys[pygame.K_d]:
-                move_direction = 1
-            if keys[pygame.K_w] and self.on_ground:
-                self.velocity_y = -self.jump_force
-                self.on_ground = False
-        elif self.controls == 'arrows':
+                direction_mouvement = 1
+            if keys[pygame.K_w] and self.au_sol:
+                self.vitesse_y = -self.force_saut
+                self.au_sol = False
+        elif self.controles == 'fleches':
             if keys[pygame.K_LEFT]:
-                move_direction = -1
+                direction_mouvement = -1
             elif keys[pygame.K_RIGHT]:
-                move_direction = 1
-            if keys[pygame.K_UP] and self.on_ground:
-                self.velocity_y = -self.jump_force
-                self.on_ground = False
+                direction_mouvement = 1
+            if keys[pygame.K_UP] and self.au_sol:
+                self.vitesse_y = -self.force_saut
+                self.au_sol = False
 
-        self.velocity_x += move_direction * self.acceleration
-        self.velocity_x = max(-self.max_speed, min(self.velocity_x, self.max_speed))
+        self.vitesse_x += direction_mouvement * self.acceleration
+        self.vitesse_x = max(-self.vitesse_max, min(self.vitesse_x, self.vitesse_max))
 
     def apply_gravity(self):
-        if not self.on_ground:
-            self.velocity_y += self.gravity
+        if not self.au_sol:
+            self.vitesse_y += self.gravite
 
     def apply_friction(self):
-        if self.velocity_x > 0:
-            self.velocity_x = max(0, self.velocity_x - self.friction)
-        elif self.velocity_x < 0:
-            self.velocity_x = min(0, self.velocity_x + self.friction)
+        if self.vitesse_x > 0:
+            self.vitesse_x = max(0, self.vitesse_x - self.friction)
+        elif self.vitesse_x < 0:
+            self.vitesse_x = min(0, self.vitesse_x + self.friction)
 
     def check_ground_collision(self, ground_level):
-        """Checks if the player is on the ground."""
-        if self.y_position + self.height >= ground_level:
-            self.y_position = ground_level - self.height  # Align player with the ground
-            self.velocity_y = 0  # Stop downward movement
-            self.on_ground = True
+        if self.position_y + self.hauteur >= ground_level:
+            self.position_y = ground_level - self.hauteur
+            self.vitesse_y = 0
+            self.au_sol = True
         else:
-            self.on_ground = False
+            self.au_sol = False
 
     def check_obstacle_collisions(self, obstacles):
-        """Handles player collision with obstacles on all sides."""
+        prochain_x = self.position_x + self.vitesse_x
+        prochain_y = self.position_y + self.vitesse_y
 
-        # Future position for collision checking
-        next_x = self.x_position + self.velocity_x
-        next_y = self.y_position + self.velocity_y
+        rect_joueur_x = pygame.Rect(prochain_x, self.position_y, self.largeur, self.hauteur)
+        rect_joueur_y = pygame.Rect(self.position_x, prochain_y, self.largeur, self.hauteur)
 
-        # Create rects for movement prediction
-        player_rect_x = pygame.Rect(next_x, self.y_position, self.width, self.height)
-        player_rect_y = pygame.Rect(self.x_position, next_y, self.width, self.height)
+        self.au_sol = False
 
-        # Track if player is colliding
-        self.on_ground = False
-
-        # Check horizontal movement collision
         for obstacle in obstacles:
-            if player_rect_x.colliderect(obstacle.rect):
-                if self.velocity_x > 0:  # Moving right
-                    self.x_position = obstacle.rect.left - self.width
-                elif self.velocity_x < 0:  # Moving left
-                    self.x_position = obstacle.rect.right
-                self.velocity_x = 0  # Stop horizontal movement
-                break  # Ensure only the first collision is handled
+            if rect_joueur_x.colliderect(obstacle.rect):
+                if self.vitesse_x > 0:
+                    self.position_x = obstacle.rect.left - self.largeur
+                elif self.vitesse_x < 0:
+                    self.position_x = obstacle.rect.right
+                self.vitesse_x = 0
+                break
 
-        # Check vertical movement collision
         for obstacle in obstacles:
-            if player_rect_y.colliderect(obstacle.rect):
-                if self.velocity_y > 0:  # Falling down
-                    self.y_position = obstacle.rect.top - self.height
-                    self.on_ground = True  # Reset ground state
-                elif self.velocity_y < 0:  # Jumping up
-                    self.y_position = obstacle.rect.bottom
-                self.velocity_y = 0  # Stop vertical movement
-                break  # Ensure only the first collision is handled
+            if rect_joueur_y.colliderect(obstacle.rect):
+                if self.vitesse_y > 0:
+                    self.position_y = obstacle.rect.top - self.hauteur
+                    self.au_sol = True
+                elif self.vitesse_y < 0:
+                    self.position_y = obstacle.rect.bottom
+                self.vitesse_y = 0
+                break
 
     def update_position(self, obstacles):
         self.apply_gravity()
         self.check_obstacle_collisions(obstacles)
         self.apply_friction()
 
-        # Apply final movement
-        self.x_position += self.velocity_x
-        self.y_position += self.velocity_y
+        self.position_x += self.vitesse_x
+        self.position_y += self.vitesse_y
 
     def get_movement_direction(self):
-        if self.velocity_x > 0:
-            return 1  # Moving right
-        elif self.velocity_x < 0:
-            return -1  # Moving left
-        return 0  # Standing still
+        if self.vitesse_x > 0:
+            return 1
+        elif self.vitesse_x < 0:
+            return -1
+        return 0
 
     def draw(self, game_display, color):
-        pygame.draw.rect(game_display, color, (self.x_position, self.y_position, self.width, self.height))
+        pygame.draw.rect(game_display, color, (self.position_x, self.position_y, self.largeur, self.hauteur))
