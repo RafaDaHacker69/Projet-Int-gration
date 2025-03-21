@@ -6,7 +6,7 @@ class MenuFafa:
         self.run = False
 
     def MenuFafa(self):
-        pygame.mixer.music.load("project2.wav")
+        pygame.mixer.music.load("IMAGES/project2.wav")
         pygame.mixer.music.play(loops=-1, start=0.0)
 
         width, height = 1240, 680
@@ -15,7 +15,7 @@ class MenuFafa:
         screen = pygame.display.set_mode((width, height))
         pygame.display.set_caption("Example Menu")
 
-        background = pygame.image.load("C:\\Users\\siali\\PycharmProjects\\Menutest\\bg.png")
+        background = pygame.image.load("IMAGES/bg2.png")
         background = pygame.transform.scale(background, (width, height))
         btnJouer = Button.Button((width // 2, height // 4 + 20), "Jouer")
         btnQuitter = Button.Button((width // 2, height // 4 + 176 + 20), "Quitter")

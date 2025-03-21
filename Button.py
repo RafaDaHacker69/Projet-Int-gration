@@ -2,7 +2,7 @@ import pygame
 
 class Button:
     def __init__(self, position, text, scale=1.0, prop=1.2, font_size=20, font_color=(255, 255, 255)):
-        self.original_image = pygame.image.load("C:\\Users\\siali\\PycharmProjects\\Menutest\\Button.png").convert_alpha()
+        self.original_image = pygame.image.load("IMAGES/Button.png").convert_alpha()
         self.image = self.original_image
         self.rect = self.image.get_rect(center=position)
         self.scale = scale
@@ -12,12 +12,12 @@ class Button:
         self.base_font_size = font_size
 
         pygame.font.init()
-        self.font = pygame.font.Font("grand9k-pixel.ttf", font_size)
+        self.font = pygame.font.Font("IMAGES/grand9k-pixel.ttf", font_size)
         self.font_color = font_color
         self.update_text_surface(font_size)
 
     def update_text_surface(self, font_size):
-        self.font = pygame.font.Font("grand9k-pixel.ttf", font_size)
+        self.font = pygame.font.Font("IMAGES/grand9k-pixel.ttf", font_size)
         self.text_surface = self.font.render(self.text, True, self.font_color)
         self.text_rect = self.text_surface.get_rect(center=self.rect.center)
 
