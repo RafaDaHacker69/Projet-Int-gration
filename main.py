@@ -1,17 +1,18 @@
 import pygame.event
-
+from MenuFafa import *
 from Menu import Menu
 from player_movement_ank import Player
 from Bras_Rotatif import Bras_Rotatif
 from Obstacle_collision import Obstacle
 
 pygame.init()
-
 game_display = pygame.display.set_mode((1240, 680))
+menu_display = pygame.display.set_mode((1,1))
 pygame.display.set_caption('CP (Club Penguin)')
-
-menu = Menu(game_display)
-menu.show_menu()
+menu = MenuFafa(menu_display)
+menu.MenuFafa()
+#menu = Menu(game_display)
+#menu.show_menu()
 
 game_clock = pygame.time.Clock()
 
@@ -23,12 +24,12 @@ display_width, display_height = game_display.get_size()
 player1 = Player(display_width * 0.2, display_height * 0.8, 30, 40, controls='wasd')
 player2 = Player(display_width * 0.7, display_height * 0.8, 30, 40, controls='arrows')
 
-player_image1 = pygame.image.load("IMAGES/Cat-removebg.png").convert_alpha()
+player_image1 = pygame.image.load("IMAGES/finalmodel.png").convert_alpha()
 Image_Witdh=player_image1.get_width()
 Image_Height = player_image1.get_height()
 player1_image_flip = None
 
-player_image2 = pygame.image.load("IMAGES/Dog-removebg.png").convert_alpha()
+player_image2 = pygame.image.load("IMAGES/finalmodel.png").convert_alpha()
 Image_Witdh2=player_image2.get_width()
 Image_Height2 = player_image2.get_height()
 player2_image_flip = None
@@ -52,8 +53,7 @@ Obstacle_collision = [
 ]
 #End variables
 
-game_running = True
-while game_running:
+while menu.run:
 
     keys = pygame.key.get_pressed()
 
@@ -113,12 +113,12 @@ while game_running:
 
     #player1.draw(game_display, (0, 120, 250))
     #player_rect1 = player_image1.get_rect(center=(player1.x_position+Decalage_x_p1, player1.y_position+Decalage_y_p1))
-    imageFinal1 = pygame.transform.scale_by(player1_image_flip, 0.3)
+    imageFinal1 = pygame.transform.scale_by(player1_image_flip, 0.4)
     image_rect1 = imageFinal1.get_rect(center=player_hitbox1.center)
 
     #player2.draw(game_display, (255, 0, 0))
     #player_rect2 = player_image2.get_rect(center=(player2.x_position + Decalage_x_p2, player2.y_position + Decalage_y_p2))
-    imageFinal2 = pygame.transform.scale_by(player2_image_flip, 0.27)
+    imageFinal2 = pygame.transform.scale_by(player2_image_flip, 0.4)
     image_rect2 = imageFinal2.get_rect(center=player_hitbox2.center)
 
     game_display.blit(imageFinal1, image_rect1.topleft)
@@ -191,7 +191,7 @@ while game_running:
     #Gestionnaire d'évènements
     for game_event in pygame.event.get():
         if game_event.type == pygame.QUIT:
-            game_running = False
+            menu.run = False
         if game_event.type == pygame.KEYUP:
             if game_event.key == pygame.K_LSHIFT:
                 bras_rotatif.arreter_rotation()

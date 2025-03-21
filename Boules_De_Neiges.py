@@ -61,7 +61,7 @@ class Boules_De_Neiges:
         #print(player_pos_x, player_pos_y)
 
         #Hitboxes
-        #pygame.draw.rect(screen, (255, 0, 0), (player_pos_x,player_pos_y-40,30 + rayon,80 + rayon))
+        pygame.draw.rect(screen, (255, 0, 0), (player_pos_x,player_pos_y-40,30 + rayon,80 + rayon))
 
         if player_pos_x <= self.x <= player_pos_x + 30 + rayon and player_pos_y-40 <= self.y < player_pos_y + 80 + rayon and not self.collision :
             print("Collision")
