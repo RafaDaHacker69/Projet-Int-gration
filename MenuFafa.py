@@ -9,7 +9,7 @@ class MenuFafa:
         pygame.mixer.music.load("IMAGES/project2.wav")
         pygame.mixer.music.play(loops=-1, start=0.0)
 
-        width, height = 1240, 680
+        width, height = 800, 400
         white = (255, 255, 255)
         black = (0, 0, 0)
         screen = pygame.display.set_mode((width, height))
@@ -39,8 +39,12 @@ class MenuFafa:
                 if btnTuto.clique(event, pygame.mouse.get_pos()):
                     print("tuto")
                 if btnJouer.clique(event, pygame.mouse.get_pos()):
+                    pygame.mixer.music.stop()
+                    pygame.mixer.music.load("IMAGES/project 5 final tweak.wav")
+                    pygame.mixer.music.play(loops=-1, start=0.0)
                     self.run = True
                     running = False
+                    screen = pygame.display.set_mode((1240, 680))
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     x, y = event.pos
                     shockwaves.append({"x": x, "y": y, "radius": 5, "alpha": 255})

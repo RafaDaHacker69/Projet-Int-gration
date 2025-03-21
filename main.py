@@ -52,9 +52,7 @@ Obstacle_collision = [
     Obstacle(400, 550, 50, 80)  # Wall
 ]
 #End variables
-
 while menu.run:
-
     keys = pygame.key.get_pressed()
 
     for player in (player1, player2):
