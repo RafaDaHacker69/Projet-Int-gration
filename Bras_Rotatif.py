@@ -50,15 +50,19 @@ class Bras_Rotatif:
         return self.theta
 
     def tourner_bras(self, rect, screen):
+        image_bras = pygame.image.load("IMAGES/arm rot.png").convert_alpha()
+        image = pygame.transform.rotate(image_bras, 90)
+        if self.inverse:
+            image = pygame.transform.flip(image, True, False)
         rec_taille = rect.get_rect()
         rec_centre_x = rec_taille.center[0]
         rec_centre_y = rec_taille.center[1]
         if not self.inverse:
-            rect_rotated = pygame.transform.rotate(rect, -abs(self.theta))
+            rect_rotated = pygame.transform.rotate(image, -abs(self.theta))
             #print(f"theta : {self.theta}")
             #print(f"t : {self.t}")
         if self.inverse:
-            rect_rotated = pygame.transform.rotate(rect, self.theta)
+            rect_rotated = pygame.transform.rotate(image, self.theta)
         rectangle_rot_taille = rect_rotated.get_rect()
         rectangle_rot_centre_x = rectangle_rot_taille.center[0]
         rectangle_rot_centre_y = rectangle_rot_taille.center[1]
@@ -66,7 +70,7 @@ class Bras_Rotatif:
         diff_y = rectangle_rot_centre_y - rec_centre_y
         pos_bras_x = self.posx - diff_x - 30
         pos_bras_y = self.posy - diff_y - 30
-        #image_bras = pygame.image.load("IMAGES/BrasOuvert.png").convert_alpha()
+
         screen.blit(rect_rotated, (pos_bras_x, pos_bras_y))
 
     def fermer_main(self, keys, touche):
