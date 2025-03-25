@@ -98,20 +98,6 @@ while menu.run:
     player1.hitboxes(game_display)
     player2.hitboxes(game_display)
 
-    # hitbox_width = 70
-    # hitbox_height = 85
-    #
-    # player_hitbox1 = pygame.Rect(player1.position_x - hitbox_width // 3,
-    #                              player1.position_y - hitbox_height // 2,
-    #                              hitbox_width, hitbox_height)
-    #
-    # player_hitbox2 = pygame.Rect(player2.position_x - hitbox_width // 3,
-    #                              player2.position_y - hitbox_height // 2,
-    #                              hitbox_width, hitbox_height)
-    #
-    # pygame.draw.rect(game_display, (0, 255, 0, 128), player_hitbox1, 2)  # Transparent Green Border
-    # pygame.draw.rect(game_display, (0, 255, 0, 128), player_hitbox2, 2)  # Transparent Green Border
-
     #player1.draw(game_display, (0, 120, 250))
     #player_rect1 = player_image1.get_rect(center=(player1.x_position+Decalage_x_p1, player1.y_position+Decalage_y_p1))
     imageFinal1 = pygame.transform.scale_by(player1_image_flip, 0.4)
