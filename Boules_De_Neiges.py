@@ -16,6 +16,7 @@ class Boules_De_Neiges:
         self.Vy = 0
         self.collision = False
         self.hitboxe = None
+        self.dmg = 0
 
     def lancement_projectile(self):
         #print(f"theta : {self.theta}")
@@ -35,7 +36,7 @@ class Boules_De_Neiges:
             self.limites_projectile(screen)
 
             pygame.draw.circle(screen, (173, 216, 230), (int(self.x), int(self.y)), self.r)
-            print(f"x : {self.x}, y : {self.y}")
+            #print(f"x : {self.x}, y : {self.y}")
 
     def limites_projectile(self,screen):
         width = screen.get_width()
@@ -47,9 +48,6 @@ class Boules_De_Neiges:
             self.x = width
             self.lance = False
             self.collision = True
-        # if self.y < 0:
-        #     self.y = 0
-        #     self.lance = False
         elif self.y > 590:
             self.y = 590
             self.lance = False
@@ -63,10 +61,19 @@ class Boules_De_Neiges:
         #Dessin de la hitboxe de la boule
         #pygame.draw.rect(screen, (255, 0, 0), self.hitboxe, 2)
 
-        if self.hitboxe.colliderect(player.hitboxe):
+        if self.hitboxe.colliderect(player.hitboxe) and self.lance:
+            self.collision = True
+            self.lance = False
             vf = ((self.m * self.Vx) + (80 * player.vitesse_x)) / (self.m + 80)
             player.vitesse_x = vf
+            self.dmg = vf
+            self.degat_inflige(player)
+            print(f"VF :{vf}")
 
+    def degat_inflige(self,player):
+        player.pv -= self.dmg
+        self.dmg = 0
+        print(f"Pv : {player.pv}")
 
 
 
