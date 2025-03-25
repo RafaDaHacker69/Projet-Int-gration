@@ -95,29 +95,32 @@ while menu.run:
     game_display.blit(bg, (0, 0))
     game_display.blit(sol,(0,585))
 
-    hitbox_width = 70
-    hitbox_height = 85
+    player1.hitboxes(game_display)
+    player2.hitboxes(game_display)
 
-    player_hitbox1 = pygame.Rect(player1.position_x - hitbox_width // 3,
-                                 player1.position_y - hitbox_height // 2,
-                                 hitbox_width, hitbox_height)
-
-    player_hitbox2 = pygame.Rect(player2.position_x - hitbox_width // 3,
-                                 player2.position_y - hitbox_height // 2,
-                                 hitbox_width, hitbox_height)
-
-    pygame.draw.rect(game_display, (0, 255, 0, 128), player_hitbox1, 2)  # Transparent Green Border
-    pygame.draw.rect(game_display, (0, 255, 0, 128), player_hitbox2, 2)  # Transparent Green Border
+    # hitbox_width = 70
+    # hitbox_height = 85
+    #
+    # player_hitbox1 = pygame.Rect(player1.position_x - hitbox_width // 3,
+    #                              player1.position_y - hitbox_height // 2,
+    #                              hitbox_width, hitbox_height)
+    #
+    # player_hitbox2 = pygame.Rect(player2.position_x - hitbox_width // 3,
+    #                              player2.position_y - hitbox_height // 2,
+    #                              hitbox_width, hitbox_height)
+    #
+    # pygame.draw.rect(game_display, (0, 255, 0, 128), player_hitbox1, 2)  # Transparent Green Border
+    # pygame.draw.rect(game_display, (0, 255, 0, 128), player_hitbox2, 2)  # Transparent Green Border
 
     #player1.draw(game_display, (0, 120, 250))
     #player_rect1 = player_image1.get_rect(center=(player1.x_position+Decalage_x_p1, player1.y_position+Decalage_y_p1))
     imageFinal1 = pygame.transform.scale_by(player1_image_flip, 0.4)
-    image_rect1 = imageFinal1.get_rect(center=player_hitbox1.center)
+    image_rect1 = imageFinal1.get_rect(center=player1.hitboxe.center)
 
     #player2.draw(game_display, (255, 0, 0))
     #player_rect2 = player_image2.get_rect(center=(player2.x_position + Decalage_x_p2, player2.y_position + Decalage_y_p2))
     imageFinal2 = pygame.transform.scale_by(player2_image_flip, 0.4)
-    image_rect2 = imageFinal2.get_rect(center=player_hitbox2.center)
+    image_rect2 = imageFinal2.get_rect(center=player2.hitboxe.center)
 
     game_display.blit(imageFinal1, image_rect1.topleft)
     game_display.blit(imageFinal2, image_rect2.topleft)
@@ -183,8 +186,8 @@ while menu.run:
     for obstacle in Obstacle_collision:
         obstacle.draw(game_display, (0, 0, 0))  # Draw each obstacle
 
-    if player_hitbox1.collidelist(Obstacle_collision) >= 0:
-        print(player_hitbox1.collidelist(Obstacle_collision))
+    if player1.hitboxe.collidelist(Obstacle_collision) >= 0:
+        print(player1.hitboxe.collidelist(Obstacle_collision))
 
     #Gestionnaire d'évènements
     for game_event in pygame.event.get():

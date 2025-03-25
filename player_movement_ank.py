@@ -16,6 +16,7 @@ class Player:
         self.acceleration = 0.5
         self.friction = 0.1
         self.controles = controles
+        self.hitboxe = None
 
     def handle_input(self, keys):
         direction_mouvement = 0
@@ -102,3 +103,12 @@ class Player:
 
     def draw(self, game_display, color):
         pygame.draw.rect(game_display, color, (self.position_x, self.position_y, self.largeur, self.hauteur))
+
+    def hitboxes(self,screen):
+        hitbox_width = 70
+        hitbox_height = 85
+        player_hitboxe = pygame.Rect(self.position_x - hitbox_width // 3,
+                                     self.position_y - hitbox_height // 2,
+                                     hitbox_width, hitbox_height)
+        self.hitboxe = player_hitboxe
+        pygame.draw.rect(screen, (0, 255, 0, 128), player_hitboxe, 2)  # Transparent Green Border

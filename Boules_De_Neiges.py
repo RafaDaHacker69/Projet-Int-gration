@@ -15,6 +15,7 @@ class Boules_De_Neiges:
         self.Vx = 0
         self.Vy = 0
         self.collision = False
+        self.hitboxe = None
 
     def lancement_projectile(self):
         #print(f"theta : {self.theta}")
@@ -55,20 +56,30 @@ class Boules_De_Neiges:
             self.collision = True
 
     def check_collision_boule(self,Player,screen):
-        player_pos_x = Player.x_position
-        player_pos_y = Player.y_position
-        rayon = self.r - 10
+
+        rayon = self.r
+        self.hitboxe = pygame.Rect(self.x-rayon,self.y-rayon, rayon*2, rayon*2)
+        #Dessin de la hitboxe de la boule
+        pygame.draw.rect(screen, (255, 0, 0), self.hitboxe, 2)
+
+        if self.hitboxe.colliderect(Player.hitboxe):
+            Vf = ((self.m * self.Vx) + (80 * Player.vitesse_x)) / (self.m + 80)
+            Player.vitesse_x = Vf
+
+        #player_pos_x = Player.x_position
+        #player_pos_y = Player.y_position
+
         #print(player_pos_x, player_pos_y)
 
         #Hitboxes
         #pygame.draw.rect(screen, (255, 0, 0), (player_pos_x,player_pos_y-40,30 + rayon,80 + rayon))
 
-        if player_pos_x <= self.x <= player_pos_x + 30 + rayon and player_pos_y-40 <= self.y < player_pos_y + 80 + rayon and not self.collision :
-            print("Collision")
-            self.lance = False
-            self.collision = True
-            Vf = ((self.m*self.Vx)+(80*Player.velocity_x))/(self.m+80)
-            Player.velocity_x = Vf
+        # if player_pos_x <= self.x <= player_pos_x + 30 + rayon and player_pos_y-40 <= self.y < player_pos_y + 80 + rayon and not self.collision :
+        #     print("Collision")
+        #     self.lance = False
+        #     self.collision = True
+        #     Vf = ((self.m*self.Vx)+(80*Player.velocity_x))/(self.m+80)
+        #     Player.velocity_x = Vf
 
 
 
