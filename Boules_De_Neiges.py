@@ -75,6 +75,9 @@ class Boules_De_Neiges:
         self.dmg = 0
         print(f"Pv : {player.pv}")
 
+        if player.pv < 0:
+            print("Le joueur est mort")
+
 
 
 
