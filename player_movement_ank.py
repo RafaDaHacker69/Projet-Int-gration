@@ -17,6 +17,7 @@ class Player:
         self.friction = 0.1
         self.controles = controles
         self.hitboxe = None
+        self.pv = 100
 
     def handle_input(self, keys):
         direction_mouvement = 0
@@ -111,4 +112,5 @@ class Player:
                                      self.position_y - hitbox_height // 2,
                                      hitbox_width, hitbox_height)
         self.hitboxe = player_hitboxe
-        pygame.draw.rect(screen, (0, 255, 0, 128), player_hitboxe, 2)  # Transparent Green Border
+        #Dessin de la hitboxe du joueur
+        #pygame.draw.rect(screen, (0, 255, 0, 128), player_hitboxe, 2)  # Transparent Green Border
