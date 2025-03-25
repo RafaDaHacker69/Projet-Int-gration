@@ -1,5 +1,6 @@
 import pygame
 import Button
+
 class MenuFafa:
     def __init__(self, screen):
         self.screen = screen
