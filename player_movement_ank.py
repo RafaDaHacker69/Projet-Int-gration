@@ -66,7 +66,6 @@ class Player:
             if self.Stamina < self.max_Stamina:
                 if (current_time - self.dernier_Stamina_util) % 500 < 50:
                     self.Stamina = min(self.max_Stamina, self.Stamina + 5)
-        print(f"Stamina: {self.Stamina}/{self.max_Stamina}")
 
     def apply_gravity(self):
         if not self.au_sol:
@@ -135,8 +134,10 @@ class Player:
 
         self.position_x += self.vitesse_x
         self.position_y += self.vitesse_y
+
         self.heal_Stamina()
         self.vitesse_selon_Stamina()
+        print(f"Stamina: {self.Stamina}/{self.max_Stamina}")
 
     def get_movement_direction(self):
         if self.vitesse_x > 0:
