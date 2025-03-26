@@ -2,7 +2,7 @@ import pygame
 
 
 class Player:
-    def __init__(self, position_x, position_y, largeur, hauteur, controles):
+    def __init__(self, position_x, position_y, largeur, hauteur, controles, Stamina):
         self.position_x = position_x
         self.position_y = position_y
         self.largeur = largeur
@@ -19,18 +19,22 @@ class Player:
         self.controles = controles
         self.hitboxe = None
         self.pv = 100
+        self.Stamina = Stamina
 
     def handle_input(self, keys):
         direction_mouvement = 0
         if self.controles == 'wasd':
             if keys[pygame.K_a]:
                 direction_mouvement = -1
+                self.Stamina -= 5
             elif keys[pygame.K_d]:
                 direction_mouvement = 1
+                self.Stamina -= 5
             if keys[pygame.K_w] and self.au_sol:
                 self.vitesse_y = -self.force_saut
                 self.au_sol = False
                 self.sur_plateforme = False
+                self.Stamina -= 25
         elif self.controles == 'fleches':
             if keys[pygame.K_LEFT]:
                 direction_mouvement = -1
