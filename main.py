@@ -177,6 +177,7 @@ while menu.run:
     if player1.hitboxe.collidelist(Obstacle_collision) >= 0:
         print(player1.hitboxe.collidelist(Obstacle_collision))
 
+    #Les barres
     health1 = Bar(25, 25, 250, 20, 100, player1.pv, "hp")
     health1.draw(game_display)
     health2 = Bar(game_display.get_width() - 275, 25, 250, 20, 100, player2.pv, "hp")
