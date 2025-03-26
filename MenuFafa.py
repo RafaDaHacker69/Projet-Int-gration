@@ -1,10 +1,13 @@
 import pygame
+from pygame.examples.go_over_there import screen
+
 import Button
 
 class MenuFafa:
     def __init__(self, screen):
         self.screen = screen
         self.run = False
+
 
     def MenuFafa(self):
         pygame.mixer.music.load("IMAGES/project2.wav")

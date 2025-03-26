@@ -1,5 +1,6 @@
 import pygame.event
 from MenuFafa import *
+from Bar import *
 from Menu import Menu
 from player_movement_ank import Player
 from Bras_Rotatif import Bras_Rotatif
@@ -53,6 +54,7 @@ Obstacle_collision = [
 ]
 #End variables
 while menu.run:
+
     keys = pygame.key.get_pressed()
 
     for player in (player1, player2):
@@ -174,6 +176,16 @@ while menu.run:
 
     if player1.hitboxe.collidelist(Obstacle_collision) >= 0:
         print(player1.hitboxe.collidelist(Obstacle_collision))
+
+    health1 = Bar(25, 25, 250, 20, 100, player1.pv, "hp")
+    health1.draw(game_display)
+    health2 = Bar(game_display.get_width() - 275, 25, 250, 20, 100, player2.pv, "hp")
+    health2.draw(game_display)
+
+    stamina1 = Bar(25, 55, 250, 20, 200, player1.Stamina, "stamina")
+    stamina1.draw(game_display)
+    stamina2 = Bar(game_display.get_width() - 275, 55, 250, 20, 200, player2.Stamina, "stamina")
+    stamina2.draw(game_display)
 
     #Gestionnaire d'évènements
     for game_event in pygame.event.get():
