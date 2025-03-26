@@ -12,7 +12,7 @@ posx = 100
 posy = 100
 
 bras_rotatif = Bras_Rotatif(0,0.01,0,0)
-
+game_clock = pygame.time.Clock()
 rectjoueur = pygame.Surface((20,75))
 rectjoueur.fill((255,255,255))
 rect = pygame.Surface((100,80),pygame.SRCALPHA)
@@ -23,7 +23,8 @@ pygame.draw.rect(rect,(255,0,0),(45,30,40,20))
 screen.blit(background,(0,0))
 screen.blit(rect,(posx,posy))
 
-
+vitesse_init = 5
+accélération = 1
 
 i=0
 t=0
@@ -46,8 +47,10 @@ while running:
         posx=posx+0.1
     if keys[pygame.K_LSHIFT]:
 
-        t+=0.001
-        i-=bras_rotatif.calcul_de_vitesse_angulaire()
+        t+=1/60
+
+        vitesse = vitesse_init + accélération * t
+        i-= vitesse
 
 
     rect_rotated = pygame.transform.rotate(rect, i)
@@ -70,8 +73,7 @@ while running:
             if event.key == pygame.K_LSHIFT:
                 t = 0
 
-
-
+    game_clock.tick(60)
     pygame.display.update()  # Met à jour l'écran
 
 pygame.quit()

@@ -137,7 +137,7 @@ class Player:
 
         self.heal_Stamina()
         self.vitesse_selon_Stamina()
-        print(f"Stamina: {self.Stamina}/{self.max_Stamina}")
+        #print(f"Stamina: {self.Stamina}/{self.max_Stamina}")
 
     def get_movement_direction(self):
         if self.vitesse_x > 0:
