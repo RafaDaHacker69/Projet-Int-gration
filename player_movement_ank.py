@@ -121,7 +121,9 @@ class Player:
 
     def vitesse_selon_Stamina(self):
         pourcentage = self.Stamina/self.max_Stamina
-        if pourcentage <= 0.50:
+        if pourcentage > 0.50:
+            self.vitesse_max = self.vitesse_max_base * pourcentage
+        else:
             pourcentage = 0.50
             self.vitesse_max = self.vitesse_max_base * pourcentage
 
