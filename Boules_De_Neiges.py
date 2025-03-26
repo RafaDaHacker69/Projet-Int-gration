@@ -19,20 +19,19 @@ class Boules_De_Neiges:
         self.dmg = 0
 
     def lancement_projectile(self):
-        #print(f"theta : {self.theta}")
         self.theta = math.radians(self.theta) #angle en radians
         self.lance = True
         self.collision = False
-        #print(f"x : {self.x}, y : {self.y}, theta : {self.theta}, vitesse : {self.vitesse}, lance : {self.lance}")
         print("boule de neige lancé")
 
     def trajectoire_projectile(self,screen):
+        gravite = -150
         if self.lance:
             self.t += 1/60
             self.Vx = self.vitesse * math.cos(self.theta)
             self.x = self.x + (self.Vx * self.t)
             self.Vy = self.vitesse * math.sin(self.theta)
-            self.y = self.y - (self.Vy * self.t + (-9.81) * self.t ** 2)
+            self.y = self.y - (self.Vy * self.t + (gravite) * self.t ** 2)
             self.limites_projectile(screen)
 
             pygame.draw.circle(screen, (173, 216, 230), (int(self.x), int(self.y)), self.r)
@@ -54,7 +53,6 @@ class Boules_De_Neiges:
             self.collision = True
 
     def check_collision_boule(self,player,screen):
-
         rayon = self.r
         self.hitboxe = pygame.Rect(self.x-rayon,self.y-rayon, rayon*2, rayon*2)
 
@@ -75,7 +73,6 @@ class Boules_De_Neiges:
         player.pv -= self.dmg
         self.dmg = 0
         print(f"Pv : {player.pv}")
-
         if player.pv < 0:
             print("Le joueur est mort")
 
