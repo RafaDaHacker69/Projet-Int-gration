@@ -9,6 +9,7 @@ class Bras_Rotatif:
         self.largeur = 20
         self.theta = theta *-1
         self.alpha = alpha
+        self.alpha_init = alpha
         self.omega0 = omega0
         self.ferme = False
         self.boule = False
@@ -20,33 +21,24 @@ class Bras_Rotatif:
         self.omega = 0
         self.boule_obj = None
         self.frame_counter = 0
-        self.last_omega = 0
         if inverse:
             self.theta = self.theta *-1
 
-    def calcul_de_delta_theta(self):
-        if self.alpha == 0:
-            self.omega = self.omega0
-        else:
-            self.omega = self.omega0 + (self.alpha * self.t)
-        self.last_omega = self.omega
-        delta_theta = (((self.omega * self.t) + (0.5 * self.alpha * (self.t ** 2))) * 180) / math.pi  # Calcul de l'angle
+    def calcul_de_omega(self):
+        self.omega = (self.omega0 + (self.alpha * self.t))*-1
         if self.inverse:
-            delta_theta = abs(delta_theta)
-        else:
-            delta_theta = -abs(delta_theta)
-        #print(f"theta : {self.theta}")
-        return delta_theta
+            self.omega = (self.omega0 + (self.alpha * self.t))
+        return self.omega
 
     def activer_rotation(self, keys, touche):
         if keys[touche]:
-            self.t += 0.001
+            self.t += 1/60
             if not self.inverse:
                 self.theta = self.theta % 360
-                self.theta -= self.calcul_de_delta_theta()
+                self.theta -= self.calcul_de_omega()
             if self.inverse:
                 self.theta = self.theta % 360
-                self.theta += self.calcul_de_delta_theta()
+                self.theta += self.calcul_de_omega()
         return self.theta
 
     def tourner_bras(self, rect, screen):
@@ -85,8 +77,7 @@ class Bras_Rotatif:
             self.dessiner_cercle_main(screen)
 
     def arreter_rotation(self):
-        self.t = 0
-        self.omega = 0
+        self.deceleration()
 
     def ouvrir_main(self):
         if self.boule_obj is not None and self.boule:
@@ -132,12 +123,24 @@ class Bras_Rotatif:
             circle_y = self.posy + offset_y
             self.boule_obj.x = circle_x
             self.boule_obj.y = circle_y
-            self.boule_obj.vitesse = (self.last_omega * self.longueur)/2
+            self.boule_obj.vitesse = (self.omega * self.longueur)*-1
+            if self.inverse:
+                self.boule_obj.vitesse = (self.omega * self.longueur)
             pygame.draw.circle(screen, (173, 216, 230), (circle_x, circle_y), self.boule_obj.r)
             #print(f"x : {circle_x}, y : {circle_y}")
 
-    def mise_a_jour_last_speed(self):
-        if not self.boule_obj.lance:
-            self.frame_counter +=1
-            if self.frame_counter >= 35:
-                self.last_omega = 0
+    def deceleration(self):
+        if not self.inverse:
+            self.alpha = 0.01
+            if self.omega >= 0:
+                self.t = 0
+                self.omega = 0
+                self.alpha = self.alpha_init
+        if self.inverse:
+            self.alpha = -0.01
+            if self.omega <= 0:
+                self.t = 0
+                self.omega = 0
+                self.alpha = self.alpha_init
+
+

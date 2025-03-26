@@ -37,8 +37,8 @@ player2_image_flip = None
 player1_image_flip = pygame.transform.flip(player_image1, True, False)
 player2_image_flip = pygame.transform.flip(player_image2, False, False)
 
-bras_rotatif = Bras_Rotatif(1,0,1,False)
-bras_rotatif2 = Bras_Rotatif(1,0,1,True)
+bras_rotatif = Bras_Rotatif(2,0,5,False)
+bras_rotatif2 = Bras_Rotatif(2,0,5,True)
 
 bras_rect = bras_rotatif.creation_bras_main(255,0,0)
 bras_rect2 = bras_rotatif2.creation_bras_main(0,120,250)
@@ -162,18 +162,12 @@ while menu.run:
     if bras_rotatif2.boule_obj is not None:
         bras_rotatif2.boule_obj.check_collision_boule(player1,game_display)
 
-    #Compteur de frames de la dernière vitesse
-    if bras_rotatif.boule_obj is not None:
-        bras_rotatif.mise_a_jour_last_speed()
-    if bras_rotatif2.boule_obj is not None:
-        bras_rotatif2.mise_a_jour_last_speed()
-
     #Obstacles Collisions
     for obstacle in Obstacle_collision:
         obstacle.draw(game_display, (0, 0, 0))  # Draw each obstacle
 
-    if player1.hitboxe.collidelist(Obstacle_collision) >= 0:
-        print(player1.hitboxe.collidelist(Obstacle_collision))
+    # if player1.hitboxe.collidelist(Obstacle_collision) >= 0:
+    #     print(player1.hitboxe.collidelist(Obstacle_collision))
 
     #Gestionnaire d'évènements
     for game_event in pygame.event.get():
@@ -189,7 +183,7 @@ while menu.run:
             if game_event.key == pygame.K_n:
                 bras_rotatif2.ouvrir_main()
 
-    #print(f"Theta = {bras_rotatif.theta}")
+    print(f"vitesse = {bras_rotatif.omega}")
     pygame.display.update()
     game_clock.tick(60)
 
