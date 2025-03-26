@@ -10,6 +10,7 @@ class Player:
         self.vitesse_x = 0
         self.vitesse_y = 0
         self.au_sol = False
+        self.sur_plateforme = False
         self.vitesse_max = 6
         self.gravite = 0.2
         self.force_saut = 7
@@ -29,6 +30,7 @@ class Player:
             if keys[pygame.K_w] and self.au_sol:
                 self.vitesse_y = -self.force_saut
                 self.au_sol = False
+                self.sur_plateforme = False
         elif self.controles == 'fleches':
             if keys[pygame.K_LEFT]:
                 direction_mouvement = -1
@@ -37,6 +39,7 @@ class Player:
             if keys[pygame.K_UP] and self.au_sol:
                 self.vitesse_y = -self.force_saut
                 self.au_sol = False
+                self.sur_plateforme = False
 
         self.vitesse_x += direction_mouvement * self.acceleration
         self.vitesse_x = max(-self.vitesse_max, min(self.vitesse_x, self.vitesse_max))
@@ -57,7 +60,10 @@ class Player:
             self.vitesse_y = 0
             self.au_sol = True
         else:
-            self.au_sol = False
+            if self.sur_plateforme == True:
+                self.au_sol = True
+            else:
+                self.au_sol = False
 
     def check_obstacle_collisions(self, obstacles):
         prochain_x = self.position_x + self.vitesse_x
@@ -81,10 +87,12 @@ class Player:
             if rect_joueur_y.colliderect(obstacle.rect):
                 if self.vitesse_y > 0:
                     self.position_y = obstacle.rect.top - self.hauteur
+                    self.vitesse_y = 0
                     self.au_sol = True
+                    self.sur_plateforme = True
                 elif self.vitesse_y < 0:
                     self.position_y = obstacle.rect.bottom
-                self.vitesse_y = 0
+                    self.vitesse_y = 0
                 break
 
     def update_position(self, obstacles):
