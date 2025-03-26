@@ -21,8 +21,8 @@ bg = pygame.image.load('IMAGES/Bg.jpg').convert_alpha()
 sol = pygame.image.load('IMAGES/sol.png').convert_alpha()
 display_width, display_height = game_display.get_size()
 
-player1 = Player(display_width * 0.2, display_height * 0.8, 30, 40, controles='wasd', 200)
-player2 = Player(display_width * 0.7, display_height * 0.8, 30, 40, controles='arrows', 200)
+player1 = Player(display_width * 0.2, display_height * 0.8, 30, 40, controles='wasd')
+player2 = Player(display_width * 0.7, display_height * 0.8, 30, 40, controles='arrows')
 
 player_image1 = pygame.image.load("IMAGES/finalmodel.png").convert_alpha()
 Image_Witdh=player_image1.get_width()

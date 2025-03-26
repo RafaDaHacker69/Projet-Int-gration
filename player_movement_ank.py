@@ -2,11 +2,14 @@ import pygame
 
 
 class Player:
-    def __init__(self, position_x, position_y, largeur, hauteur, controles, Stamina):
+    def __init__(self, position_x, position_y, largeur, hauteur, controles):
         self.position_x = position_x
         self.position_y = position_y
         self.largeur = largeur
         self.hauteur = hauteur
+        self.Stamina = 200
+        self.max_Stamina = 200
+        self.dernier_Stamina_util = pygame.time.get_ticks()
         self.vitesse_x = 0
         self.vitesse_y = 0
         self.au_sol = False
@@ -19,34 +22,50 @@ class Player:
         self.controles = controles
         self.hitboxe = None
         self.pv = 100
-        self.Stamina = Stamina
+
+    def util_stamina(self, nb):
+        if self.Stamina >= nb:
+            self.Stamina -= nb
+            self.dernier_Stamina_util = pygame.time.get_ticks()
 
     def handle_input(self, keys):
         direction_mouvement = 0
-        if self.controles == 'wasd':
-            if keys[pygame.K_a]:
-                direction_mouvement = -1
-                self.Stamina -= 5
-            elif keys[pygame.K_d]:
-                direction_mouvement = 1
-                self.Stamina -= 5
-            if keys[pygame.K_w] and self.au_sol:
-                self.vitesse_y = -self.force_saut
-                self.au_sol = False
-                self.sur_plateforme = False
-                self.Stamina -= 25
-        elif self.controles == 'fleches':
-            if keys[pygame.K_LEFT]:
-                direction_mouvement = -1
-            elif keys[pygame.K_RIGHT]:
-                direction_mouvement = 1
-            if keys[pygame.K_UP] and self.au_sol:
-                self.vitesse_y = -self.force_saut
-                self.au_sol = False
-                self.sur_plateforme = False
+        if self.Stamina >= 5:
+            if self.controles == 'wasd':
+                if keys[pygame.K_a]:
+                    direction_mouvement = -1
+                    self.util_stamina(0.1)
+                elif keys[pygame.K_d]:
+                    direction_mouvement = 1
+                    self.util_stamina(0.1)
+                if keys[pygame.K_w] and self.au_sol:
+                    self.vitesse_y = -self.force_saut
+                    self.au_sol = False
+                    self.sur_plateforme = False
+                    self.util_stamina(5)
+            elif self.controles == 'fleches':
+                if keys[pygame.K_LEFT]:
+                    direction_mouvement = -1
+                    self.util_stamina(0.1)
+                elif keys[pygame.K_RIGHT]:
+                    direction_mouvement = 1
+                    self.util_stamina(0.1)
+                if keys[pygame.K_UP] and self.au_sol:
+                    self.vitesse_y = -self.force_saut
+                    self.au_sol = False
+                    self.sur_plateforme = False
+                    self.util_stamina(5)
 
         self.vitesse_x += direction_mouvement * self.acceleration
         self.vitesse_x = max(-self.vitesse_max, min(self.vitesse_x, self.vitesse_max))
+
+    def heal_Stamina(self):
+        current_time = pygame.time.get_ticks()
+        if current_time - self.dernier_Stamina_util >= 2000:
+            if self.Stamina < self.max_Stamina:
+                if (current_time - self.dernier_Stamina_util) % 500 < 50:
+                    self.Stamina = min(self.max_Stamina, self.Stamina + 5)
+        print(f"Stamina: {self.Stamina}/{self.max_Stamina}")
 
     def apply_gravity(self):
         if not self.au_sol:
@@ -99,6 +118,10 @@ class Player:
                     self.vitesse_y = 0
                 break
 
+    def vitesse_selon_Stamina(self):
+        pourcentage = self.max_Stamina/self.Stamina
+
+
     def update_position(self, obstacles):
         self.apply_gravity()
         self.check_obstacle_collisions(obstacles)
@@ -106,6 +129,7 @@ class Player:
 
         self.position_x += self.vitesse_x
         self.position_y += self.vitesse_y
+        self.heal_Stamina()
 
     def get_movement_direction(self):
         if self.vitesse_x > 0:
