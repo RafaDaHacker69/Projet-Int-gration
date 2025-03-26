@@ -181,7 +181,6 @@ while menu.run:
     health1.draw(game_display)
     health2 = Bar(game_display.get_width() - 275, 25, 250, 20, 100, player2.pv, "hp")
     health2.draw(game_display)
-
     stamina1 = Bar(25, 55, 250, 20, 200, player1.Stamina, "stamina")
     stamina1.draw(game_display)
     stamina2 = Bar(game_display.get_width() - 275, 55, 250, 20, 200, player2.Stamina, "stamina")

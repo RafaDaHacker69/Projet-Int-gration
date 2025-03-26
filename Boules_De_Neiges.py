@@ -66,7 +66,7 @@ class Boules_De_Neiges:
             self.lance = False
             vf = ((self.m * self.Vx) + (80 * player.vitesse_x)) / (self.m + 80)
             player.vitesse_x = vf
-            self.dmg = vf
+            self.dmg = abs(vf)
             self.degat_inflige(player)
             print(f"VF :{vf}")
 
