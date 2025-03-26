@@ -120,8 +120,10 @@ class Player:
                 break
 
     def vitesse_selon_Stamina(self):
-        pourcentage = self.max_Stamina/self.Stamina
-        self.vitesse_max = self.vitesse_max_base*pourcentage
+        pourcentage = self.Stamina/self.max_Stamina
+        if pourcentage <= 0.50:
+            pourcentage = 0.50
+            self.vitesse_max = self.vitesse_max_base * pourcentage
 
 
     def update_position(self, obstacles):
@@ -132,6 +134,7 @@ class Player:
         self.position_x += self.vitesse_x
         self.position_y += self.vitesse_y
         self.heal_Stamina()
+        self.vitesse_selon_Stamina()
 
     def get_movement_direction(self):
         if self.vitesse_x > 0:
