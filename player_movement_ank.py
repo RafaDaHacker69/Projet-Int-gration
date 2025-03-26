@@ -15,6 +15,7 @@ class Player:
         self.au_sol = False
         self.sur_plateforme = False
         self.vitesse_max = 6
+        self.vitesse_max_base = 6
         self.gravite = 0.2
         self.force_saut = 7
         self.acceleration = 0.5
@@ -120,6 +121,7 @@ class Player:
 
     def vitesse_selon_Stamina(self):
         pourcentage = self.max_Stamina/self.Stamina
+        self.vitesse_max = self.vitesse_max_base*pourcentage
 
 
     def update_position(self, obstacles):
