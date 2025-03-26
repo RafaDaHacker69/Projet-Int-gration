@@ -38,8 +38,8 @@ player2_image_flip = None
 player1_image_flip = pygame.transform.flip(player_image1, True, False)
 player2_image_flip = pygame.transform.flip(player_image2, False, False)
 
-bras_rotatif = Bras_Rotatif(2,0,5,False)
-bras_rotatif2 = Bras_Rotatif(2,0,5,True)
+bras_rotatif = Bras_Rotatif(1,0,4,False)
+bras_rotatif2 = Bras_Rotatif(1,0,4,True)
 
 bras_rect = bras_rotatif.creation_bras_main(255,0,0)
 bras_rect2 = bras_rotatif2.creation_bras_main(0,120,250)
@@ -181,21 +181,24 @@ while menu.run:
     stamina2 = Bar(game_display.get_width() - 275, 55, 250, 20, 200, player2.Stamina, "stamina")
     stamina2.draw(game_display)
 
+    #Décélération
+    bras_rotatif.deceleration()
+    bras_rotatif2.deceleration()
+
     #Gestionnaire d'évènements
     for game_event in pygame.event.get():
         if game_event.type == pygame.QUIT:
             menu.run = False
         if game_event.type == pygame.KEYUP:
             if game_event.key == pygame.K_LSHIFT:
-                bras_rotatif.arreter_rotation()
+                bras_rotatif.decelerer = True
             if game_event.key == pygame.K_m:
-                bras_rotatif2.arreter_rotation()
+                bras_rotatif2.decelerer = True
             if game_event.key == pygame.K_c:
                 bras_rotatif.ouvrir_main()
             if game_event.key == pygame.K_n:
                 bras_rotatif2.ouvrir_main()
 
-    print(f"vitesse = {bras_rotatif.omega}")
     pygame.display.update()
     game_clock.tick(60)
 

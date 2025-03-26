@@ -21,6 +21,7 @@ class Bras_Rotatif:
         self.omega = 0
         self.boule_obj = None
         self.frame_counter = 0
+        self.decelerer = False
         if inverse:
             self.theta = self.theta *-1
 
@@ -32,6 +33,7 @@ class Bras_Rotatif:
 
     def activer_rotation(self, keys, touche):
         if keys[touche]:
+            self.decelerer = False
             self.t += 1/60
             if not self.inverse:
                 self.theta = self.theta % 360
@@ -75,9 +77,6 @@ class Bras_Rotatif:
             self.boule = True
             print(f"Boule de neige {self.boule}:")
             self.dessiner_cercle_main(screen)
-
-    def arreter_rotation(self):
-        self.deceleration()
 
     def ouvrir_main(self):
         if self.boule_obj is not None and self.boule:
@@ -123,24 +122,30 @@ class Bras_Rotatif:
             circle_y = self.posy + offset_y
             self.boule_obj.x = circle_x
             self.boule_obj.y = circle_y
-            self.boule_obj.vitesse = (self.omega * self.longueur)*-1
+            self.boule_obj.vitesse = ((self.omega * self.longueur)*-1)*0.5
             if self.inverse:
-                self.boule_obj.vitesse = (self.omega * self.longueur)
+                self.boule_obj.vitesse = ((self.omega * self.longueur))*0.5
             pygame.draw.circle(screen, (173, 216, 230), (circle_x, circle_y), self.boule_obj.r)
             #print(f"x : {circle_x}, y : {circle_y}")
 
     def deceleration(self):
-        if not self.inverse:
-            self.alpha = 0.01
-            if self.omega >= 0:
-                self.t = 0
-                self.omega = 0
-                self.alpha = self.alpha_init
         if self.inverse:
-            self.alpha = -0.01
-            if self.omega <= 0:
-                self.t = 0
-                self.omega = 0
-                self.alpha = self.alpha_init
-
-
+            if self.decelerer:
+                self.omega = self.omega * 0.9
+                self.t += 1 / 60
+                self.theta = self.theta % 360
+                self.theta += self.omega
+                if self.omega <=1 :
+                    self.omega = 0
+                    self.t = 0
+                    self.decelerer = False
+        else :
+            if self.decelerer:
+                self.omega = self.omega * 0.9
+                self.t += 1 / 60
+                self.theta = self.theta % 360
+                self.theta -= self.omega
+                if self.omega >=-1 :
+                    self.omega = 0
+                    self.t = 0
+                    self.decelerer = False
