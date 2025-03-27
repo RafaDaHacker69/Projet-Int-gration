@@ -48,9 +48,13 @@ player_y_Baseposition = display_height*0.88
 
 #creation obstacles
 Obstacle_collision = [
-    Obstacle(200, 100, 100, 20),  # Floating platform
-    Obstacle(450, 500, 150, 20),  # Another platform
-    Obstacle(400, 550, 50, 80)  # Wall
+    Obstacle(100, display_height-90, 50, 50),  # Floating platform
+    Obstacle(120, display_height-100, 50, 50),  # Another platform
+    Obstacle(140, display_height-110, 50, 50),  # Wall
+    Obstacle(160, display_height - 100, 50, 50),  # Another platform
+    Obstacle(180, display_height - 90, 50, 50),  # Floating platform
+
+    Obstacle(320, display_height - 200, 50, 100),  # Floating platform
 ]
 #End variables
 while menu.run:

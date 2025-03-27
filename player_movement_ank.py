@@ -14,6 +14,7 @@ class Player:
         self.vitesse_y = 0
         self.au_sol = False
         self.sur_plateforme = False
+        self.dernier_obstacle = None
         self.vitesse_max = 6
         self.vitesse_max_base = 6
         self.gravite = 0.2
@@ -97,12 +98,42 @@ class Player:
 
         self.au_sol = False
 
+        if self.dernier_obstacle:
+            if self.vitesse_x > 0:
+                if prochain_x >= (self.dernier_obstacle.rect.left - self.largeur + (self.dernier_obstacle.get_width())):
+                    if self.sur_plateforme:
+                        self.vitesse_y += self.gravite
+                        self.sur_plateforme = False
+            elif  self.vitesse_x < 0:
+                if prochain_x < (self.dernier_obstacle.rect.right-(self.dernier_obstacle.get_width()+self.largeur)):
+                    if self.sur_plateforme:
+                        self.vitesse_y += self.gravite
+                        self.sur_plateforme = False
+
         for obstacle in obstacles:
             if rect_joueur_x.colliderect(obstacle.rect):
                 if self.vitesse_x > 0:
-                    self.position_x = obstacle.rect.left - self.largeur
+                    if ((obstacle.get_y_pos()+obstacle.get_height())-self.position_y) >= 80:
+                        if self.vitesse_y == 0:
+                            self.position_x = obstacle.rect.left - self.largeur
+                            self.position_y = obstacle.rect.top - self.hauteur
+                            self.vitesse_y = 0
+                            self.au_sol = True
+                            self.sur_plateforme = True
+                            self.dernier_obstacle = obstacle
+                    else:
+                        self.position_x = obstacle.rect.left - self.largeur
                 elif self.vitesse_x < 0:
-                    self.position_x = obstacle.rect.right
+                    if ((obstacle.get_y_pos() + obstacle.get_height()) - self.position_y) >= 80:
+                        if self.vitesse_y == 0:
+                            self.position_x = obstacle.rect.right
+                            self.position_y = obstacle.rect.top - self.hauteur
+                            self.vitesse_y = 0
+                            self.au_sol = True
+                            self.sur_plateforme = True
+                            self.dernier_obstacle = obstacle
+                    else:
+                        self.position_x = obstacle.rect.right
                 self.vitesse_x = 0
                 break
 
@@ -113,6 +144,7 @@ class Player:
                     self.vitesse_y = 0
                     self.au_sol = True
                     self.sur_plateforme = True
+                    self.dernier_obstacle = obstacle
                 elif self.vitesse_y < 0:
                     self.position_y = obstacle.rect.bottom
                     self.vitesse_y = 0
