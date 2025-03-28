@@ -1,5 +1,5 @@
 import pygame
-
+import time
 
 import Button
 
@@ -46,6 +46,7 @@ class menu:
                     pygame.mixer.music.stop()
                     pygame.mixer.music.load("IMAGES/project 5 final tweak.wav")
                     pygame.mixer.music.play(loops=-1, start=0.0)
+                    time.sleep(0.25)
                     self.run = True
                     running = False
                     screen = pygame.display.set_mode((1240, 680))
@@ -101,16 +102,19 @@ class menu:
                 if event.type == pygame.QUIT:
                     running = False
                 if btn_Joueur_1.clique(event, pygame.mouse.get_pos()):
+                    time.sleep(0.25)
                     running = False
                 if btn_Joueur_2.clique(event, pygame.mouse.get_pos()):
                     player.image = pygame.image.load("IMAGES/Cat-removebg.png").convert_alpha()
                     bras_rotatif.alpha = 5
                     bras_rotatif.omega0 = 10
+                    time.sleep(0.25)
                     running = False
                 if btn_Joueur_3.clique(event, pygame.mouse.get_pos()):
                     player.image = pygame.image.load("IMAGES/Dog-removebg.png").convert_alpha()
                     player.force_saut = 14
                     player.acceleration = 2
+                    time.sleep(0.25)
                     running = False
 
             pygame.display.flip()
