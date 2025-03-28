@@ -3,7 +3,7 @@ import pygame
 
 import Button
 
-class MenuFafa:
+class menu:
     def __init__(self, screen):
         self.screen = screen
         self.run = False

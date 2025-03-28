@@ -1,5 +1,4 @@
 import math
-import time
 from Boules_De_Neiges import Boules_De_Neiges
 import pygame
 class Bras_Rotatif:
@@ -22,6 +21,8 @@ class Bras_Rotatif:
         self.boule_obj = None
         self.frame_counter = 0
         self.decelerer = False
+        self.grosseur_boule_max = 34
+        self.facteur_grossissement_boule = 1
         if inverse:
             self.theta = self.theta *-1
 
@@ -100,10 +101,10 @@ class Bras_Rotatif:
         return rect
 
     def grossir_boule(self, lim_min, lim_max):
-        if self.boule and self.boule_obj and lim_min < self.theta < lim_max and self.ferme and self.boule_obj.r < 34:
+        if self.boule and self.boule_obj and lim_min < self.theta < lim_max and self.ferme and self.boule_obj.r < self.grosseur_boule_max:
             self.frame_counter += 1
             if self.frame_counter > 20:
-                self.boule_obj.r += 1
+                self.boule_obj.r += self.facteur_grossissement_boule
                 self.boule_obj.m = self.boule_obj.r ** 2
                 self.frame_counter = 0
         #print(f"rayon : {self.boule_obj.r}, masse : {self.boule_obj.m}")
