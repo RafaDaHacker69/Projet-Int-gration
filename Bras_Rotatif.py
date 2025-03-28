@@ -71,12 +71,12 @@ class Bras_Rotatif:
         if keys[touche]:
             self.ferme = True
 
-    def ramasser_boule(self,lim_min, lim_max,screen):
+    def ramasser_boule(self,lim_min, lim_max,screen,player):
         if self.ferme and not self.boule and lim_min < self.theta < lim_max:
             self.boule_obj = Boules_De_Neiges(10, 10)
             self.boule = True
             print(f"Boule de neige {self.boule}:")
-            self.dessiner_cercle_main(screen)
+            self.dessiner_cercle_main(screen,player)
 
     def ouvrir_main(self):
         if self.boule_obj is not None and self.boule:
@@ -108,7 +108,7 @@ class Bras_Rotatif:
                 self.frame_counter = 0
         #print(f"rayon : {self.boule_obj.r}, masse : {self.boule_obj.m}")
 
-    def dessiner_cercle_main(self, screen):
+    def dessiner_cercle_main(self, screen, player):
         if self.boule and self.boule_obj:
             angle_rad = math.radians(self.theta)
             if self.inverse :
@@ -122,9 +122,9 @@ class Bras_Rotatif:
             circle_y = self.posy + offset_y
             self.boule_obj.x = circle_x
             self.boule_obj.y = circle_y
-            self.boule_obj.vitesse = ((self.omega * self.longueur)*-1)*0.5
+            self.boule_obj.vitesse = ((self.omega * self.longueur + player.vitesse_x)*-1)*0.5
             if self.inverse:
-                self.boule_obj.vitesse = ((self.omega * self.longueur))*0.5
+                self.boule_obj.vitesse = ((self.omega * self.longueur + player.vitesse_x))*0.5
             pygame.draw.circle(screen, (173, 216, 230), (circle_x, circle_y), self.boule_obj.r)
             #print(f"x : {circle_x}, y : {circle_y}")
 

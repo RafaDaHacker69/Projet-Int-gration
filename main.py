@@ -7,13 +7,13 @@ from Bras_Rotatif import Bras_Rotatif
 from Obstacle_collision import Obstacle
 
 pygame.init()
+
 game_display = pygame.display.set_mode((1240, 680))
 menu_display = pygame.display.set_mode((1,1))
 pygame.display.set_caption('CP (Club Penguin)')
+
 menu = MenuFafa(menu_display)
 menu.MenuFafa()
-#menu = Menu(game_display)
-#menu.show_menu()
 
 game_clock = pygame.time.Clock()
 
@@ -128,8 +128,8 @@ while menu.run:
     bras_rotatif2.theta=bras_rotatif2.activer_rotation(keys,pygame.K_m)
 
     #Ramasser une boule de neige
-    bras_rotatif.ramasser_boule(65,115,game_display)
-    bras_rotatif2.ramasser_boule(65,115,game_display)
+    bras_rotatif.ramasser_boule(65,115,game_display,player1)
+    bras_rotatif2.ramasser_boule(65,115,game_display,player2)
 
     #Fermeture de la main
     bras_rotatif.fermer_main(keys,pygame.K_c)
@@ -137,9 +137,9 @@ while menu.run:
 
     #Dessiner la boule
     if bras_rotatif.boule:
-        bras_rotatif.dessiner_cercle_main(game_display)
+        bras_rotatif.dessiner_cercle_main(game_display,player1)
     if bras_rotatif2.boule:
-        bras_rotatif2.dessiner_cercle_main(game_display)
+        bras_rotatif2.dessiner_cercle_main(game_display,player2)
 
     #Rotation bras
     bras_rotatif.posx = player1.position_x
