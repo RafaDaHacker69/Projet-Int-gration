@@ -1,5 +1,5 @@
 import pygame
-from pygame.examples.go_over_there import screen
+
 
 import Button
 
@@ -73,5 +73,41 @@ class MenuFafa:
 
 
 
+    def selection_perso(self,player,bras_rotatif):
+
+        width, height = 800, 400
+        screen = pygame.display.set_mode((width, height))
+        clock = pygame.time.Clock()
+
+        btn_Joueur_1 = Button.Button((width // 2, height // 4 + 20), "Perso 1")
+        btn_Joueur_2 = Button.Button((width // 2, height // 4 + 176 + 20), "Perso 2")
+        btn_Joueur_3 = Button.Button((width // 2, height // 4 + 88 + 20), "Perso 3")
+
+        running = True
+        while running:
+            btn_Joueur_1.initialiser(screen)
+            btn_Joueur_2.initialiser(screen)
+            btn_Joueur_3.initialiser(screen)
+            btn_Joueur_1.verifier(pygame.mouse.get_pos())
+            btn_Joueur_2.verifier(pygame.mouse.get_pos())
+            btn_Joueur_3.verifier(pygame.mouse.get_pos())
 
 
+
+            screen.fill((255, 255, 255))
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+                if btn_Joueur_1.clique(event, pygame.mouse.get_pos()):
+                    running = False
+                if btn_Joueur_2.clique(event, pygame.mouse.get_pos()):
+                    bras_rotatif.alpha = 5
+                    bras_rotatif.omega = 10
+                    running = False
+                if btn_Joueur_3.clique(event, pygame.mouse.get_pos()):
+                    player.force_saut = 14
+                    player.acceleration = 2
+                    running = False
+
+            pygame.display.flip()
+            clock.tick(60)

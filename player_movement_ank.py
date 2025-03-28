@@ -24,6 +24,7 @@ class Player:
         self.controles = controles
         self.hitboxe = None
         self.pv = 100
+        self.image = pygame.image.load("IMAGES/finalmodel.png").convert_alpha()
 
     def util_stamina(self, nb):
         if self.Stamina >= nb:

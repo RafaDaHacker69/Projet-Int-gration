@@ -25,12 +25,12 @@ display_width, display_height = game_display.get_size()
 player1 = Player(display_width * 0.2, display_height * 0.8, 30, 40, controles='wasd')
 player2 = Player(display_width * 0.7, display_height * 0.8, 30, 40, controles='fleches')
 
-player_image1 = pygame.image.load("IMAGES/finalmodel.png").convert_alpha()
+player_image1 = player1.image
 Image_Witdh=player_image1.get_width()
 Image_Height = player_image1.get_height()
 player1_image_flip = None
 
-player_image2 = pygame.image.load("IMAGES/finalmodel.png").convert_alpha()
+player_image2 = player2.image
 Image_Witdh2=player_image2.get_width()
 Image_Height2 = player_image2.get_height()
 player2_image_flip = None
