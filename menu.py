@@ -73,7 +73,7 @@ class MenuFafa:
 
 
 
-    def selection_perso(self,player,bras_rotatif):
+    def selection_perso(self,player,bras_rotatif,txt):
         width, height = 1240, 680
         screen = pygame.display.set_mode((width, height))
         clock = pygame.time.Clock()
@@ -86,6 +86,9 @@ class MenuFafa:
         running = True
         while running:
             screen.fill((255, 255, 255))
+            font = pygame.font.Font(None, 60)
+            text = font.render(txt, True, (0, 0, 0))
+            self.screen.blit(text, (400, 75))
 
             btn_Joueur_1.initialiser(screen)
             btn_Joueur_2.initialiser(screen)
