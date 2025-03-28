@@ -1,7 +1,5 @@
-import pygame.event
 from menu import *
 from Bar import *
-from Test_menu import Menu
 from player import Player
 from Bras_Rotatif import Bras_Rotatif
 from Obstacle_collision import Obstacle

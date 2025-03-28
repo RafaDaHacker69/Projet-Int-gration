@@ -125,6 +125,7 @@ class menu:
     def menu_mort(self):
         width, height = 1240, 680
         screen = pygame.display.set_mode((width, height))
+        retour_menu = Button.Button((width // 2, height // 4 + 20), "Retour au menu")
         clock = pygame.time.Clock()
         running = True
         while running:
@@ -132,8 +133,15 @@ class menu:
             font = pygame.font.Font(None, 60)
             text = font.render("Bravo vous avez gagné !", True, (0, 0, 0))
             self.screen.blit(text, (400, 75))
+            retour_menu.initialiser(screen)
+            retour_menu.verifier(pygame.mouse.get_pos())
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
+                    time.sleep(0.25)
+                    running = False
+                    self.menu()
+                    self.restart = True
+                if retour_menu.clique(event, pygame.mouse.get_pos()):
                     time.sleep(0.25)
                     running = False
                     self.menu()
