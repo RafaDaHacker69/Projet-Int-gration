@@ -70,6 +70,10 @@ Obstacle_collision = [
 #End variables
 while menu_principale.run:
     if menu_de_mort1.restart or menu_de_mort2.restart:
+        menu_perso1.selection_perso(player1, bras_rotatif, "Sélection du Joueur 1")
+        menu_perso2.selection_perso(player2, bras_rotatif2, "Sélection du Joueur 2")
+        player_image1 = player1.image
+        player_image2 = player2.image
         player1.position_x = display_width * 0.2
         player1.position_y = display_height * 0.8
         player2.position_x = display_width * 0.7
