@@ -78,11 +78,16 @@ while menu_principale.run:
         player1.vitesse_y = 0
         player2.vitesse_x = 0
         player2.vitesse_y = 0
+        player1.pv = 100
+        player1.stamina = 200
+        player2.pv = 100
+        player2.stamina = 200
         bras_rotatif.theta = 0
         bras_rotatif2.theta = 0
         bras_rotatif.omega = 0
         bras_rotatif2.omega = 0
-        restart = False
+        menu_de_mort1.restart = False
+        menu_de_mort2.restart = False
 
     keys = pygame.key.get_pressed()
 
