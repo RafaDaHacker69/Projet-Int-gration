@@ -35,6 +35,10 @@ menu_perso1.selection_perso(player1, bras_rotatif,"Sélection du Joueur 1")
 menu_perso2 = menu(menu_display)
 menu_perso2.selection_perso(player2, bras_rotatif2,"Sélection du Joueur 2")
 
+#Menu de mort du joueur
+menu_de_mort1 = menu(menu_display)
+menu_de_mort2 = menu(menu_display)
+
 player_image1 = player1.image
 Image_Witdh=player_image1.get_width()
 Image_Height = player_image1.get_height()
@@ -65,6 +69,20 @@ Obstacle_collision = [
 ]
 #End variables
 while menu_principale.run:
+    if menu_de_mort1.restart or menu_de_mort2.restart:
+        player1.position_x = display_width * 0.2
+        player1.position_y = display_height * 0.8
+        player2.position_x = display_width * 0.7
+        player2.position_y = display_height * 0.8
+        player1.vitesse_x = 0
+        player1.vitesse_y = 0
+        player2.vitesse_x = 0
+        player2.vitesse_y = 0
+        bras_rotatif.theta = 0
+        bras_rotatif2.theta = 0
+        bras_rotatif.omega = 0
+        bras_rotatif2.omega = 0
+        restart = False
 
     keys = pygame.key.get_pressed()
 
@@ -171,9 +189,9 @@ while menu_principale.run:
 
     #Check collisions de boules
     if bras_rotatif.boule_obj is not None:
-        bras_rotatif.boule_obj.check_collision_boule(player2,game_display)
+        bras_rotatif.boule_obj.check_collision_boule(player2,game_display,menu_de_mort1)
     if bras_rotatif2.boule_obj is not None:
-        bras_rotatif2.boule_obj.check_collision_boule(player1,game_display)
+        bras_rotatif2.boule_obj.check_collision_boule(player1,game_display,menu_de_mort2)
 
     #Obstacles Collisions
     for obstacle in Obstacle_collision:

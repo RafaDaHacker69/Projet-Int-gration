@@ -1,5 +1,6 @@
 import math
 import pygame
+import time
 
 class Boules_De_Neiges:
 
@@ -52,7 +53,7 @@ class Boules_De_Neiges:
             self.lance = False
             self.collision = True
 
-    def check_collision_boule(self,player,screen):
+    def check_collision_boule(self,player,screen,menu_de_mort):
         rayon = self.r
         self.hitboxe = pygame.Rect(self.x-rayon,self.y-rayon, rayon*2, rayon*2)
 
@@ -66,15 +67,18 @@ class Boules_De_Neiges:
             player.vitesse_x = vf
             modVit=math.sqrt(self.Vx**2 + self.Vy**2)
             self.dmg = self.m*modVit/(80*15)
-            self.degat_inflige(player)
+            self.degat_inflige(player,menu_de_mort)
             print(f"VF :{vf}")
 
-    def degat_inflige(self,player):
+    def degat_inflige(self,player,menu_de_mort):
         player.pv -= self.dmg
         self.dmg = 0
         print(f"Pv : {player.pv}")
         if player.pv < 0:
             print("Le joueur est mort")
+            menu_de_mort.menu_mort()
+
+
 
 
 
