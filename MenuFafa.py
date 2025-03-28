@@ -9,7 +9,7 @@ class MenuFafa:
         self.run = False
 
 
-    def MenuFafa(self):
+    def menu(self):
         pygame.mixer.music.load("IMAGES/project2.wav")
         pygame.mixer.music.play(loops=-1, start=0.0)
 
@@ -17,7 +17,7 @@ class MenuFafa:
         white = (255, 255, 255)
         black = (0, 0, 0)
         screen = pygame.display.set_mode((width, height))
-        pygame.display.set_caption("Example Menu")
+        pygame.display.set_caption("Menu")
 
         background = pygame.image.load("IMAGES/bg2.png")
         background = pygame.transform.scale(background, (width, height))
@@ -75,7 +75,7 @@ class MenuFafa:
 
     def selection_perso(self,player,bras_rotatif):
 
-        width, height = 800, 400
+        width, height = 1240, 680
         screen = pygame.display.set_mode((width, height))
         clock = pygame.time.Clock()
 
@@ -101,10 +101,12 @@ class MenuFafa:
                 if btn_Joueur_1.clique(event, pygame.mouse.get_pos()):
                     running = False
                 if btn_Joueur_2.clique(event, pygame.mouse.get_pos()):
+                    player.image = pygame.image.load("IMAGES/Cat-removebg.png").convert_alpha()
                     bras_rotatif.alpha = 5
                     bras_rotatif.omega = 10
                     running = False
                 if btn_Joueur_3.clique(event, pygame.mouse.get_pos()):
+                    player.image = pygame.image.load("IMAGES/Dog-removebg.png").convert_alpha()
                     player.force_saut = 14
                     player.acceleration = 2
                     running = False

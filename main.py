@@ -12,8 +12,8 @@ game_display = pygame.display.set_mode((1240, 680))
 menu_display = pygame.display.set_mode((1,1))
 pygame.display.set_caption('CP (Club Penguin)')
 
-menu = MenuFafa(menu_display)
-menu.MenuFafa()
+menu_principale = MenuFafa(menu_display)
+menu_principale.menu()
 
 game_clock = pygame.time.Clock()
 
@@ -44,6 +44,9 @@ bras_rotatif2 = Bras_Rotatif(1,0,4,True)
 bras_rect = bras_rotatif.creation_bras_main(255,0,0)
 bras_rect2 = bras_rotatif2.creation_bras_main(0,120,250)
 
+menu_perso = MenuFafa(menu_display)
+menu_perso.selection_perso(player1, bras_rotatif)
+
 player_y_Baseposition = display_height*0.88
 
 #creation obstacles
@@ -57,7 +60,7 @@ Obstacle_collision = [
     Obstacle(320, display_height - 200, 50, 100),  # Floating platform
 ]
 #End variables
-while menu.run:
+while menu_principale.run:
 
     keys = pygame.key.get_pressed()
 
@@ -192,7 +195,7 @@ while menu.run:
     #Gestionnaire d'évènements
     for game_event in pygame.event.get():
         if game_event.type == pygame.QUIT:
-            menu.run = False
+            menu_principale = False
         if game_event.type == pygame.KEYUP:
             if game_event.key == pygame.K_LSHIFT:
                 bras_rotatif.decelerer = True
