@@ -1,8 +1,8 @@
 import pygame.event
-from MenuFafa import *
+from menu import *
 from Bar import *
-from Menu import Menu
-from player_movement_ank import Player
+from Test_menu import Menu
+from player import Player
 from Bras_Rotatif import Bras_Rotatif
 from Obstacle_collision import Obstacle
 
@@ -44,8 +44,12 @@ bras_rotatif2 = Bras_Rotatif(1,0,4,True)
 bras_rect = bras_rotatif.creation_bras_main(255,0,0)
 bras_rect2 = bras_rotatif2.creation_bras_main(0,120,250)
 
-menu_perso = MenuFafa(menu_display)
-menu_perso.selection_perso(player1, bras_rotatif)
+#Menu de séléction des perso
+menu_perso1 = MenuFafa(menu_display)
+menu_perso1.selection_perso(player1, bras_rotatif)
+menu_perso2 = MenuFafa(menu_display)
+menu_perso2.selection_perso(player2, bras_rotatif2)
+
 
 player_y_Baseposition = display_height*0.88
 

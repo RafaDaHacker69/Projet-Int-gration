@@ -79,12 +79,15 @@ class MenuFafa:
         screen = pygame.display.set_mode((width, height))
         clock = pygame.time.Clock()
 
+
         btn_Joueur_1 = Button.Button((width // 2, height // 4 + 20), "Perso 1")
-        btn_Joueur_2 = Button.Button((width // 2, height // 4 + 176 + 20), "Perso 2")
-        btn_Joueur_3 = Button.Button((width // 2, height // 4 + 88 + 20), "Perso 3")
+        btn_Joueur_2 = Button.Button((width // 2, height // 4 + 176 + 20), "Perso 3")
+        btn_Joueur_3 = Button.Button((width // 2, height // 4 + 88 + 20), "Perso 2")
 
         running = True
         while running:
+            screen.fill((255, 255, 255))
+
             btn_Joueur_1.initialiser(screen)
             btn_Joueur_2.initialiser(screen)
             btn_Joueur_3.initialiser(screen)
@@ -92,9 +95,6 @@ class MenuFafa:
             btn_Joueur_2.verifier(pygame.mouse.get_pos())
             btn_Joueur_3.verifier(pygame.mouse.get_pos())
 
-
-
-            screen.fill((255, 255, 255))
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
