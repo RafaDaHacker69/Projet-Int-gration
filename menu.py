@@ -74,7 +74,6 @@ class MenuFafa:
 
 
     def selection_perso(self,player,bras_rotatif):
-
         width, height = 1240, 680
         screen = pygame.display.set_mode((width, height))
         clock = pygame.time.Clock()
@@ -103,7 +102,7 @@ class MenuFafa:
                 if btn_Joueur_2.clique(event, pygame.mouse.get_pos()):
                     player.image = pygame.image.load("IMAGES/Cat-removebg.png").convert_alpha()
                     bras_rotatif.alpha = 5
-                    bras_rotatif.omega = 10
+                    bras_rotatif.omega0 = 10
                     running = False
                 if btn_Joueur_3.clique(event, pygame.mouse.get_pos()):
                     player.image = pygame.image.load("IMAGES/Dog-removebg.png").convert_alpha()

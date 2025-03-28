@@ -25,6 +25,16 @@ display_width, display_height = game_display.get_size()
 player1 = Player(display_width * 0.2, display_height * 0.8, 30, 40, controles='wasd')
 player2 = Player(display_width * 0.7, display_height * 0.8, 30, 40, controles='fleches')
 
+bras_rotatif = Bras_Rotatif(1,0,4,False)
+bras_rotatif2 = Bras_Rotatif(1,0,4,True)
+
+#Menu de séléction des perso
+menu_perso1 = MenuFafa(menu_display)
+menu_perso1.selection_perso(player1, bras_rotatif)
+
+menu_perso2 = MenuFafa(menu_display)
+menu_perso2.selection_perso(player2, bras_rotatif2)
+
 player_image1 = player1.image
 Image_Witdh=player_image1.get_width()
 Image_Height = player_image1.get_height()
@@ -38,18 +48,8 @@ player2_image_flip = None
 player1_image_flip = pygame.transform.flip(player_image1, True, False)
 player2_image_flip = pygame.transform.flip(player_image2, False, False)
 
-bras_rotatif = Bras_Rotatif(1,0,4,False)
-bras_rotatif2 = Bras_Rotatif(1,0,4,True)
-
 bras_rect = bras_rotatif.creation_bras_main(255,0,0)
 bras_rect2 = bras_rotatif2.creation_bras_main(0,120,250)
-
-#Menu de séléction des perso
-menu_perso1 = MenuFafa(menu_display)
-menu_perso1.selection_perso(player1, bras_rotatif)
-menu_perso2 = MenuFafa(menu_display)
-menu_perso2.selection_perso(player2, bras_rotatif2)
-
 
 player_y_Baseposition = display_height*0.88
 
