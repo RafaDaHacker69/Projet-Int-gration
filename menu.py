@@ -121,8 +121,8 @@ class menu:
                     time.sleep(0.25)
                     running = False
                 hovered_1 = btn_Joueur_1.rect.collidepoint(pygame.mouse.get_pos())
-                hovered_2 = btn_Joueur_3.rect.collidepoint(pygame.mouse.get_pos())
-                hovered_3 = btn_Joueur_2.rect.collidepoint(pygame.mouse.get_pos())
+                hovered_2 = btn_Joueur_2.rect.collidepoint(pygame.mouse.get_pos())
+                hovered_3 = btn_Joueur_3.rect.collidepoint(pygame.mouse.get_pos())
                 if hovered_1:
                     self.fait=False
                     image = pygame.image.load("IMAGES/finalmodel.png").convert_alpha()
