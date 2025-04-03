@@ -1,6 +1,6 @@
 import pygame
 import time
-
+import pygame.freetype
 import Button
 
 class menu:
@@ -86,8 +86,8 @@ class menu:
 
 
         btn_Joueur_1 = Button.Button((width // 2, height // 4 + 20), "Perso 1")
-        btn_Joueur_2 = Button.Button((width // 2, height // 4 + 176 + 20), "Perso 3")
-        btn_Joueur_3 = Button.Button((width // 2, height // 4 + 88 + 20), "Perso 2")
+        btn_Joueur_2 = Button.Button((width // 2, height // 4 + 88  + 20), "Perso 2")
+        btn_Joueur_3 = Button.Button((width // 2, height // 4 + 176 + 20), "Perso 3")
 
         running = True
         while running:
@@ -137,11 +137,33 @@ class menu:
                     texte = "Premier personnage : \npersonnage de base avec 100 hp et 200 stamina.\nforce: normale\nvitesse: normale\nsaut:normal\nhabilité ultime : musculature"
             font = pygame.font.Font(None, 60)
             info = font.render(texte, True, (0, 0, 0))
-            self.screen.blit(info, (10, 400))
-            self.screen.blit(image, (400, 75))
+            self.dessiner_text(self.screen, texte, (100, 75), "IMAGES/grand9k-pixel.ttf", 40, (0, 0, 0), 400)
+            self.screen.blit(image, (800, 75))
             pygame.display.flip()
             clock.tick(60)
 
+    def dessiner_text(self, screen, text, position, font, taille, couleur, wrap):
+        pygame.freetype.init()
+        font = pygame.freetype.Font(font, taille)
+
+        mots = text.split()
+        lignes = []
+        ligneCourante = ""
+
+        for mot in mots:
+            lignesTemp = ligneCourante + " " + mot if ligneCourante else mot
+            if font.get_rect(lignesTemp).width <= wrap:
+                ligneCourante = lignesTemp
+            else:
+                lignes.append(ligneCourante)
+                ligneCourante = mot
+        lignes.append(ligneCourante)
+
+        x, y = position
+        espace = taille + 5
+        for ligne in lignes:
+            font.render_to(screen, (x, y), ligne, couleur)
+            y += espace
 
     def menu_mort(self):
         width, height = 1240, 680
