@@ -11,7 +11,7 @@ class menu:
 
 
     def menu(self):
-        pygame.mixer.music.load("IMAGES/project2.wav")
+        pygame.mixer.music.load("IMAGES/10 final.wav")
         pygame.mixer.music.play(loops=-1, start=0.0)
 
         width, height = 800, 400
@@ -126,7 +126,7 @@ class menu:
                 if hovered_1:
                     self.fait=False
                     image = pygame.image.load("IMAGES/finalmodel.png").convert_alpha()
-                    texte = "Premier personnage : \npersonnage de base avec 100 hp et 200 stamina.\nforce: normale\nvitesse: normale\nsaut:normal\nhabilité ultime : musculature"
+                    texte = "Premier personnage :\n personnage de base avec 100 hp et 200 stamina.\nforce: normale\nvitesse: normale\nsaut:normal\nhabilité ultime : musculature"
                 if hovered_2:
                     self.fait = False
                     image = pygame.image.load("IMAGES/Cat-removebg.png").convert_alpha()
@@ -134,10 +134,10 @@ class menu:
                 if hovered_3:
                     self.fait = False
                     image = pygame.image.load("IMAGES/Dog-removebg.png").convert_alpha()
-                    texte = "Premier personnage : \npersonnage de base avec 100 hp et 200 stamina.\nforce: normale\nvitesse: normale\nsaut:normal\nhabilité ultime : musculature"
+                    texte = "Premier personnage :      personnage de base avec 100 hp et 200 stamina.\nforce: normale\nvitesse: normale\nsaut:normal\nhabilité ultime : musculature"
             font = pygame.font.Font(None, 60)
             info = font.render(texte, True, (0, 0, 0))
-            self.dessiner_text(self.screen, texte, (100, 75), "IMAGES/grand9k-pixel.ttf", 40, (0, 0, 0), 400)
+            self.dessiner_text(self.screen, texte, (25, 175), "IMAGES/grand9k-pixel.ttf", 30, (0, 0, 0), 475)
             self.screen.blit(image, (800, 75))
             pygame.display.flip()
             clock.tick(60)
@@ -146,18 +146,19 @@ class menu:
         pygame.freetype.init()
         font = pygame.freetype.Font(font, taille)
 
-        mots = text.split()
         lignes = []
-        ligneCourante = ""
+        for ligne in text.splitlines():
+            mots = ligne.split()
+            ligneCourante = ""
 
-        for mot in mots:
-            lignesTemp = ligneCourante + " " + mot if ligneCourante else mot
-            if font.get_rect(lignesTemp).width <= wrap:
-                ligneCourante = lignesTemp
-            else:
-                lignes.append(ligneCourante)
-                ligneCourante = mot
-        lignes.append(ligneCourante)
+            for mot in mots:
+                lignesTemp = ligneCourante + " " + mot if ligneCourante else mot
+                if font.get_rect(lignesTemp).width <= wrap:
+                    ligneCourante = lignesTemp
+                else:
+                    lignes.append(ligneCourante)
+                    ligneCourante = mot
+            lignes.append(ligneCourante)
 
         x, y = position
         espace = taille + 5
