@@ -79,6 +79,10 @@ class menu:
         width, height = 1240, 680
         screen = pygame.display.set_mode((width, height))
         clock = pygame.time.Clock()
+        self.fait=True
+        if self.fait :
+            texte = " "
+            image =pygame.image.load("IMAGES/blank.png").convert_alpha()
 
 
         btn_Joueur_1 = Button.Button((width // 2, height // 4 + 20), "Perso 1")
@@ -91,7 +95,6 @@ class menu:
             font = pygame.font.Font(None, 60)
             text = font.render(txt, True, (0, 0, 0))
             self.screen.blit(text, (400, 75))
-
             btn_Joueur_1.initialiser(screen)
             btn_Joueur_2.initialiser(screen)
             btn_Joueur_3.initialiser(screen)
@@ -117,7 +120,25 @@ class menu:
                     player.acceleration = 2
                     time.sleep(0.25)
                     running = False
-
+                hovered_1 = btn_Joueur_1.rect.collidepoint(pygame.mouse.get_pos())
+                hovered_2 = btn_Joueur_3.rect.collidepoint(pygame.mouse.get_pos())
+                hovered_3 = btn_Joueur_2.rect.collidepoint(pygame.mouse.get_pos())
+                if hovered_1:
+                    self.fait=False
+                    image = pygame.image.load("IMAGES/finalmodel.png").convert_alpha()
+                    texte = "Premier personnage : \npersonnage de base avec 100 hp et 200 stamina.\nforce: normale\nvitesse: normale\nsaut:normal\nhabilité ultime : musculature"
+                if hovered_2:
+                    self.fait = False
+                    image = pygame.image.load("IMAGES/Cat-removebg.png").convert_alpha()
+                    texte = "Deuxième personnage : \npersonnage rapide avec 100 hp et 200 stamina.\nforce: normale\nvitesse: vite\nsaut: normal\nhabilité ultime : jsp"
+                if hovered_3:
+                    self.fait = False
+                    image = pygame.image.load("IMAGES/Dog-removebg.png").convert_alpha()
+                    texte = "Premier personnage : \npersonnage de base avec 100 hp et 200 stamina.\nforce: normale\nvitesse: normale\nsaut:normal\nhabilité ultime : musculature"
+            font = pygame.font.Font(None, 60)
+            info = font.render(texte, True, (0, 0, 0))
+            self.screen.blit(info, (10, 400))
+            self.screen.blit(image, (400, 75))
             pygame.display.flip()
             clock.tick(60)
 
