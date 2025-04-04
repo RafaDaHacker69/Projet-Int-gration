@@ -110,8 +110,8 @@ class menu:
                     running = False
                 if btn_Joueur_2.clique(event, pygame.mouse.get_pos()):
                     player.image = pygame.image.load("IMAGES/Cat-removebg.png").convert_alpha()
-                    bras_rotatif.alpha = 5
-                    bras_rotatif.omega0 = 10
+                    bras_rotatif.alpha = 3
+                    bras_rotatif.omega0 = 6
                     time.sleep(0.25)
                     running = False
                 if btn_Joueur_3.clique(event, pygame.mouse.get_pos()):
