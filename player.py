@@ -7,8 +7,8 @@ class Player:
         self.position_y = position_y
         self.largeur = largeur
         self.hauteur = hauteur
-        self.Stamina = 200
-        self.max_Stamina = 200
+        self.Stamina = 100
+        self.max_Stamina = 100
         self.dernier_Stamina_util = pygame.time.get_ticks()
         self.vitesse_x = 0
         self.vitesse_y = 0
@@ -24,6 +24,7 @@ class Player:
         self.controles = controles
         self.hitboxe = None
         self.pv = 100
+        self.pv_max = 100
         self.image = pygame.image.load("IMAGES/finalmodel.png").convert_alpha()
 
     def util_stamina(self, nb):

@@ -62,7 +62,6 @@ Obstacle_collision = [
     Obstacle(140, display_height-110, 50, 50),  # Wall
     Obstacle(160, display_height - 100, 50, 50),  # Another platform
     Obstacle(180, display_height - 90, 50, 50),  # Floating platform
-
     Obstacle(320, display_height - 200, 50, 100),  # Floating platform
 ]
 #End variables
@@ -81,9 +80,9 @@ while menu_principale.run:
         player2.vitesse_x = 0
         player2.vitesse_y = 0
         player1.pv = 100
-        player1.stamina = 200
+        player1.stamina = 100
         player2.pv = 100
-        player2.stamina = 200
+        player2.stamina = 100
         bras_rotatif.theta = 0
         bras_rotatif2.theta = 0
         bras_rotatif.omega = 0
@@ -208,13 +207,13 @@ while menu_principale.run:
     #     print(player1.hitboxe.collidelist(Obstacle_collision))
 
     #Les barres
-    health1 = Bar(25, 25, 250, 20, 100, player1.pv, "hp")
+    health1 = Bar(25, 25, 250, 20, player1.pv_max, player1.pv, "hp")
     health1.draw(game_display)
-    health2 = Bar(game_display.get_width() - 275, 25, 250, 20, 100, player2.pv, "hp")
+    health2 = Bar(game_display.get_width() - 275, 25, 250, 20, player2.pv_max, player2.pv, "hp")
     health2.draw(game_display)
-    stamina1 = Bar(25, 55, 250, 20, 200, player1.Stamina, "stamina")
+    stamina1 = Bar(25, 55, 250, 20, player1.max_Stamina, player1.Stamina, "stamina")
     stamina1.draw(game_display)
-    stamina2 = Bar(game_display.get_width() - 275, 55, 250, 20, 200, player2.Stamina, "stamina")
+    stamina2 = Bar(game_display.get_width() - 275, 55, 250, 20, player1.max_Stamina, player2.Stamina, "stamina")
     stamina2.draw(game_display)
 
     #Décélération

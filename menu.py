@@ -41,6 +41,7 @@ class menu:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT or btnQuitter.clique(event, pygame.mouse.get_pos()):
                     running = False
+                    pygame.quit()
                 if btnTuto.clique(event, pygame.mouse.get_pos()):
                     print("tuto")
                 if btnJouer.clique(event, pygame.mouse.get_pos()):
@@ -110,13 +111,15 @@ class menu:
                     running = False
                 if btn_Joueur_2.clique(event, pygame.mouse.get_pos()):
                     player.image = pygame.image.load("IMAGES/Cat-removebg.png").convert_alpha()
-                    bras_rotatif.alpha = 3
-                    bras_rotatif.omega0 = 6
+                    player.pv = 80
+                    player.pv_max = 80
+                    bras_rotatif.alpha = 2
+                    bras_rotatif.omega0 = 5
                     time.sleep(0.25)
                     running = False
                 if btn_Joueur_3.clique(event, pygame.mouse.get_pos()):
                     player.image = pygame.image.load("IMAGES/Dog-removebg.png").convert_alpha()
-                    player.force_saut = 14
+                    player.force_saut = 11
                     player.acceleration = 2
                     time.sleep(0.25)
                     running = False
@@ -169,7 +172,7 @@ class menu:
     def menu_mort(self):
         width, height = 1240, 680
         screen = pygame.display.set_mode((width, height))
-        retour_menu = Button.Button((width // 2, height // 4 + 20), "Retour au menu")
+        retour_menu = Button.Button((width // 2, height // 4 + 20), "Retour")
         clock = pygame.time.Clock()
         running = True
         while running:
