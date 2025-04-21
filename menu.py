@@ -110,7 +110,7 @@ class menu:
                     time.sleep(0.25)
                     running = False
                 if btn_Joueur_2.clique(event, pygame.mouse.get_pos()):
-                    player.image = pygame.image.load("IMAGES/Cat-removebg.png").convert_alpha()
+                    player.image = pygame.image.load("IMAGES/pinguoin-vert.png").convert_alpha()
                     player.pv = 80
                     player.pv_max = 80
                     bras_rotatif.alpha = 2
@@ -118,7 +118,7 @@ class menu:
                     time.sleep(0.25)
                     running = False
                 if btn_Joueur_3.clique(event, pygame.mouse.get_pos()):
-                    player.image = pygame.image.load("IMAGES/Dog-removebg.png").convert_alpha()
+                    player.image = pygame.image.load("IMAGES/pinguoin-rouge.png").convert_alpha()
                     player.force_saut = 11
                     player.acceleration = 2
                     time.sleep(0.25)
@@ -132,11 +132,11 @@ class menu:
                     texte = "Premier personnage :\n personnage de base avec 100 hp et 200 stamina.\nforce: normale\nvitesse: normale\nsaut:normal\nhabilité ultime : musculature"
                 if hovered_2:
                     self.fait = False
-                    image = pygame.image.load("IMAGES/Cat-removebg.png").convert_alpha()
+                    image = pygame.image.load("IMAGES/pinguoin-vert.png").convert_alpha()
                     texte = "Deuxième personnage : \npersonnage rapide avec 100 hp et 200 stamina.\nforce: normale\nvitesse: vite\nsaut: normal\nhabilité ultime : jsp"
                 if hovered_3:
                     self.fait = False
-                    image = pygame.image.load("IMAGES/Dog-removebg.png").convert_alpha()
+                    image = pygame.image.load("IMAGES/pinguoin-rouge.png").convert_alpha()
                     texte = "Premier personnage :      personnage de base avec 100 hp et 200 stamina.\nforce: normale\nvitesse: normale\nsaut:normal\nhabilité ultime : musculature"
             font = pygame.font.Font(None, 60)
             info = font.render(texte, True, (0, 0, 0))
