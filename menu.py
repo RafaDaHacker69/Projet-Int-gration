@@ -186,12 +186,10 @@ class menu:
                 if event.type == pygame.QUIT:
                     time.sleep(0.25)
                     running = False
-                    self.menu()
                     self.restart = True
                 if retour_menu.clique(event, pygame.mouse.get_pos()):
                     time.sleep(0.25)
                     running = False
-                    self.menu()
                     self.restart = True
             pygame.display.flip()
             clock.tick(60)
