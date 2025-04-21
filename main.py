@@ -143,9 +143,9 @@ def jeu():
             bras_rotatif2.boule_obj.trajectoire_projectile(game_display)
 
         if bras_rotatif.boule_obj is not None:
-            bras_rotatif.boule_obj.check_collision_boule(player2, game_display, menu_de_mort1)
+            bras_rotatif.boule_obj.check_collision_boule(player2, game_display, menu_de_mort1,player1)
         if bras_rotatif2.boule_obj is not None:
-            bras_rotatif2.boule_obj.check_collision_boule(player1, game_display, menu_de_mort2)
+            bras_rotatif2.boule_obj.check_collision_boule(player1, game_display, menu_de_mort2,player2)
 
         for obstacle in Obstacle_collision:
             obstacle.draw(game_display, (0, 0, 0))
@@ -158,6 +158,10 @@ def jeu():
         stamina1.draw(game_display)
         stamina2 = Bar(game_display.get_width() - 275, 55, 250, 20, player1.max_Stamina, player2.Stamina, "stamina")
         stamina2.draw(game_display)
+        ult1 = Bar(25, 85, 250, 20, player1.charge_max, player1.charge, "ult")
+        ult1.draw(game_display)
+        ult2 = Bar(game_display.get_width() - 275, 85, 250, 20, player2.charge_max, player2.charge, "ult")
+        ult2.draw(game_display)
 
         bras_rotatif.deceleration()
         bras_rotatif2.deceleration()

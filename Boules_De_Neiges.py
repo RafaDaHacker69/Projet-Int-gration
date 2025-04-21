@@ -53,7 +53,7 @@ class Boules_De_Neiges:
             self.lance = False
             self.collision = True
 
-    def check_collision_boule(self,player,screen,menu_de_mort):
+    def check_collision_boule(self,player,screen,menu_de_mort,playerDegat):
         rayon = self.r
         self.hitboxe = pygame.Rect(self.x-rayon,self.y-rayon, rayon*2, rayon*2)
 
@@ -67,11 +67,17 @@ class Boules_De_Neiges:
             player.vitesse_x = vf
             modVit=math.sqrt(self.Vx**2 + self.Vy**2)
             self.dmg = self.m*modVit/(80*15)
-            self.degat_inflige(player,menu_de_mort)
+            self.degat_inflige(player,menu_de_mort,playerDegat)
             print(f"VF :{vf}")
 
-    def degat_inflige(self,player,menu_de_mort):
+    def degat_inflige(self,player,menu_de_mort,playerDegat):
         player.pv -= self.dmg
+        player.charge+=self.dmg/1.3
+        playerDegat.charge+=self.dmg/2
+        if player.charge >= player.charge_max:
+            player.charge = player.charge_max
+        if playerDegat.charge >= playerDegat.charge_max:
+            playerDegat.charge = playerDegat.charge_max
         self.dmg = 0
         print(f"Pv : {player.pv}")
         if player.pv < 0:

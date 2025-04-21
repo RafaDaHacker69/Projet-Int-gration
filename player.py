@@ -25,6 +25,8 @@ class Player:
         self.hitboxe = None
         self.pv = 100
         self.pv_max = 100
+        self.charge=0
+        self.charge_max = 100
         self.image = pygame.image.load("IMAGES/finalmodel.png").convert_alpha()
 
     def util_stamina(self, nb):
