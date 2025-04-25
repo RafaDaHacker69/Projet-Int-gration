@@ -89,7 +89,7 @@ class Player:
                     self.Stamina = min(self.max_Stamina, self.Stamina + 5)
     def charger(self):
         if self.charge < self.charge_max:
-            self.charge += 0.01
+            self.charge += 2
     def apply_gravity(self):
         if not self.au_sol:
             self.vitesse_y += self.gravite
