@@ -28,6 +28,7 @@ class Player:
         self.charge=0
         self.charge_max = 100
         self.image = pygame.image.load("IMAGES/finalmodel.png").convert_alpha()
+        self.joueurSorte=1
 
     def util_stamina(self, nb):
         if self.Stamina >= nb:
@@ -71,7 +72,9 @@ class Player:
             if self.Stamina < self.max_Stamina:
                 if (current_time - self.dernier_Stamina_util) % 500 < 50:
                     self.Stamina = min(self.max_Stamina, self.Stamina + 5)
-
+    def charger(self):
+        if self.charge < self.charge_max:
+            self.charge += 0.01
     def apply_gravity(self):
         if not self.au_sol:
             self.vitesse_y += self.gravite
@@ -92,6 +95,12 @@ class Player:
                 self.au_sol = True
             else:
                 self.au_sol = False
+
+    def ult(self):
+        if (self.charge>=self.charge_max):
+            print("ult: ")
+            print(self.joueurSorte)
+            self.charge=0
 
     def check_obstacle_collisions(self, obstacles):
         prochain_x = self.position_x + self.vitesse_x
@@ -172,6 +181,7 @@ class Player:
         self.position_y += self.vitesse_y
 
         self.heal_Stamina()
+        self.charger()
         self.vitesse_selon_Stamina()
         #print(f"Stamina: {self.Stamina}/{self.max_Stamina}")
 

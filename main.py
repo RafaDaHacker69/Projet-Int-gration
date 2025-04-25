@@ -8,7 +8,7 @@ import pygame
 
 restart = False
 
-def jeu():
+def jeu(): #fortnite
     global restart
 
     pygame.init()
@@ -182,6 +182,10 @@ def jeu():
                     bras_rotatif.ouvrir_main()
                 if game_event.key == pygame.K_n:
                     bras_rotatif2.ouvrir_main()
+                if game_event.key == pygame.K_q:
+                    player1.ult()
+                if game_event.key == pygame.K_p:
+                    player2.ult()
 
         pygame.display.update()
         game_clock.tick(60)

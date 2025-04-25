@@ -111,6 +111,7 @@ class menu:
                     running = False
                 if btn_Joueur_2.clique(event, pygame.mouse.get_pos()):
                     player.image = pygame.image.load("IMAGES/pinguoin-vert.png").convert_alpha()
+                    player.joueurSorte=2
                     player.pv = 80
                     player.pv_max = 80
                     bras_rotatif.alpha = 2
@@ -119,6 +120,7 @@ class menu:
                     running = False
                 if btn_Joueur_3.clique(event, pygame.mouse.get_pos()):
                     player.image = pygame.image.load("IMAGES/pinguoin-rouge.png").convert_alpha()
+                    player.joueurSorte = 3
                     player.force_saut = 11
                     player.acceleration = 2
                     time.sleep(0.25)
