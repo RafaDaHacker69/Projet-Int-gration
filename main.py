@@ -201,9 +201,9 @@ while menu_principale.run:
 
     #Check collisions de boules
     if bras_rotatif.boule_obj is not None:
-        bras_rotatif.boule_obj.check_collision_boule(player2,game_display,menu_de_mort1)
+        bras_rotatif.boule_obj.check_collision_boule(player2,game_display,menu_de_mort1, player2)
     if bras_rotatif2.boule_obj is not None:
-        bras_rotatif2.boule_obj.check_collision_boule(player1,game_display,menu_de_mort2)
+        bras_rotatif2.boule_obj.check_collision_boule(player1,game_display,menu_de_mort2,player1)
 
     #Obstacles Collisions
     for obstacle in Obstacle_collision:
