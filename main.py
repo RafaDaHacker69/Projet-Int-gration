@@ -1,14 +1,18 @@
 from menu import *
 from Bar import *
+from Timer import *
 from player import Player
 from Bras_Rotatif import Bras_Rotatif
 from Obstacle_collision import Obstacle
 
 pygame.init()
+Width, Height = 1240,680
 
-game_display = pygame.display.set_mode((1240, 680))
+game_display = pygame.display.set_mode((Width, Height))
 menu_display = pygame.display.set_mode((1,1))
 pygame.display.set_caption('CP (Club Penguin)')
+
+timer = Timer(300, 50, Width/2-100, 25, (255, 255, 255), game_display)
 
 menu_principale = menu(menu_display)
 menu_principale.menu()
@@ -211,6 +215,10 @@ while menu_principale.run:
 
     # if player1.hitboxe.collidelist(Obstacle_collision) >= 0:
     #     print(player1.hitboxe.collidelist(Obstacle_collision))
+
+    #Le temps
+    timer.update()
+    timer.draw()
 
     #Les barres
     health1 = Bar(25, 25, 250, 20, player1.pv_max, player1.pv, "hp")
