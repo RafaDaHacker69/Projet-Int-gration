@@ -213,14 +213,18 @@ while menu_principale.run:
     #     print(player1.hitboxe.collidelist(Obstacle_collision))
 
     #Les barres
-    health1 = Bar(25, 25, 250, 20, 100, player1.pv, "hp")
+    health1 = Bar(25, 25, 250, 20, player1.pv_max, player1.pv, "hp")
     health1.draw(game_display)
-    health2 = Bar(game_display.get_width() - 275, 25, 250, 20, 100, player2.pv, "hp")
+    health2 = Bar(game_display.get_width() - 275, 25, 250, 20, player2.pv_max, player2.pv, "hp")
     health2.draw(game_display)
-    stamina1 = Bar(25, 55, 250, 20, 200, player1.Stamina, "stamina")
+    stamina1 = Bar(25, 55, 250, 20, player1.max_Stamina, player1.Stamina, "stamina")
     stamina1.draw(game_display)
-    stamina2 = Bar(game_display.get_width() - 275, 55, 250, 20, 200, player2.Stamina, "stamina")
+    stamina2 = Bar(game_display.get_width() - 275, 55, 250, 20, player2.max_Stamina, player2.Stamina, "stamina")
     stamina2.draw(game_display)
+    charge1 = Bar(25, 85, 250, 20, player1.charge_max, player1.charge, "ult")
+    charge1.draw(game_display)
+    charge2 = Bar(game_display.get_width() - 275, 85, 250, 20, player2.charge_max, player2.charge, "ult")
+    charge2.draw(game_display)
 
     #Décélération
     bras_rotatif.deceleration()
@@ -239,6 +243,10 @@ while menu_principale.run:
                 bras_rotatif.ouvrir_main()
             if game_event.key == pygame.K_n:
                 bras_rotatif2.ouvrir_main()
+            if game_event.key == pygame.K_q:
+                player1.ult()
+            if game_event.key == pygame.K_p:
+                player2.ult()
 
     pygame.display.update()
     game_clock.tick(60)

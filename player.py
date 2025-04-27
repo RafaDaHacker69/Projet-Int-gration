@@ -34,6 +34,11 @@ class Player:
         self.image = pygame.image.load("IMAGES/finalmodel.png").convert_alpha()
         self.joueurSorte=1
 
+    def ult(self):
+        if self.charge>=self.charge_max:
+            print("ult ")
+            print(self.joueurSorte)
+            self.charge=0
     def util_stamina(self, nb):
         if self.Stamina >= nb:
             self.Stamina -= nb
