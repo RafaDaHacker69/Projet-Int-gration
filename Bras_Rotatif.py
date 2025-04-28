@@ -54,7 +54,7 @@ class Bras_Rotatif:
         rec_centre_y = rec_taille.center[1]
         if not self.inverse:
             rect_rotated = pygame.transform.rotate(image, -abs(self.theta))
-            #print(f"theta : {self.theta}")l
+            #print(f"theta : {self.theta}")
             #print(f"t : {self.t}")
         if self.inverse:
             rect_rotated = pygame.transform.rotate(image, self.theta)
