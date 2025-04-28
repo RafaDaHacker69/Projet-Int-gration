@@ -27,6 +27,7 @@ class Player:
         self.pv_max = 100
         self.charge=0
         self.charge_max = 100
+        self.facteur=0.01
         self.image = pygame.image.load("IMAGES/finalmodel.png").convert_alpha()
         self.joueurSorte=1
 
@@ -74,7 +75,7 @@ class Player:
                     self.Stamina = min(self.max_Stamina, self.Stamina + 5)
     def charger(self):
         if self.charge < self.charge_max:
-            self.charge += 2
+            self.charge += self.facteur
     def apply_gravity(self):
         if not self.au_sol:
             self.vitesse_y += self.gravite
