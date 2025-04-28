@@ -20,11 +20,7 @@ class Player:
         self.gravite = 0.2
         self.force_saut = 7
         self.acceleration = 0.5
-        self.snow_Acc = 0.6
-        self.ice_Acc = 0.25
-        self.friction = 0.2
-        self.snow_Friction = 0.2
-        self.ice_Friction = 0.07
+        self.friction = 0.1
         self.controles = controles
         self.hitboxe = None
         self.pv = 100
@@ -34,11 +30,6 @@ class Player:
         self.image = pygame.image.load("IMAGES/finalmodel.png").convert_alpha()
         self.joueurSorte=1
 
-    def ult(self):
-        if self.charge>=self.charge_max:
-            print("ult ")
-            print(self.joueurSorte)
-            self.charge=0
     def util_stamina(self, nb):
         if self.Stamina >= nb:
             self.Stamina -= nb
@@ -46,12 +37,6 @@ class Player:
 
     def handle_input(self, keys):
         direction_mouvement = 0
-        if self.sur_plateforme:
-            self.friction = self.snow_Friction
-            self.acceleration = self.snow_Acc
-        else:
-            self.friction = self.ice_Friction
-            self.acceleration = self.ice_Acc
         if self.Stamina >= 5:
             if self.controles == 'wasd':
                 if keys[pygame.K_a]:
