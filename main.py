@@ -11,11 +11,12 @@ restart = False
 
 def jeu(): #fortnite
     global restart
-
     pygame.init()
 
     Width, Height = 1240, 680
     facteurDegat=1
+    jouerMusique=True
+    recommence=True
 
     game_display = pygame.display.set_mode((Width, Height))
     menu_display = pygame.display.set_mode((1, 1))
@@ -26,7 +27,8 @@ def jeu(): #fortnite
 
     game_clock = pygame.time.Clock()
 
-    timer = Timer(180, 50, Width / 2 - 100, 25, (255, 255, 255), game_display)
+    timer = Timer(300, 50, Width / 2 - 100, 25, (255, 255, 255), game_display)
+
 
     BACKGROUND_COLOR = pygame.Color('white')
     bg = pygame.image.load('IMAGES/Bg.jpg').convert_alpha()
@@ -157,17 +159,31 @@ def jeu(): #fortnite
             obstacle.draw(game_display, (0, 0, 0))
 
         # Le temps
-        timer.update()
-        timer.draw()
-        if (timer.secs-timer.getTemps()<=60):
-            player1.facteur=0.08
-            player2.facteur = 0.08
-        if (timer.is_finished()) :
-            if player1.pv<player2.pv:
-                menu_de_mort1.menu_mort()
+        if (menu_perso2.choisi):
+            if (recommence):
+                pygame.mixer.music.stop()
+                pygame.mixer.music.load("IMAGES/project 5 final tweak.wav")
+                pygame.mixer.music.play(loops=-1, start=0.0)
+                timer.reset()
+                recommence=False
+            timer.draw()
+            timer.update()
+            if (timer.secs - timer.getTemps() <= 60):
+                player1.facteur = 0.08
+                player2.facteur = 0.08
+                if jouerMusique:
+                    pygame.mixer.music.stop()
+                    pygame.mixer.music.load("IMAGES/project 11 DRAFT.wav")
+                    pygame.mixer.music.play(loops=-1, start=0.0)
+                    jouerMusique = False
+            if (timer.is_finished()):
+                if player1.pv < player2.pv:
+                    menu_de_mort1.menu_mort()
 
-            if player1.pv > player2.pv:
-                menu_de_mort2.menu_mort()
+                if player1.pv > player2.pv:
+                    menu_de_mort2.menu_mort()
+
+
 
 
 

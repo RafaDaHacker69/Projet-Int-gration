@@ -8,10 +8,11 @@ class menu:
         self.screen = screen
         self.run = False
         self.restart = False
+        self.choisi=False
 
 
     def menu(self):
-        pygame.mixer.music.load("IMAGES/10 final.wav")
+        pygame.mixer.music.load("IMAGES/project 9 DRAFT.wav")
         pygame.mixer.music.play(loops=-1, start=0.0)
 
         width, height = 800, 400
@@ -45,9 +46,6 @@ class menu:
                 if btnTuto.clique(event, pygame.mouse.get_pos()):
                     print("tuto")
                 if btnJouer.clique(event, pygame.mouse.get_pos()):
-                    pygame.mixer.music.stop()
-                    pygame.mixer.music.load("IMAGES/project 5 final tweak.wav")
-                    pygame.mixer.music.play(loops=-1, start=0.0)
                     time.sleep(0.25)
                     self.run = True
                     running = False
@@ -108,6 +106,7 @@ class menu:
                     running = False
                 if btn_Joueur_1.clique(event, pygame.mouse.get_pos()):
                     time.sleep(0.25)
+                    self.choisi = True
                     running = False
                 if btn_Joueur_2.clique(event, pygame.mouse.get_pos()):
                     player.image = pygame.image.load("IMAGES/pinguoin-vert.png").convert_alpha()
@@ -117,6 +116,7 @@ class menu:
                     bras_rotatif.alpha = 2
                     bras_rotatif.omega0 = 5
                     time.sleep(0.25)
+                    self.choisi = True
                     running = False
                 if btn_Joueur_3.clique(event, pygame.mouse.get_pos()):
                     player.image = pygame.image.load("IMAGES/pinguoin-rouge.png").convert_alpha()
@@ -124,6 +124,7 @@ class menu:
                     player.force_saut = 11
                     player.acceleration = 2
                     time.sleep(0.25)
+                    self.choisi=True
                     running = False
                 hovered_1 = btn_Joueur_1.rect.collidepoint(pygame.mouse.get_pos())
                 hovered_2 = btn_Joueur_2.rect.collidepoint(pygame.mouse.get_pos())
