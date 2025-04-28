@@ -33,10 +33,10 @@ class Timer:
     def reset(self):
         self.tick0 = pygame.time.get_ticks()
         self.temps = self.secs
-        self.finished = False
+        self.fini = False
 
     def is_finished(self):
-        return self.finished
+        return self.fini
 
     def getTemps(self):
         if (self.fini):

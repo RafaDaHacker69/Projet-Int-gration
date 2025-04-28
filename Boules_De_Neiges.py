@@ -19,6 +19,7 @@ class Boules_De_Neiges:
         self.hitboxe = None
         self.dmg = 0
 
+
     def lancement_projectile(self):
         self.theta = math.radians(self.theta) #angle en radians
         self.lance = True
@@ -53,7 +54,7 @@ class Boules_De_Neiges:
             self.lance = False
             self.collision = True
 
-    def check_collision_boule(self,player,screen,menu_de_mort,playerDegat):
+    def check_collision_boule(self,player,screen,menu_de_mort,playerDegat,facteurDegat):
         rayon = self.r
         self.hitboxe = pygame.Rect(self.x-rayon,self.y-rayon, rayon*2, rayon*2)
 
@@ -66,7 +67,7 @@ class Boules_De_Neiges:
             vf = ((self.m * self.Vx) + (80 * player.vitesse_x)) / (self.m + 80)
             player.vitesse_x = vf
             modVit=math.sqrt(self.Vx**2 + self.Vy**2)
-            self.dmg = self.m*modVit/(80*15)
+            self.dmg = facteurDegat*self.m*modVit/(80*15)
             self.degat_inflige(player,menu_de_mort,playerDegat)
             print(f"VF :{vf}")
 

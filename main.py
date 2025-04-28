@@ -15,6 +15,7 @@ def jeu(): #fortnite
     pygame.init()
 
     Width, Height = 1240, 680
+    facteurDegat=1
 
     game_display = pygame.display.set_mode((Width, Height))
     menu_display = pygame.display.set_mode((1, 1))
@@ -25,7 +26,7 @@ def jeu(): #fortnite
 
     game_clock = pygame.time.Clock()
 
-    timer = Timer(300, 50, Width / 2 - 100, 25, (255, 255, 255), game_display)
+    timer = Timer(180, 50, Width / 2 - 100, 25, (255, 255, 255), game_display)
 
     BACKGROUND_COLOR = pygame.Color('white')
     bg = pygame.image.load('IMAGES/Bg.jpg').convert_alpha()
@@ -148,9 +149,9 @@ def jeu(): #fortnite
             bras_rotatif2.boule_obj.trajectoire_projectile(game_display)
 
         if bras_rotatif.boule_obj is not None:
-            bras_rotatif.boule_obj.check_collision_boule(player2, game_display, menu_de_mort1,player1)
+            bras_rotatif.boule_obj.check_collision_boule(player2, game_display, menu_de_mort1,player1,facteurDegat)
         if bras_rotatif2.boule_obj is not None:
-            bras_rotatif2.boule_obj.check_collision_boule(player1, game_display, menu_de_mort2,player2)
+            bras_rotatif2.boule_obj.check_collision_boule(player1, game_display, menu_de_mort2,player2,facteurDegat)
 
         for obstacle in Obstacle_collision:
             obstacle.draw(game_display, (0, 0, 0))
@@ -158,6 +159,18 @@ def jeu(): #fortnite
         # Le temps
         timer.update()
         timer.draw()
+        if (timer.secs-timer.getTemps()<=60):
+            player1.facteur=0.08
+            player2.facteur = 0.08
+        if (timer.is_finished()) :
+            if player1.pv<player2.pv:
+                menu_de_mort1.menu_mort()
+
+            if player1.pv > player2.pv:
+                menu_de_mort2.menu_mort()
+
+
+
 
         health1 = Bar(25, 25, 250, 20, player1.pv_max, player1.pv, "hp")
         health1.draw(game_display)
