@@ -45,6 +45,8 @@ def jeu(): #fortnite
         pass
 
     frame_index = 0
+    frame_delay = 6
+    frame_counter = 0
 
     sol = pygame.image.load('IMAGES/sol.png').convert_alpha()
     display_width, display_height = game_display.get_size()
@@ -119,7 +121,15 @@ def jeu(): #fortnite
 
         game_display.fill(BACKGROUND_COLOR)
         game_display.blit(frames[frame_index], (0, 0))
-        frame_index = (frame_index + 1) % len(frames)
+        frame_counter += 1
+        if frame_counter >= frame_delay:
+            frame_counter = 0
+            # Si on est sur la dernière frame, revenir à la première frame
+            if frame_index == len(frames) - 1:
+                frame_index = 1
+            else:
+                frame_index += 1  # Passer à la frame suivante
+
         #game_display.blit(bg, (0, 0))
         game_display.blit(sol, (0, 585))
 
