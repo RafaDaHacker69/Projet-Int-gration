@@ -32,7 +32,7 @@ def jeu(): #fortnite
 
     BACKGROUND_COLOR = (173, 216, 230)
     bg = pygame.image.load('IMAGES/backg.jpg').convert_alpha()
-    gif_path = 'IMAGES/neige-6.gif'  # Remplace par le chemin de ton GIF
+    gif_path = 'IMAGES/neige.gif'  # Remplace par le chemin de ton GIF
     gif = Image.open(gif_path)
 
     frames = []
