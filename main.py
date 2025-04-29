@@ -30,9 +30,9 @@ def jeu(): #fortnite
     timer = Timer(300, 50, Width / 2 - 100, 25, (255, 255, 255), game_display)
 
 
-    BACKGROUND_COLOR = pygame.Color('white')
-    #bg = pygame.image.load('IMAGES/neige.gif').convert_alpha()
-    gif_path = 'IMAGES/neige-2.gif'  # Remplace par le chemin de ton GIF
+    BACKGROUND_COLOR = (173, 216, 230)
+    bg = pygame.image.load('IMAGES/backg.jpg').convert_alpha()
+    gif_path = 'IMAGES/neige-6.gif'  # Remplace par le chemin de ton GIF
     gif = Image.open(gif_path)
 
     frames = []
@@ -45,7 +45,7 @@ def jeu(): #fortnite
         pass
 
     frame_index = 0
-    frame_delay = 6
+    frame_delay = 15
     frame_counter = 0
 
     sol = pygame.image.load('IMAGES/sol.png').convert_alpha()
@@ -120,6 +120,7 @@ def jeu(): #fortnite
             player2_image_flip = pygame.transform.flip(player_image2, False, False)
 
         game_display.fill(BACKGROUND_COLOR)
+        game_display.blit(bg, (0, 0))
         game_display.blit(frames[frame_index], (0, 0))
         frame_counter += 1
         if frame_counter >= frame_delay:
@@ -130,7 +131,7 @@ def jeu(): #fortnite
             else:
                 frame_index += 1  # Passer à la frame suivante
 
-        #game_display.blit(bg, (0, 0))
+
         game_display.blit(sol, (0, 585))
 
         player1.hitboxes(game_display)
