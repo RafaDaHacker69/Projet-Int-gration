@@ -69,7 +69,6 @@ class Boules_De_Neiges:
             modVit=math.sqrt(self.Vx**2 + self.Vy**2)
             self.dmg = facteurDegat*self.m*modVit/(80*15)
             self.degat_inflige(player,menu_de_mort,playerDegat)
-            print(f"VF :{vf}")
 
     def degat_inflige(self,player,menu_de_mort,playerDegat):
         player.pv -= self.dmg

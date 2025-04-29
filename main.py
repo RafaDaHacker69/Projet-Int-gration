@@ -5,7 +5,7 @@ from Bras_Rotatif import Bras_Rotatif
 from Obstacle_collision import Obstacle
 from Timer import *
 import pygame
-
+from PIL import Image
 
 restart = False
 
@@ -31,7 +31,21 @@ def jeu(): #fortnite
 
 
     BACKGROUND_COLOR = pygame.Color('white')
-    bg = pygame.image.load('IMAGES/Bg.jpg').convert_alpha()
+    #bg = pygame.image.load('IMAGES/neige.gif').convert_alpha()
+    gif_path = 'IMAGES/neige-2.gif'  # Remplace par le chemin de ton GIF
+    gif = Image.open(gif_path)
+
+    frames = []
+    try:
+        while True:
+            frame = pygame.image.fromstring(gif.tobytes(), gif.size, gif.mode)
+            frames.append(frame)
+            gif.seek(gif.tell() + 1)
+    except EOFError:
+        pass
+
+    frame_index = 0
+
     sol = pygame.image.load('IMAGES/sol.png').convert_alpha()
     display_width, display_height = game_display.get_size()
 
@@ -104,7 +118,9 @@ def jeu(): #fortnite
             player2_image_flip = pygame.transform.flip(player_image2, False, False)
 
         game_display.fill(BACKGROUND_COLOR)
-        game_display.blit(bg, (0, 0))
+        game_display.blit(frames[frame_index], (0, 0))
+        frame_index = (frame_index + 1) % len(frames)
+        #game_display.blit(bg, (0, 0))
         game_display.blit(sol, (0, 585))
 
         player1.hitboxes(game_display)
@@ -182,11 +198,6 @@ def jeu(): #fortnite
 
                 if player1.pv > player2.pv:
                     menu_de_mort2.menu_mort()
-
-
-
-
-
 
         health1 = Bar(25, 25, 250, 20, player1.pv_max, player1.pv, "hp")
         health1.draw(game_display)

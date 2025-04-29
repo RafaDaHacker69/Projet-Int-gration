@@ -98,10 +98,18 @@ class Player:
                 self.au_sol = False
 
     def ult(self):
-        if (self.charge>=self.charge_max):
+        if self.charge>=self.charge_max:
             print("ult: ")
             print(self.joueurSorte)
             self.charge=0
+            if self.joueurSorte == 1:
+                self.pv =+ 50
+                print(self.pv)
+            if self.joueurSorte == 2:
+                print("utl 2")
+            if self.joueurSorte == 3:
+                print("utl 3")
+
 
     def check_obstacle_collisions(self, obstacles):
         prochain_x = self.position_x + self.vitesse_x
