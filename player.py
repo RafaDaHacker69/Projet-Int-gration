@@ -27,7 +27,7 @@ class Player:
         self.pv_max = 100
         self.charge=0
         self.charge_max = 100
-        self.facteur=0.01
+        self.facteur=2
         self.image = pygame.image.load("IMAGES/finalmodel.png").convert_alpha()
         self.joueurSorte=1
         self.bras_obj = None
@@ -107,7 +107,8 @@ class Player:
                 self.pv += 50
                 print(self.pv)
             if self.joueurSorte == 2:
-                Bras_Rotatif.utlimate_boule(self.bras_obj)
+                ult = True
+                Bras_Rotatif.utlimate_boule(self.bras_obj,ult)
                 print("utl 2")
             if self.joueurSorte == 3:
                 print("utl 3")

@@ -14,7 +14,6 @@ def jeu(): #fortnite
     pygame.init()
 
     Width, Height = 1240, 680
-    facteurDegat=1
     jouerMusique=True
     recommence=True
 
@@ -181,9 +180,9 @@ def jeu(): #fortnite
             bras_rotatif2.boule_obj.trajectoire_projectile(game_display)
 
         if bras_rotatif.boule_obj is not None:
-            bras_rotatif.boule_obj.check_collision_boule(player2, game_display, menu_de_mort1,player1,facteurDegat)
+            bras_rotatif.boule_obj.check_collision_boule(player2, game_display, menu_de_mort1,player1)
         if bras_rotatif2.boule_obj is not None:
-            bras_rotatif2.boule_obj.check_collision_boule(player1, game_display, menu_de_mort2,player2,facteurDegat)
+            bras_rotatif2.boule_obj.check_collision_boule(player1, game_display, menu_de_mort2,player2)
 
         for obstacle in Obstacle_collision:
             obstacle.draw(game_display, (0, 0, 0))

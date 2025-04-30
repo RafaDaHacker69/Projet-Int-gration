@@ -151,5 +151,6 @@ class Bras_Rotatif:
                     self.t = 0
                     self.decelerer = False
 
-    def utlimate_boule(self):
-        print("ulti_boule")
+    def utlimate_boule(self,ult):
+        if self.boule_obj != None :
+            self.boule_obj.ult_dmg = ult
