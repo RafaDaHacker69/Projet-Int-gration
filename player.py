@@ -104,7 +104,9 @@ class Player:
             print(self.joueurSorte)
             self.charge=0
             if self.joueurSorte == 1:
-                self.pv += 50
+                self.pv += 25
+                if (self.pv>self.pv_max):
+                    self.pv = self.pv_max
                 print(self.pv)
             if self.joueurSorte == 2:
                 ult = True
