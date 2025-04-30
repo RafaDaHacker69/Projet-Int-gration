@@ -45,7 +45,7 @@ def jeu(): #fortnite
         pass
 
     frame_index = 0
-    frame_delay = 15
+    frame_delay = 3
     frame_counter = 0
 
     sol = pygame.image.load('IMAGES/sol.png').convert_alpha()
