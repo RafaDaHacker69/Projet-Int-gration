@@ -150,3 +150,7 @@ class Bras_Rotatif:
                     self.omega = 0
                     self.t = 0
                     self.decelerer = False
+
+    def utlimate_boule(self):
+        print("ulti_boule")
+        sel

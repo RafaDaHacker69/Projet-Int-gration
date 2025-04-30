@@ -1,5 +1,5 @@
 import pygame
-
+from Bras_Rotatif import *
 
 class Player:
     def __init__(self, position_x, position_y, largeur, hauteur, controles):
@@ -30,6 +30,7 @@ class Player:
         self.facteur=0.01
         self.image = pygame.image.load("IMAGES/finalmodel.png").convert_alpha()
         self.joueurSorte=1
+        self.bras_obj = None
 
     def util_stamina(self, nb):
         if self.Stamina >= nb:
@@ -106,6 +107,7 @@ class Player:
                 self.pv += 50
                 print(self.pv)
             if self.joueurSorte == 2:
+                Bras_Rotatif.utlimate_boule(self.bras_obj)
                 print("utl 2")
             if self.joueurSorte == 3:
                 print("utl 3")
