@@ -153,4 +153,3 @@ class Bras_Rotatif:
 
     def utlimate_boule(self):
         print("ulti_boule")
-        sel
