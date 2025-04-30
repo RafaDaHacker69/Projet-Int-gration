@@ -31,10 +31,9 @@ class Boules_De_Neiges:
     def trajectoire_projectile(self,screen):
         gravite = -150
         if self.lance:
-            print(self.Vx)
             self.t += 1/60
             self.Vx = self.vitesse * math.cos(self.theta)
-            self.x = self.x + (self.Vx * self.t)
+            self.x = self.x + (self.Vx * self.t)-0.2*self.t
             self.Vy = self.vitesse * math.sin(self.theta)
             self.y = self.y - (self.Vy * self.t + (gravite) * self.t ** 2)
             self.limites_projectile(screen)
