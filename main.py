@@ -237,6 +237,8 @@ def jeu(): #fortnite
         bras_rotatif.deceleration()
         bras_rotatif2.deceleration()
 
+
+
         if menu_de_mort1.restart or menu_de_mort2.restart:
             restart = True
             return
