@@ -37,6 +37,7 @@ class Player:
         self.animation_speed = 0.2
         self.frame_timer = 0
         self.load_sprite_sheet("IMAGES/final model-Sheet.png", 10)
+        self.last_direction = -1
 
     def load_sprite_sheet(self, path, num_frames):
         sprite_sheet = pygame.image.load(path).convert_alpha()
@@ -67,9 +68,11 @@ class Player:
                 if keys[pygame.K_a]:
                     direction_mouvement = -1
                     self.util_stamina(0.1)
+                    self.last_direction = -1
                 elif keys[pygame.K_d]:
                     direction_mouvement = 1
                     self.util_stamina(0.1)
+                    self.last_direction = 1
                 if keys[pygame.K_w] and self.au_sol:
                     self.vitesse_y = -self.force_saut
                     self.au_sol = False
@@ -79,9 +82,11 @@ class Player:
                 if keys[pygame.K_LEFT]:
                     direction_mouvement = -1
                     self.util_stamina(0.1)
+                    self.last_direction = -1
                 elif keys[pygame.K_RIGHT]:
                     direction_mouvement = 1
                     self.util_stamina(0.1)
+                    self.last_direction = 1
                 if keys[pygame.K_UP] and self.au_sol:
                     self.vitesse_y = -self.force_saut
                     self.au_sol = False

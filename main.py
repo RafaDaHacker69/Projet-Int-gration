@@ -52,6 +52,8 @@ def jeu(): #fortnite
 
     player1 = Player(display_width * 0.2, display_height * 0.8, 30, 40, controles='wasd')
     player2 = Player(display_width * 0.7, display_height * 0.8, 30, 40, controles='fleches')
+    player1.last_direction = 1  # Facing right
+    player2.last_direction = -1  # Facing left
 
     bras_rotatif = Bras_Rotatif(1, 0, 4, False)
     bras_rotatif2 = Bras_Rotatif(1, 0, 4, True)
@@ -117,13 +119,14 @@ def jeu(): #fortnite
         direction1 = player1.get_movement_direction()
         direction2 = player2.get_movement_direction()
 
-        if direction1 == "right":
+        if player1.last_direction == 1:
             frame1 = pygame.transform.flip(frame1, True, False)
-        elif direction1 == "left":
+        elif player1.last_direction == -1:
             frame1 = pygame.transform.flip(frame1, False, False)
-        if direction2 == "right":
+
+        if player2.last_direction == 1:
             frame2 = pygame.transform.flip(frame2, True, False)
-        elif direction2 == "left":
+        elif player2.last_direction == -1:
             frame2 = pygame.transform.flip(frame2, False, False)
 
         game_display.fill(BACKGROUND_COLOR)
@@ -144,8 +147,8 @@ def jeu(): #fortnite
         player1.hitboxes(game_display)
         player2.hitboxes(game_display)
 
-        frame1 = pygame.transform.scale_by(frame1, 0.4)
-        frame2 = pygame.transform.scale_by(frame2, 0.4)
+        frame1 = pygame.transform.scale_by(frame1, 0.5)
+        frame2 = pygame.transform.scale_by(frame2, 0.5)
 
         rect1 = frame1.get_rect(center=player1.hitboxe.center)
         rect2 = frame2.get_rect(center=player2.hitboxe.center)
