@@ -31,6 +31,29 @@ class Player:
         self.image = pygame.image.load("IMAGES/finalmodel.png").convert_alpha()
         self.joueurSorte=1
         self.bras_obj = None
+        #Sprite animation
+        self.animation_frames = []
+        self.frame_index = 0
+        self.animation_speed = 0.2
+        self.frame_timer = 0
+        self.load_sprite_sheet("IMAGES/final model-Sheet.png", 10)
+
+    def load_sprite_sheet(self, path, num_frames):
+        sprite_sheet = pygame.image.load(path).convert_alpha()
+        frame_width = sprite_sheet.get_width() // num_frames
+        frame_height = sprite_sheet.get_height()
+        for i in range(num_frames):
+            frame = sprite_sheet.subsurface((i * frame_width, 0, frame_width, frame_height))
+            self.animation_frames.append(frame)
+
+    def update_animation(self):
+        self.frame_timer += self.animation_speed
+        if self.frame_timer >= 1:
+            self.frame_timer = 0
+            self.frame_index = (self.frame_index + 1) % len(self.animation_frames)
+
+    def get_current_frame(self):
+        return self.animation_frames[self.frame_index]
 
     def util_stamina(self, nb):
         if self.Stamina >= nb:

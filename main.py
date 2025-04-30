@@ -108,18 +108,23 @@ def jeu(): #fortnite
         elif player2.position_x < display_width / 2:
             player2.position_x = display_width / 2
 
+        player1.update_animation()
+        player2.update_animation()
+
+        frame1 = player1.get_current_frame()
+        frame2 = player2.get_current_frame()
+
         direction1 = player1.get_movement_direction()
         direction2 = player2.get_movement_direction()
 
         if direction1 == "right":
-            player1_image_flip = pygame.transform.flip(player_image1, True, False)
+            frame1 = pygame.transform.flip(frame1, True, False)
         elif direction1 == "left":
-            player1_image_flip = pygame.transform.flip(player_image1, False, False)
-
+            frame1 = pygame.transform.flip(frame1, False, False)
         if direction2 == "right":
-            player2_image_flip = pygame.transform.flip(player_image2, True, False)
+            frame2 = pygame.transform.flip(frame2, True, False)
         elif direction2 == "left":
-            player2_image_flip = pygame.transform.flip(player_image2, False, False)
+            frame2 = pygame.transform.flip(frame2, False, False)
 
         game_display.fill(BACKGROUND_COLOR)
         game_display.blit(bg, (0, 0))
@@ -139,13 +144,14 @@ def jeu(): #fortnite
         player1.hitboxes(game_display)
         player2.hitboxes(game_display)
 
-        imageFinal1 = pygame.transform.scale_by(player1_image_flip, 0.4)
-        image_rect1 = imageFinal1.get_rect(center=player1.hitboxe.center)
-        imageFinal2 = pygame.transform.scale_by(player2_image_flip, 0.4)
-        image_rect2 = imageFinal2.get_rect(center=player2.hitboxe.center)
+        frame1 = pygame.transform.scale_by(frame1, 0.4)
+        frame2 = pygame.transform.scale_by(frame2, 0.4)
 
-        game_display.blit(imageFinal1, image_rect1.topleft)
-        game_display.blit(imageFinal2, image_rect2.topleft)
+        rect1 = frame1.get_rect(center=player1.hitboxe.center)
+        rect2 = frame2.get_rect(center=player2.hitboxe.center)
+
+        game_display.blit(frame1, rect1.topleft)
+        game_display.blit(frame2, rect2.topleft)
 
         bras_rotatif.theta = bras_rotatif.activer_rotation(keys, pygame.K_LSHIFT)
         bras_rotatif2.theta = bras_rotatif2.activer_rotation(keys, pygame.K_m)
