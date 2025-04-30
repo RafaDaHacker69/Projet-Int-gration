@@ -103,7 +103,7 @@ class Player:
             print(self.joueurSorte)
             self.charge=0
             if self.joueurSorte == 1:
-                self.pv =+ 50
+                self.pv += 50
                 print(self.pv)
             if self.joueurSorte == 2:
                 print("utl 2")
