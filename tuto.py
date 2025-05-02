@@ -23,9 +23,13 @@ cible =pygame.transform.scale_by(cible, 0.2)
 gif_path = 'IMAGES/neige.gif'  # Remplace par le chemin de ton GIF
 gif = Image.open(gif_path)
 
-btnMenu = Button.Button((1000,600), "Menu")
+btnMenu = Button.Button((1000,100), "Menu")
 
 font = pygame.font.SysFont(None, 36)
+
+def dessiner_texte(text, font, text_col, x, y):
+    img = font.render(text, True, text_col)
+    game_display.blit(img, (x, y))
 
 frames = []
 try:
@@ -66,6 +70,7 @@ textes = [
     "Quand le bras du pinguoin est orienté vers le sol, appuie sur C pour former un boule de neige !",
     "Maintenant, relache C pour la lancé !",
     "Ton but sera d'éliminer le joueur adverse avec les boules de neiges",
+    "Pratique toi sur la cible",
     "Ton personnage possède de la vie, de l'énergie et une barre de capacité spéciale",
     "Appuie sur Q pour utiliser ta capacité spéciale",
     "Tes PV se sont remontés à 100 !",
@@ -74,7 +79,7 @@ textes = [
 ]
 
 index_texte = 0
-
+touche = False
 while boucle:
 
 
@@ -147,7 +152,8 @@ while boucle:
         if hitboxe.colliderect(rect_cible):
             player1.bras_obj.boule_obj.lance = False
             player1.bras_obj.boule_obj=None
-            print("touché")
+            touche = True
+
 
     health1 = Bar(25, 25, 250, 20, player1.pv_max, player1.pv, "hp")
     health1.draw(game_display)
@@ -161,12 +167,15 @@ while boucle:
     btnMenu.initialiser(game_display)
     btnMenu.verifier(pygame.mouse.get_pos())
 
-    pygame.draw.rect(game_display, (139,0,0), rect_cible)
+    #pygame.draw.rect(game_display, (139,0,0), rect_cible)
     game_display.blit(cible,(1000,400))
 
     if index_texte < len(textes):
         texte_surface = font.render(textes[index_texte], True, (255, 255, 255))
         game_display.blit(texte_surface, (50, 300))
+
+    if touche:
+        dessiner_texte("Bravo !", font, (0, 0, 0), 1005, 380)
 
     for game_event in pygame.event.get():
         if game_event.type == pygame.QUIT:
