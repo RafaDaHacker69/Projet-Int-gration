@@ -2,6 +2,7 @@ import pygame
 import time
 import pygame.freetype
 import Button
+from tuto import tuto
 
 class menu:
     def __init__(self, screen):
@@ -45,6 +46,7 @@ class menu:
                     pygame.quit()
                 if btnTuto.clique(event, pygame.mouse.get_pos()):
                     print("tuto")
+                    tuto()
                 if btnJouer.clique(event, pygame.mouse.get_pos()):
                     time.sleep(0.25)
                     self.run = True

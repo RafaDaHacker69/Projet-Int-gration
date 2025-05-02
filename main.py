@@ -242,7 +242,6 @@ def jeu(): #fortnite
         if menu_de_mort1.restart or menu_de_mort2.restart:
             restart = True
             return
-
         for game_event in pygame.event.get():
             if game_event.type == pygame.QUIT:
                 menu_principale.run = False
