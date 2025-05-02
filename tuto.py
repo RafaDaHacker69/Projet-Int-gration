@@ -18,6 +18,8 @@ pygame.display.set_caption('Tuto')
 
 BACKGROUND_COLOR = (173, 216, 230)
 bg = pygame.image.load('IMAGES/backg.jpg').convert_alpha()
+cible = pygame.image.load('IMAGES/cible.png').convert_alpha()
+cible =pygame.transform.scale_by(cible, 0.2)
 gif_path = 'IMAGES/neige.gif'  # Remplace par le chemin de ton GIF
 gif = Image.open(gif_path)
 
@@ -51,6 +53,8 @@ player1.bras_obj = bras_rotatif
 bras_rect = bras_rotatif.creation_bras_main(255, 0, 0)
 
 player_y_Baseposition = display_height * 0.88
+
+rect_cible = pygame.Rect(1005,410,85,85)
 
 boucle = True
 
@@ -137,6 +141,14 @@ while boucle:
     if bras_rotatif.boule_obj is not None and bras_rotatif.boule_obj.lance:
         bras_rotatif.boule_obj.trajectoire_projectile(game_display)
 
+    if bras_rotatif.boule_obj is not None:
+        rayon = player1.bras_obj.boule_obj.r
+        hitboxe = pygame.Rect(player1.bras_obj.boule_obj.x - rayon, player1.bras_obj.boule_obj.y - rayon, rayon * 2, rayon * 2)
+        if hitboxe.colliderect(rect_cible):
+            player1.bras_obj.boule_obj.lance = False
+            player1.bras_obj.boule_obj=None
+            print("touché")
+
     health1 = Bar(25, 25, 250, 20, player1.pv_max, player1.pv, "hp")
     health1.draw(game_display)
     stamina1 = Bar(25, 55, 250, 20, player1.max_Stamina, player1.Stamina, "stamina")
@@ -148,6 +160,9 @@ while boucle:
 
     btnMenu.initialiser(game_display)
     btnMenu.verifier(pygame.mouse.get_pos())
+
+    pygame.draw.rect(game_display, (139,0,0), rect_cible)
+    game_display.blit(cible,(1000,400))
 
     if index_texte < len(textes):
         texte_surface = font.render(textes[index_texte], True, (255, 255, 255))
