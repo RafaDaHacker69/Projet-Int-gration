@@ -2,7 +2,7 @@ import pygame
 from Bras_Rotatif import *
 
 class Player:
-    def __init__(self, position_x, position_y, largeur, hauteur, controles):
+    def __init__(self, position_x, position_y, largeur, hauteur, controles, pv, facteur):
         self.position_x = position_x
         self.position_y = position_y
         self.largeur = largeur
@@ -23,11 +23,11 @@ class Player:
         self.friction = 0.1
         self.controles = controles
         self.hitboxe = None
-        self.pv = 100
+        self.pv = pv
         self.pv_max = 100
         self.charge=0
         self.charge_max = 100
-        self.facteur=2
+        self.facteur= facteur
         self.image = pygame.image.load("IMAGES/finalmodel.png").convert_alpha()
         self.joueurSorte=1
         self.bras_obj = None

@@ -50,8 +50,8 @@ def jeu(): #fortnite
     sol = pygame.image.load('IMAGES/sol.png').convert_alpha()
     display_width, display_height = game_display.get_size()
 
-    player1 = Player(display_width * 0.2, display_height * 0.8, 30, 40, controles='wasd')
-    player2 = Player(display_width * 0.7, display_height * 0.8, 30, 40, controles='fleches')
+    player1 = Player(display_width * 0.2, display_height * 0.8, 30, 40, controles='wasd', pv=100, facteur=2)
+    player2 = Player(display_width * 0.7, display_height * 0.8, 30, 40, controles='fleches', pv=100, facteur=2)
     player1.last_direction = 1  # Facing right
     player2.last_direction = -1  # Facing left
 
