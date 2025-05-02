@@ -64,7 +64,7 @@ def tuto() :
     textes = [
         "Bienvenue dans le tutoriel ! (appuie sur ESPACE pour continuer)",
         "Utilise WASD pour te déplacer.",
-        "Appuie sur LSHIFT pour faire tourner ton bras !.",
+        "Appuie sur LSHIFT pour faire tourner ton bras !",
         "Quand le bras du pinguoin est orienté vers le sol, appuie sur C pour former un boule de neige !",
         "Maintenant, relache C pour la lancé !",
         "Ton but sera d'éliminer le joueur adverse avec les boules de neiges",
