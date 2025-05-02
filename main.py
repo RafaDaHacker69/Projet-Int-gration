@@ -193,6 +193,11 @@ def jeu(): #fortnite
         if bras_rotatif2.boule_obj is not None:
             bras_rotatif2.boule_obj.check_collision_boule(player1, game_display, menu_de_mort2,player2)
 
+        if bras_rotatif.boule_obj is not None:
+            bras_rotatif.ralentissement_boule()
+        if bras_rotatif2.boule_obj is not None:
+            bras_rotatif2.ralentissement_boule()
+
         for obstacle in Obstacle_collision:
             obstacle.draw(game_display, (0, 0, 0))
 

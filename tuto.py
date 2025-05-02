@@ -79,9 +79,6 @@ def tuto() :
     index_texte = 0
     touche = False
     while boucle:
-
-
-
         keys = pygame.key.get_pressed()
 
 
@@ -178,6 +175,9 @@ def tuto() :
         for game_event in pygame.event.get():
             if game_event.type == pygame.QUIT or btnMenu.clique(game_event, pygame.mouse.get_pos()):
                 boucle = False
+                pygame.quit()
+                restart = True
+                return
             if game_event.type == pygame.KEYUP:
                 if game_event.key == pygame.K_LSHIFT:
                     bras_rotatif.decelerer = True

@@ -23,6 +23,7 @@ class Bras_Rotatif:
         self.decelerer = False
         self.grosseur_boule_max = 34
         self.facteur_grossissement_boule = 1
+        self.facteur_ralentissement_boule = 0
         if inverse:
             self.theta = self.theta *-1
 
@@ -154,3 +155,8 @@ class Bras_Rotatif:
     def utlimate_boule(self,ult):
         if self.boule_obj != None :
             self.boule_obj.ult_dmg = ult
+
+
+    def ralentissement_boule(self):
+        print(self.omega)
+        self.omega = self.omega * self.facteur_ralentissement_boule
