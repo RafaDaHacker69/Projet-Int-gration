@@ -21,8 +21,9 @@ bg = pygame.image.load('IMAGES/backg.jpg').convert_alpha()
 gif_path = 'IMAGES/neige.gif'  # Remplace par le chemin de ton GIF
 gif = Image.open(gif_path)
 
-btnMenu = Button.Button((width // 2, height // 4 + 20), "Jouer")
+btnMenu = Button.Button((1000,600), "Menu")
 
+font = pygame.font.SysFont(None, 36)
 
 frames = []
 try:
@@ -54,11 +55,25 @@ player_y_Baseposition = display_height * 0.88
 boucle = True
 
 Obstacle_collision = []
+textes = [
+    "Bienvenue dans le tutoriel ! (appuie sur ESPACE pour continuer)",
+    "Utilise WASD pour te déplacer.",
+    "Appuie sur LSHIFT pour faire tourner ton bras !.",
+    "Quand le bras du pinguoin est orienté vers le sol, appuie sur C pour former un boule de neige !",
+    "Maintenant, relache C pour la lancé !",
+    "Ton but sera d'éliminer le joueur adverse avec les boules de neiges",
+    "Ton personnage possède de la vie, de l'énergie et une barre de capacité spéciale",
+    "Appuie sur Q pour utiliser ta capacité spéciale",
+    "Tes PV se sont remontés à 100 !",
+    "NB : Chaque personnage à une capacité spéciale différente",
+    "Bonne chance !"
+]
+
+index_texte = 0
 
 while boucle:
 
-    btnMenu.initialiser(game_display)
-    btnMenu.verifier(pygame.mouse.get_pos())
+
 
     keys = pygame.key.get_pressed()
 
@@ -131,6 +146,13 @@ while boucle:
 
     bras_rotatif.deceleration()
 
+    btnMenu.initialiser(game_display)
+    btnMenu.verifier(pygame.mouse.get_pos())
+
+    if index_texte < len(textes):
+        texte_surface = font.render(textes[index_texte], True, (255, 255, 255))
+        game_display.blit(texte_surface, (50, 300))
+
     for game_event in pygame.event.get():
         if game_event.type == pygame.QUIT:
             boucle = False
@@ -141,6 +163,8 @@ while boucle:
                 bras_rotatif.ouvrir_main()
             if game_event.key == pygame.K_q:
                 player1.ult()
+        if game_event.type == pygame.KEYDOWN and game_event.key == pygame.K_SPACE:
+            index_texte += 1
 
 
     pygame.display.update()
