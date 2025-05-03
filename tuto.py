@@ -192,4 +192,3 @@ class Tuto:
 
             pygame.display.update()
             game_clock.tick(60)
-
