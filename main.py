@@ -79,17 +79,8 @@ def jeu(): #fortnite
 
     menu_perso1 = menu(menu_display)
     menu_perso1.selection_perso(player1, bras_rotatif, "Sélection du Joueur 1")
-
-    if menu_principale.quitter:
-        pygame.quit()
-        sys.exit()
-
     menu_perso2 = menu(menu_display)
     menu_perso2.selection_perso(player2, bras_rotatif2, "Sélection du Joueur 2")
-
-    if menu_principale.quitter:
-        pygame.quit()
-        sys.exit()
 
     menu_de_mort1 = menu(menu_display)
     menu_de_mort2 = menu(menu_display)
