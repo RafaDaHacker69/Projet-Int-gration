@@ -2,7 +2,7 @@ import pygame
 from Bras_Rotatif import *
 
 class Player:
-    def __init__(self, position_x, position_y, largeur, hauteur, controles, pv, facteur):
+    def __init__(self, position_x, position_y, largeur, hauteur, controles, pv, facteur, inverse):
         self.position_x = position_x
         self.position_y = position_y
         self.largeur = largeur
@@ -37,6 +37,7 @@ class Player:
         self.animation_speed = 0.2
         self.frame_timer = 0
         self.last_direction = -1
+        self.inverse = inverse
 
     def load_sprite_sheet(self, path, num_frames):
         sprite_sheet = pygame.image.load(path).convert_alpha()
@@ -237,11 +238,19 @@ class Player:
         pygame.draw.rect(game_display, color, (self.position_x, self.position_y, self.largeur, self.hauteur))
 
     def hitboxes(self,screen):
-        hitbox_width = 85
-        hitbox_height = 95
-        player_hitboxe = pygame.Rect(self.position_x - hitbox_width // 3,
-                                     self.position_y - hitbox_height // 2,
-                                     hitbox_width, hitbox_height)
-        self.hitboxe = player_hitboxe
+        if self.inverse :
+            hitbox_width = 70
+            hitbox_height = 95
+            player_hitboxe = pygame.Rect(self.position_x - 17,#23
+                                         self.position_y - hitbox_height // 2,
+                                         hitbox_width, hitbox_height)
+            self.hitboxe = player_hitboxe
+        else :
+            hitbox_width = 70
+            hitbox_height = 95
+            player_hitboxe = pygame.Rect(self.position_x - 17,#23
+                                         self.position_y - hitbox_height // 2,
+                                         hitbox_width, hitbox_height)
+            self.hitboxe = player_hitboxe
         #Dessin de la hitboxe du joueur
         pygame.draw.rect(screen, (0, 255, 0, 128), player_hitboxe, 2)  # Transparent Green Border

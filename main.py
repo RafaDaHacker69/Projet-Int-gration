@@ -50,8 +50,8 @@ def jeu(): #fortnite
     sol = pygame.image.load('IMAGES/sol.png').convert_alpha()
     display_width, display_height = game_display.get_size()
 
-    player1 = Player(display_width * 0.2, display_height * 0.8, 30, 40, controles='wasd', pv=100, facteur=2)
-    player2 = Player(display_width * 0.7, display_height * 0.8, 30, 40, controles='fleches', pv=100, facteur=2)
+    player1 = Player(display_width * 0.2, display_height * 0.8, 30, 40, controles='wasd', pv=100, facteur=2,inverse=False)
+    player2 = Player(display_width * 0.7, display_height * 0.8, 30, 40, controles='fleches', pv=100, facteur=2,inverse=True)
     player1.last_direction = 1  # Facing right
     player2.last_direction = -1  # Facing left
 
@@ -81,12 +81,12 @@ def jeu(): #fortnite
     player_y_Baseposition = display_height * 0.88
 
     Obstacle_collision = [
-        Obstacle(100, display_height - 90, 50, 50),
-        Obstacle(120, display_height - 100, 50, 50),
-        Obstacle(140, display_height - 110, 50, 50),
-        Obstacle(160, display_height - 100, 50, 50),
-        Obstacle(180, display_height - 90, 50, 50),
-        Obstacle(320, display_height - 200, 50, 100),
+        # Obstacle(100, display_height - 90, 50, 50),
+        # Obstacle(120, display_height - 100, 50, 50),
+        # Obstacle(140, display_height - 110, 50, 50),
+        # Obstacle(160, display_height - 100, 50, 50),
+        # Obstacle(180, display_height - 90, 50, 50),
+        # Obstacle(320, display_height - 200, 50, 100),
     ]
 
     while menu_principale.run:
