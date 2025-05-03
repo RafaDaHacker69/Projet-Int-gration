@@ -109,6 +109,8 @@ class menu:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
+                    self.quitter = True
+                    sys.exit()
                 if btn_Joueur_1.clique(event, pygame.mouse.get_pos()):
                     player.load_sprite_sheet("IMAGES/final model-Sheet(black).png", 10)
                     time.sleep(0.25)

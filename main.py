@@ -28,19 +28,14 @@ def jeu(): #fortnite
         pygame.quit()
         sys.exit()
 
+
     tuto = Tuto()
 
-
-
     game_clock = pygame.time.Clock()
-
     timer = Timer(300, 50, Width / 2 - 100, 25, (255, 255, 255), game_display)
-
 
     BACKGROUND_COLOR = (173, 216, 230)
     loading = LoadingScreen()
-
-
 
     bg = pygame.image.load('IMAGES/backg.jpg').convert_alpha()
     gif_path = 'IMAGES/neige.gif'
@@ -61,7 +56,6 @@ def jeu(): #fortnite
 
     if menu_principale.tuto:
         tuto.tutoriel()
-
 
     loading.loading()
 
@@ -86,8 +80,16 @@ def jeu(): #fortnite
     menu_perso1 = menu(menu_display)
     menu_perso1.selection_perso(player1, bras_rotatif, "Sélection du Joueur 1")
 
+    if menu_principale.quitter:
+        pygame.quit()
+        sys.exit()
+
     menu_perso2 = menu(menu_display)
     menu_perso2.selection_perso(player2, bras_rotatif2, "Sélection du Joueur 2")
+
+    if menu_principale.quitter:
+        pygame.quit()
+        sys.exit()
 
     menu_de_mort1 = menu(menu_display)
     menu_de_mort2 = menu(menu_display)
