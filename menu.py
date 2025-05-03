@@ -10,6 +10,7 @@ class menu:
         self.run = False
         self.restart = False
         self.choisi=False
+        self.tuto = False
 
 
     def menu(self):
@@ -46,7 +47,9 @@ class menu:
                     pygame.quit()
                 if btnTuto.clique(event, pygame.mouse.get_pos()):
                     print("tuto")
-                    tuto()
+                    self.tuto = True
+                    running = False
+                    screen = pygame.display.set_mode((1240, 680))
                 if btnJouer.clique(event, pygame.mouse.get_pos()):
                     time.sleep(0.25)
                     self.run = True

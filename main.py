@@ -3,8 +3,9 @@ from Bar import *
 from player import Player
 from Bras_Rotatif import Bras_Rotatif
 from Timer import *
-import pygame
 from PIL import Image
+from Loading_Screen import *
+import threading
 
 restart = False
 
@@ -22,6 +23,8 @@ def jeu(): #fortnite
 
     menu_principale = menu(menu_display)
     menu_principale.menu()
+    tuto = Tuto()
+
 
     game_clock = pygame.time.Clock()
 
@@ -29,18 +32,27 @@ def jeu(): #fortnite
 
 
     BACKGROUND_COLOR = (173, 216, 230)
+
+    if menu_principale.tuto:
+        tuto.tutoriel()
+
     bg = pygame.image.load('IMAGES/backg.jpg').convert_alpha()
-    gif_path = 'IMAGES/neige.gif'  # Remplace par le chemin de ton GIF
+    gif_path = 'IMAGES/neige.gif'
     gif = Image.open(gif_path)
 
     frames = []
-    try:
-        while True:
-            frame = pygame.image.fromstring(gif.tobytes(), gif.size, gif.mode)
-            frames.append(frame)
-            gif.seek(gif.tell() + 1)
-    except EOFError:
-        pass
+    def gerer_gif():
+        try:
+            while True:
+                frame = pygame.image.fromstring(gif.tobytes(), gif.size, gif.mode)
+                frames.append(frame)
+                gif.seek(gif.tell() + 1)
+        except EOFError:
+            pass
+
+    loading = LoadingScreen()
+    threading.Thread(target=gerer_gif).start()
+    loading.loading()
 
     frame_index = 0
     frame_delay = 3
@@ -54,8 +66,8 @@ def jeu(): #fortnite
     player1.last_direction = 1  # Facing right
     player2.last_direction = -1  # Facing left
 
-    bras_rotatif = Bras_Rotatif(1, 0, 10, False)
-    bras_rotatif2 = Bras_Rotatif(1, 0, 10, True)
+    bras_rotatif = Bras_Rotatif(1, 0, 4, False)
+    bras_rotatif2 = Bras_Rotatif(1, 0, 4, True)
 
     player1.bras_obj = bras_rotatif
     player2.bras_obj = bras_rotatif2
