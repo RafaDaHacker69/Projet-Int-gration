@@ -23,7 +23,13 @@ def jeu(): #fortnite
 
     menu_principale = menu(menu_display)
     menu_principale.menu()
+
+    if menu_principale.quitter:
+        pygame.quit()
+        sys.exit()
+
     tuto = Tuto()
+
 
 
     game_clock = pygame.time.Clock()

@@ -11,7 +11,7 @@ class menu:
         self.restart = False
         self.choisi=False
         self.tuto = False
-
+        self.quitter = False
 
     def menu(self):
         pygame.mixer.music.load("IMAGES/project 9 DRAFT.wav")
@@ -44,7 +44,7 @@ class menu:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT or btnQuitter.clique(event, pygame.mouse.get_pos()):
                     running = False
-                    pygame.quit()
+                    self.quitter = True
                 if btnTuto.clique(event, pygame.mouse.get_pos()):
                     print("tuto")
                     self.tuto = True
