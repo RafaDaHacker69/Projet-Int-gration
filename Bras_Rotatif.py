@@ -45,8 +45,12 @@ class Bras_Rotatif:
                 self.theta += self.calcul_de_omega()
         return self.theta
 
-    def tourner_bras(self, rect, screen):
+    def tourner_bras(self, rect, screen,x):
         image_bras = pygame.image.load("IMAGES/arm rot.png").convert_alpha()
+        if x==2:
+            image_bras = pygame.image.load("IMAGES/arm rot(red).png").convert_alpha()
+        if x==3 :
+            image_bras = pygame.image.load("IMAGES/arm rot(blue).png").convert_alpha()
         image = pygame.transform.rotate(image_bras, 90)
         if self.inverse:
             image = pygame.transform.flip(image, True, False)
