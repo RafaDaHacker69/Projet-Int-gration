@@ -161,6 +161,6 @@ class Bras_Rotatif:
             self.boule_obj.ult_dmg = ult
 
 
-    def ralentissement_boule(self):
-        print(self.omega)
-        self.omega = self.omega * self.facteur_ralentissement_boule
+    # def ralentissement_boule(self):
+    #     print(self.omega)
+    #     self.omega = self.omega * self.facteur_ralentissement_boule
