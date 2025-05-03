@@ -253,4 +253,4 @@ class Player:
                                          hitbox_width, hitbox_height)
             self.hitboxe = player_hitboxe
         #Dessin de la hitboxe du joueur
-        pygame.draw.rect(screen, (0, 255, 0, 128), player_hitboxe, 2)  # Transparent Green Border
+        #pygame.draw.rect(screen, (0, 255, 0, 128), player_hitboxe, 2)  # Transparent Green Border

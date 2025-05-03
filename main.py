@@ -2,7 +2,6 @@ from menu import *
 from Bar import *
 from player import Player
 from Bras_Rotatif import Bras_Rotatif
-from Obstacle_collision import Obstacle
 from Timer import *
 import pygame
 from PIL import Image
@@ -55,8 +54,8 @@ def jeu(): #fortnite
     player1.last_direction = 1  # Facing right
     player2.last_direction = -1  # Facing left
 
-    bras_rotatif = Bras_Rotatif(1, 0, 4, False)
-    bras_rotatif2 = Bras_Rotatif(1, 0, 4, True)
+    bras_rotatif = Bras_Rotatif(1, 0, 10, False)
+    bras_rotatif2 = Bras_Rotatif(1, 0, 10, True)
 
     player1.bras_obj = bras_rotatif
     player2.bras_obj = bras_rotatif2
@@ -70,10 +69,11 @@ def jeu(): #fortnite
     menu_de_mort1 = menu(menu_display)
     menu_de_mort2 = menu(menu_display)
 
-    player_image1 = player1.image
-    player_image2 = player2.image
-    player1_image_flip = pygame.transform.flip(player_image1, True, False)
-    player2_image_flip = pygame.transform.flip(player_image2, False, False)
+    # player_image1 = player1.image
+    # player_image2 = player2.image
+
+    # player1_image_flip = pygame.transform.flip(player_image1, True, False)
+    # player2_image_flip = pygame.transform.flip(player_image2, False, False)
 
     bras_rect = bras_rotatif.creation_bras_main(255, 0, 0)
     bras_rect2 = bras_rotatif2.creation_bras_main(0, 120, 250)
@@ -241,8 +241,6 @@ def jeu(): #fortnite
 
         bras_rotatif.deceleration()
         bras_rotatif2.deceleration()
-
-
 
         if menu_de_mort1.restart or menu_de_mort2.restart:
             restart = True

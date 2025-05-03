@@ -46,7 +46,8 @@ def tuto() :
     game_clock = pygame.time.Clock()
     display_width, display_height = game_display.get_size()
 
-    player1 = Player(display_width * 0.2, display_height * 0.8, 30, 40, controles='wasd', pv=75, facteur = 2)
+    player1 = Player(display_width * 0.2, display_height * 0.8, 30, 40, controles='wasd', pv=75, facteur = 2, inverse=False)
+    player1.load_sprite_sheet("IMAGES/final model-Sheet(black).png", 10)
     player_image1 = player1.image
     player1.last_direction = 1
 
@@ -133,7 +134,7 @@ def tuto() :
         bras_rotatif.posx = player1.position_x
         bras_rotatif.posy = player1.position_y
 
-        bras_rotatif.tourner_bras(bras_rect, game_display)
+        bras_rotatif.tourner_bras(bras_rect, game_display,1)
 
         if bras_rotatif.boule_obj is not None:
             bras_rotatif.grossir_boule(65, 115)
