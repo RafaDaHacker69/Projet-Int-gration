@@ -152,7 +152,8 @@ class menu:
             font = pygame.font.Font(None, 60)
             info = font.render(texte, True, (0, 0, 0))
             self.dessiner_text(self.screen, texte, (25, 175), "IMAGES/grand9k-pixel.ttf", 30, (0, 0, 0), 475)
-            self.screen.blit(image, (800, 75))
+            imageFinale = pygame.transform.smoothscale(image,(int(image.get_width() * 1.5), int(image.get_height() * 1.5)))
+            self.screen.blit(imageFinale, (800, 125))
             pygame.display.flip()
             clock.tick(60)
 
