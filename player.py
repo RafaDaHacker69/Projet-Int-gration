@@ -237,8 +237,8 @@ class Player:
         pygame.draw.rect(game_display, color, (self.position_x, self.position_y, self.largeur, self.hauteur))
 
     def hitboxes(self,screen):
-        hitbox_width = 70
-        hitbox_height = 85
+        hitbox_width = 85
+        hitbox_height = 95
         player_hitboxe = pygame.Rect(self.position_x - hitbox_width // 3,
                                      self.position_y - hitbox_height // 2,
                                      hitbox_width, hitbox_height)
