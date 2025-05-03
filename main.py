@@ -175,8 +175,8 @@ def jeu(): #fortnite
         bras_rotatif2.posx = player2.position_x
         bras_rotatif2.posy = player2.position_y
 
-        bras_rotatif.tourner_bras(bras_rect, game_display)
-        bras_rotatif2.tourner_bras(bras_rect2, game_display)
+        bras_rotatif.tourner_bras(bras_rect, game_display,player1.joueurSorte)
+        bras_rotatif2.tourner_bras(bras_rect2, game_display,player2.joueurSorte)
 
         if bras_rotatif.boule_obj is not None:
             bras_rotatif.grossir_boule(65, 115)
