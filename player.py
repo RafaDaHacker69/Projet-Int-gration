@@ -36,7 +36,6 @@ class Player:
         self.frame_index = 0
         self.animation_speed = 0.2
         self.frame_timer = 0
-        self.load_sprite_sheet("IMAGES/final model-Sheet.png", 10)
         self.last_direction = -1
 
     def load_sprite_sheet(self, path, num_frames):
