@@ -32,9 +32,9 @@ def jeu(): #fortnite
 
 
     BACKGROUND_COLOR = (173, 216, 230)
+    loading = LoadingScreen()
 
-    if menu_principale.tuto:
-        tuto.tutoriel()
+
 
     bg = pygame.image.load('IMAGES/backg.jpg').convert_alpha()
     gif_path = 'IMAGES/neige.gif'
@@ -50,8 +50,13 @@ def jeu(): #fortnite
         except EOFError:
             pass
 
-    loading = LoadingScreen()
+
     threading.Thread(target=gerer_gif).start()
+
+    if menu_principale.tuto:
+        tuto.tutoriel()
+
+
     loading.loading()
 
     frame_index = 0

@@ -4,6 +4,8 @@ from player import Player
 from Bras_Rotatif import Bras_Rotatif
 import pygame
 from PIL import Image
+import threading
+from Loading_Screen import *
 
 class Tuto:
     def __init__(self):
@@ -27,19 +29,25 @@ class Tuto:
         btnMenu = Button.Button((1000,100), "Menu")
 
         font = pygame.font.SysFont(None, 36)
+        loading = LoadingScreen()
 
         def dessiner_texte(text, font, text_col, x, y):
             img = font.render(text, True, text_col)
             game_display.blit(img, (x, y))
 
         frames = []
-        try:
-            while True:
-                frame = pygame.image.fromstring(gif.tobytes(), gif.size, gif.mode)
-                frames.append(frame)
-                gif.seek(gif.tell() + 1)
-        except EOFError:
-            pass
+        def gerer_gif():
+            try:
+                while True:
+                    frame = pygame.image.fromstring(gif.tobytes(), gif.size, gif.mode)
+                    frames.append(frame)
+                    gif.seek(gif.tell() + 1)
+            except EOFError:
+                pass
+
+        threading.Thread(target=gerer_gif).start()
+
+        loading.loading()
 
         frame_index = 0
         frame_delay = 3
