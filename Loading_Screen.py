@@ -35,6 +35,7 @@ class LoadingScreen:
         threading.Thread(target=doWork).start()
 
         tips = [
+            "Astuces : Certains pingouins peuvent plonger à plus de 500m dans l'eau !",
             "Astuces : Appuie sur Q/P pour utiliser ton abilité spéciale !",
             "Astuces : Utilise WASD/FLÈCHES pour te déplacer !",
             "Astuces : Le pingouin noir aime le melon d'eau et le basket !",
@@ -45,7 +46,6 @@ class LoadingScreen:
             "Astuces : Ton personnage possède une capacité spéciale unique !",
             "Astuces : Le pingouin bleu a voté ppc !",
             "Astuces : Les bébés pingouins s’appellent des poussinots !",
-            "Astuces : Certains pingouins peuvent plonger à plus de 500 mètres de profondeur !",
             "Astuces : On retrouve les pingouins uniquement dans l'hémisphère sud !",
         ]
         index_texte = 0
@@ -75,7 +75,7 @@ class LoadingScreen:
 
 
             texte_surface = font_tips.render(tips[index_texte % len(tips)], True, (0,0,0))
-            screen.blit(texte_surface, (130, 570))
+            screen.blit(texte_surface, (150, 570))
 
             pygame.display.update()
             clock.tick(60)
