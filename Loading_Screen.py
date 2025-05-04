@@ -33,12 +33,29 @@ class LoadingScreen:
 
         threading.Thread(target=doWork).start()
 
+        tips = [
+            "Bienvenue dans le tutoriel ! (appuie sur ESPACE pour continuer)",
+            "Utilise WASD pour te déplacer.",
+            "Appuie sur LSHIFT pour faire tourner ton bras !",
+            "Quand le bras du pinguoin est orienté vers le sol, appuie sur C pour former un boule de neige !",
+            "Maintenant, relache C pour la lancé !",
+            "Ton but sera d'éliminer le joueur adverse avec les boules de neiges",
+            "Pratique toi sur la cible",
+            "Ton personnage possède de la vie, de l'énergie et une barre de capacité spéciale",
+            "Appuie sur Q pour utiliser ta capacité spéciale",
+            "Tes PV se sont remontés à 100 !",
+            "NB : Chaque personnage à une capacité spéciale différente",
+            "Bonne chance !"
+        ]
+        index_texte = 0
+
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                    index_texte += 1
             screen.fill((160, 200, 220))  # RGB de "#0d0e2e"
 
             if not self.loading_finished:
@@ -54,6 +71,10 @@ class LoadingScreen:
             else:
                 print("Chargement terminé !")
                 break
+
+            if index_texte < len(tips):
+                texte_surface = font.render(tips[index_texte], True, (255, 255, 255))
+                screen.blit(texte_surface, (50, 300))
 
             pygame.display.update()
             clock.tick(60)
