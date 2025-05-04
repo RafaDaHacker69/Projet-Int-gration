@@ -24,6 +24,9 @@ def jeu(): #fortnite
     menu_principale = menu(menu_display)
     menu_principale.menu()
 
+    menu_de_mort1 = menu(menu_display)
+    menu_de_mort2 = menu(menu_display)
+
     if menu_principale.quitter:
         pygame.quit()
         sys.exit()
@@ -49,13 +52,10 @@ def jeu(): #fortnite
                 gif.seek(gif.tell() + 1)
         except EOFError:
             pass
-
-
     threading.Thread(target=gerer_gif).start()
 
     if menu_principale.tuto:
         tuto.tutoriel()
-
     loading.loading()
 
     frame_index = 0
@@ -80,9 +80,6 @@ def jeu(): #fortnite
     menu_perso1.selection_perso(player1, bras_rotatif, "Sélection du Joueur 1")
     menu_perso2 = menu(menu_display)
     menu_perso2.selection_perso(player2, bras_rotatif2, "Sélection du Joueur 2")
-
-    menu_de_mort1 = menu(menu_display)
-    menu_de_mort2 = menu(menu_display)
 
     # player_image1 = player1.image
     # player_image2 = player2.image
