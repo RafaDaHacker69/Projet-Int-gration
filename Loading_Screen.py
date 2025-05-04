@@ -14,7 +14,7 @@ class LoadingScreen:
         pygame.display.set_caption("Chargement")
         clock = pygame.time.Clock()
 
-        work = 100000000
+        work = 100000000 * 1
 
         font = pygame.font.Font("IMAGES/grand9k-pixel.ttf", 50)
         font_tips = pygame.font.Font("IMAGES/grand9k-pixel.ttf", 25)
@@ -48,6 +48,7 @@ class LoadingScreen:
             "Astuces : Le pingouin bleu a voté ppc !",
             "Astuces : Les bébés pingouins s’appellent des poussinots !",
             "Astuces : On retrouve les pingouins uniquement dans l'hémisphère sud !",
+            "Astuces : Bonjour traduit en chinois est 你好"
         ]
         index_texte = 0
 
