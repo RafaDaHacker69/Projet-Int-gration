@@ -41,7 +41,7 @@ def jeu(): #fortnite
     loading = LoadingScreen()
 
     bg = pygame.image.load('IMAGES/backg.jpg').convert_alpha()
-    gif_path = 'IMAGES/neige.gif'
+    gif_path = 'IMAGES/anim neige(REAL).gif'
     gif = Image.open(gif_path)
 
     frames = []

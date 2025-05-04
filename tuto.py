@@ -23,7 +23,7 @@ class Tuto:
         bg = pygame.image.load('IMAGES/backg.jpg').convert_alpha()
         cible = pygame.image.load('IMAGES/cible.png').convert_alpha()
         cible =pygame.transform.scale_by(cible, 0.2)
-        gif_path = 'IMAGES/neige.gif'  # Remplace par le chemin de ton GIF
+        gif_path = 'IMAGES/anim neige(REAL).gif'  # Remplace par le chemin de ton GIF
         gif = Image.open(gif_path)
 
         btnMenu = Button.Button((1000,100), "Menu")
