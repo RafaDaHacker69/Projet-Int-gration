@@ -21,14 +21,14 @@ class Boules_De_Neiges:
         self.facteur_dmg = 1
         self.ult_dmg = False
 
-
     def lancement_projectile(self):
         self.theta = math.radians(self.theta) #angle en radians
         self.lance = True
         self.collision = False
         print("boule de neige lancé")
 
-    def trajectoire_projectile(self,screen):
+
+    def trajectoire_projectile(self,screen, obstacles):
         gravite = -150
         if self.lance:
             self.t += 1/60
@@ -38,8 +38,14 @@ class Boules_De_Neiges:
             self.y = self.y - (self.Vy * self.t + (gravite) * self.t ** 2)
             self.limites_projectile(screen)
 
-            pygame.draw.circle(screen, (173, 216, 230), (int(self.x), int(self.y)), self.r)
-            #print(f"x : {self.x}, y : {self.y}")
+            for obstacle in obstacles:
+                if self.hitboxe.colliderect(obstacle):
+                    self.lance = False
+                    self.collision = True
+                    break
+
+            if not self.collision:
+                pygame.draw.circle(screen, (173, 216, 230), (int(self.x), int(self.y)), self.r)            #print(f"x : {self.x}, y : {self.y}")
 
     def limites_projectile(self,screen):
         width = screen.get_width()

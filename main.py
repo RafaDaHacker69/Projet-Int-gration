@@ -1,5 +1,6 @@
 from menu import *
 from Bar import *
+from Obstacle_collision import *
 from player import Player
 from Bras_Rotatif import Bras_Rotatif
 from Timer import *
@@ -96,12 +97,12 @@ def jeu(): #fortnite
     player_y_Baseposition = display_height * 0.88
 
     Obstacle_collision = [
-        # Obstacle(100, display_height - 90, 50, 50),
+        Obstacle(100, display_height - 90, 50, 50),
         # Obstacle(120, display_height - 100, 50, 50),
         # Obstacle(140, display_height - 110, 50, 50),
         # Obstacle(160, display_height - 100, 50, 50),
         # Obstacle(180, display_height - 90, 50, 50),
-        # Obstacle(320, display_height - 200, 50, 100),
+        Obstacle(320, display_height - 200, 50, 100),
     ]
 
     while menu_principale.run:
@@ -199,9 +200,9 @@ def jeu(): #fortnite
             bras_rotatif2.grossir_boule(65, 115)
 
         if bras_rotatif.boule_obj is not None and bras_rotatif.boule_obj.lance:
-            bras_rotatif.boule_obj.trajectoire_projectile(game_display)
+            bras_rotatif.boule_obj.trajectoire_projectile(game_display, Obstacle_collision)
         if bras_rotatif2.boule_obj is not None and bras_rotatif2.boule_obj.lance:
-            bras_rotatif2.boule_obj.trajectoire_projectile(game_display)
+            bras_rotatif2.boule_obj.trajectoire_projectile(game_display, Obstacle_collision)
 
         if bras_rotatif.boule_obj is not None:
             bras_rotatif.boule_obj.check_collision_boule(player2, game_display, menu_de_mort1,player1)
