@@ -28,7 +28,6 @@ def jeu(): #fortnite
         pygame.quit()
         sys.exit()
 
-
     tuto = Tuto()
 
     game_clock = pygame.time.Clock()
