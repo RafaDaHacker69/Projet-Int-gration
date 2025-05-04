@@ -39,7 +39,7 @@ class menu:
 
         threading.Thread(target=gerer_gif).start()
         frame_index = 0
-        frame_delay = 3
+        frame_delay = 5
         frame_counter = 0
 
 
