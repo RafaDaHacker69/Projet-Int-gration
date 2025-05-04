@@ -56,7 +56,8 @@ def jeu(): #fortnite
 
     if menu_principale.tuto:
         tuto.tutoriel()
-    loading.loading()
+        restart = True
+
 
     frame_index = 0
     frame_delay = 3
@@ -75,6 +76,8 @@ def jeu(): #fortnite
 
     player1.bras_obj = bras_rotatif
     player2.bras_obj = bras_rotatif2
+
+    #loading.loading()
 
     menu_perso1 = menu(menu_display)
     menu_perso1.selection_perso(player1, bras_rotatif, "Sélection du Joueur 1")
