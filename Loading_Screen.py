@@ -35,14 +35,18 @@ class LoadingScreen:
         threading.Thread(target=doWork).start()
 
         tips = [
-            "Astuces : Appuie sur Q pour utiliser ton abilité spéciale",
-            "Astuces : Utilise WASD pour te déplacer.",
-            "Astuces : Appuie sur LSHIFT pour faire tourner ton bras !",
+            "Astuces : Appuie sur Q/P pour utiliser ton abilité spéciale !",
+            "Astuces : Utilise WASD/FLÈCHES pour te déplacer !",
+            "Astuces : Le pingouin noir aime le melon d'eau et le basket !",
             "Astuces : Lance des boules de neiges pour éliminer l'adversaire !",
-            "Astuces : Anh khoi pue du batte",
-            "Astuces : caca pipi",
-            "Astuces : Pratique toi sur la cible",
-            "Astuces : Ton personnage possède de la vie, de l'énergie et une barre de capacité spéciale",
+            "Astuces : Anh khoi n'a pas beaucoup travaillé sur ce projet !",
+            "Astuces : Le pingouin rouge est connu pour toucher des enfants !",
+            "Astuces : Appuie sur LSHIFT/M pour faire tourner ton bras !",
+            "Astuces : Ton personnage possède une capacité spéciale unique !",
+            "Astuces : Le pingouin bleu a voté ppc !",
+            "Astuces : Les bébés pingouins s’appellent des poussinots !",
+            "Astuces : Certains pingouins peuvent plonger à plus de 500 mètres de profondeur !",
+            "Astuces : On retrouve les pingouins uniquement dans l'hémisphère sud !",
         ]
         index_texte = 0
 
@@ -69,9 +73,9 @@ class LoadingScreen:
                 print("Chargement terminé !")
                 break
 
-            if index_texte < len(tips):
-                texte_surface = font_tips.render(tips[index_texte], True, (0,0,0))
-                screen.blit(texte_surface, (130, 570))
+
+            texte_surface = font_tips.render(tips[index_texte % len(tips)], True, (0,0,0))
+            screen.blit(texte_surface, (130, 570))
 
             pygame.display.update()
             clock.tick(60)
