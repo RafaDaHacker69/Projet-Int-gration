@@ -41,7 +41,7 @@ class LoadingScreen:
             "Astuces : Le pingouin noir aime le melon d'eau et le basket !",
             "Astuces : Lance des boules de neiges pour éliminer l'adversaire !",
             "Astuces : Anh khoi n'a pas beaucoup travaillé sur ce projet !",
-            "Astuces : Le pingouin rouge est connu pour toucher des enfants !",
+            "Astuces : Le pingouin rouge est connu pour toucher des enfants  :O !",
             "Astuces : Appuie sur LSHIFT/M pour faire tourner ton bras !",
             "Astuces : Ton personnage possède une capacité spéciale unique !",
             "Astuces : Le pingouin bleu a voté ppc !",
