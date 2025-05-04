@@ -1,6 +1,7 @@
 import pygame
 import sys
 import threading
+import random
 
 class LoadingScreen:
     def __init__(self):
@@ -56,7 +57,7 @@ class LoadingScreen:
                     pygame.quit()
                     sys.exit()
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-                    index_texte += 1
+                    index_texte = random.randint(0, tips.__len__())
             screen.fill((160, 200, 220))  # RGB de "#0d0e2e"
 
             if not self.loading_finished:
