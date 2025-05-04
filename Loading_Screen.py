@@ -16,6 +16,7 @@ class LoadingScreen:
         work = 100000000
 
         font = pygame.font.Font("IMAGES/grand9k-pixel.ttf", 50)
+        font_tips = pygame.font.Font("IMAGES/grand9k-pixel.ttf", 25)
         text = font.render("Chargement...", True, (0,0,0))
 
 
@@ -34,18 +35,14 @@ class LoadingScreen:
         threading.Thread(target=doWork).start()
 
         tips = [
-            "Bienvenue dans le tutoriel ! (appuie sur ESPACE pour continuer)",
-            "Utilise WASD pour te déplacer.",
-            "Appuie sur LSHIFT pour faire tourner ton bras !",
-            "Quand le bras du pinguoin est orienté vers le sol, appuie sur C pour former un boule de neige !",
-            "Maintenant, relache C pour la lancé !",
-            "Ton but sera d'éliminer le joueur adverse avec les boules de neiges",
-            "Pratique toi sur la cible",
-            "Ton personnage possède de la vie, de l'énergie et une barre de capacité spéciale",
-            "Appuie sur Q pour utiliser ta capacité spéciale",
-            "Tes PV se sont remontés à 100 !",
-            "NB : Chaque personnage à une capacité spéciale différente",
-            "Bonne chance !"
+            "Astuces : Appuie sur Q pour utiliser ton abilité spéciale",
+            "Astuces : Utilise WASD pour te déplacer.",
+            "Astuces : Appuie sur LSHIFT pour faire tourner ton bras !",
+            "Astuces : Lance des boules de neiges pour éliminer l'adversaire !",
+            "Astuces : Anh khoi pue du batte",
+            "Astuces : caca pipi",
+            "Astuces : Pratique toi sur la cible",
+            "Astuces : Ton personnage possède de la vie, de l'énergie et une barre de capacité spéciale",
         ]
         index_texte = 0
 
@@ -73,8 +70,8 @@ class LoadingScreen:
                 break
 
             if index_texte < len(tips):
-                texte_surface = font.render(tips[index_texte], True, (255, 255, 255))
-                screen.blit(texte_surface, (50, 300))
+                texte_surface = font_tips.render(tips[index_texte], True, (0,0,0))
+                screen.blit(texte_surface, (130, 570))
 
             pygame.display.update()
             clock.tick(60)
