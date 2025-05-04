@@ -4,6 +4,7 @@ from Bras_Rotatif import *
 class Player:
     def __init__(self, position_x, position_y, largeur, hauteur, controles, pv, facteur, inverse):
         self.position_x = position_x
+        self.previous_position_x = 0
         self.position_y = position_y
         self.largeur = largeur
         self.hauteur = hauteur
@@ -48,10 +49,27 @@ class Player:
             self.animation_frames.append(frame)
 
     def update_animation(self):
-        self.frame_timer += self.animation_speed
-        if self.frame_timer >= 1:
+        # Animate only if the player is moving
+        if self.position_x != self.previous_position_x:
+            # Calculate speed factor (0 to 1)
+            speed_ratio = abs(self.vitesse_x) / self.vitesse_max_base  # use base max speed to normalize
+            speed_ratio = min(speed_ratio, 1)  # Ensure it doesn't go above 1
+
+            # Advance animation frame based on speed ratio
+            self.frame_timer += speed_ratio
+
+            # When frame_timer exceeds a threshold, advance the frame
+            if self.frame_timer >= 1:
+                self.frame_index += 1
+                self.frame_timer = 0
+
+                if self.frame_index >= len(self.animation_frames):
+                    self.frame_index = 0
+        else:
+            self.frame_index = 0  # Optional: go back to idle frame when not moving
             self.frame_timer = 0
-            self.frame_index = (self.frame_index + 1) % len(self.animation_frames)
+
+        self.previous_position_x = self.position_x
 
     def get_current_frame(self):
         return self.animation_frames[self.frame_index]
