@@ -23,6 +23,26 @@ class menu:
         screen = pygame.display.set_mode((width, height))
         pygame.display.set_caption("Menu")
 
+        gif_path = 'IMAGES/bg anim2.gif'
+        gif = Image.open(gif_path)
+
+        frames = []
+
+        def gerer_gif():
+            try:
+                while True:
+                    frame = pygame.image.fromstring(gif.tobytes(), gif.size, gif.mode)
+                    frames.append(frame)
+                    gif.seek(gif.tell() + 1)
+            except EOFError:
+                pass
+
+        threading.Thread(target=gerer_gif).start()
+        frame_index = 0
+        frame_delay = 3
+        frame_counter = 0
+
+
         background = pygame.image.load("IMAGES/bg2.png")
         background = pygame.transform.scale(background, (width, height))
         btnJouer = Button.Button((width // 2, height // 4 + 20), "Jouer")
@@ -33,7 +53,15 @@ class menu:
         shockwaves = []
         running = True
         while running:
-            screen.blit(background, (0, 0))
+            screen.blit(frames[frame_index], (0, 0))
+            frame_counter += 1
+            if frame_counter >= frame_delay:
+                frame_counter = 0
+                # Si on est sur la dernière frame, revenir à la première frame
+                if frame_index == len(frames) - 1:
+                    frame_index = 1
+                else:
+                    frame_index += 1  # Passer à la frame suivante
             btnJouer.initialiser(screen)
             btnQuitter.initialiser(screen)
             btnTuto.initialiser(screen)
