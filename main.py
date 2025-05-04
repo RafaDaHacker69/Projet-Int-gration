@@ -2,10 +2,10 @@ from menu import *
 from Bar import *
 from player import Player
 from Bras_Rotatif import Bras_Rotatif
-from Obstacle_collision import Obstacle
 from Timer import *
-import pygame
 from PIL import Image
+from Loading_Screen import *
+import threading
 
 restart = False
 
@@ -24,24 +24,40 @@ def jeu(): #fortnite
     menu_principale = menu(menu_display)
     menu_principale.menu()
 
-    game_clock = pygame.time.Clock()
+    if menu_principale.quitter:
+        pygame.quit()
+        sys.exit()
 
+
+    tuto = Tuto()
+
+    game_clock = pygame.time.Clock()
     timer = Timer(300, 50, Width / 2 - 100, 25, (255, 255, 255), game_display)
 
-
     BACKGROUND_COLOR = (173, 216, 230)
+    loading = LoadingScreen()
+
     bg = pygame.image.load('IMAGES/backg.jpg').convert_alpha()
-    gif_path = 'IMAGES/neige.gif'  # Remplace par le chemin de ton GIF
+    gif_path = 'IMAGES/neige.gif'
     gif = Image.open(gif_path)
 
     frames = []
-    try:
-        while True:
-            frame = pygame.image.fromstring(gif.tobytes(), gif.size, gif.mode)
-            frames.append(frame)
-            gif.seek(gif.tell() + 1)
-    except EOFError:
-        pass
+    def gerer_gif():
+        try:
+            while True:
+                frame = pygame.image.fromstring(gif.tobytes(), gif.size, gif.mode)
+                frames.append(frame)
+                gif.seek(gif.tell() + 1)
+        except EOFError:
+            pass
+
+
+    threading.Thread(target=gerer_gif).start()
+
+    if menu_principale.tuto:
+        tuto.tutoriel()
+
+    loading.loading()
 
     frame_index = 0
     frame_delay = 3
@@ -50,8 +66,8 @@ def jeu(): #fortnite
     sol = pygame.image.load('IMAGES/sol.png').convert_alpha()
     display_width, display_height = game_display.get_size()
 
-    player1 = Player(display_width * 0.2, display_height * 0.8, 30, 40, controles='wasd')
-    player2 = Player(display_width * 0.7, display_height * 0.8, 30, 40, controles='fleches')
+    player1 = Player(display_width * 0.2, display_height * 0.8, 30, 40, controles='wasd', pv=100, facteur=2,inverse=False)
+    player2 = Player(display_width * 0.7, display_height * 0.8, 30, 40, controles='fleches', pv=100, facteur=2,inverse=True)
     player1.last_direction = 1  # Facing right
     player2.last_direction = -1  # Facing left
 
@@ -63,17 +79,17 @@ def jeu(): #fortnite
 
     menu_perso1 = menu(menu_display)
     menu_perso1.selection_perso(player1, bras_rotatif, "Sélection du Joueur 1")
-
     menu_perso2 = menu(menu_display)
     menu_perso2.selection_perso(player2, bras_rotatif2, "Sélection du Joueur 2")
 
     menu_de_mort1 = menu(menu_display)
     menu_de_mort2 = menu(menu_display)
 
-    player_image1 = player1.image
-    player_image2 = player2.image
-    player1_image_flip = pygame.transform.flip(player_image1, True, False)
-    player2_image_flip = pygame.transform.flip(player_image2, False, False)
+    # player_image1 = player1.image
+    # player_image2 = player2.image
+
+    # player1_image_flip = pygame.transform.flip(player_image1, True, False)
+    # player2_image_flip = pygame.transform.flip(player_image2, False, False)
 
     bras_rect = bras_rotatif.creation_bras_main(255, 0, 0)
     bras_rect2 = bras_rotatif2.creation_bras_main(0, 120, 250)
@@ -81,12 +97,12 @@ def jeu(): #fortnite
     player_y_Baseposition = display_height * 0.88
 
     Obstacle_collision = [
-        Obstacle(100, display_height - 90, 50, 50),
-        Obstacle(120, display_height - 100, 50, 50),
-        Obstacle(140, display_height - 110, 50, 50),
-        Obstacle(160, display_height - 100, 50, 50),
-        Obstacle(180, display_height - 90, 50, 50),
-        Obstacle(320, display_height - 200, 50, 100),
+        # Obstacle(100, display_height - 90, 50, 50),
+        # Obstacle(120, display_height - 100, 50, 50),
+        # Obstacle(140, display_height - 110, 50, 50),
+        # Obstacle(160, display_height - 100, 50, 50),
+        # Obstacle(180, display_height - 90, 50, 50),
+        # Obstacle(320, display_height - 200, 50, 100),
     ]
 
     while menu_principale.run:
@@ -175,8 +191,8 @@ def jeu(): #fortnite
         bras_rotatif2.posx = player2.position_x
         bras_rotatif2.posy = player2.position_y
 
-        bras_rotatif.tourner_bras(bras_rect, game_display)
-        bras_rotatif2.tourner_bras(bras_rect2, game_display)
+        bras_rotatif.tourner_bras(bras_rect, game_display,player1.joueurSorte)
+        bras_rotatif2.tourner_bras(bras_rect2, game_display,player2.joueurSorte)
 
         if bras_rotatif.boule_obj is not None:
             bras_rotatif.grossir_boule(65, 115)
@@ -192,6 +208,11 @@ def jeu(): #fortnite
             bras_rotatif.boule_obj.check_collision_boule(player2, game_display, menu_de_mort1,player1)
         if bras_rotatif2.boule_obj is not None:
             bras_rotatif2.boule_obj.check_collision_boule(player1, game_display, menu_de_mort2,player2)
+
+        # if bras_rotatif.boule_obj is not None:
+        #     bras_rotatif.ralentissement_boule()
+        # if bras_rotatif2.boule_obj is not None:
+        #     bras_rotatif2.ralentissement_boule()
 
         for obstacle in Obstacle_collision:
             obstacle.draw(game_display, (0, 0, 0))
@@ -237,12 +258,9 @@ def jeu(): #fortnite
         bras_rotatif.deceleration()
         bras_rotatif2.deceleration()
 
-
-
         if menu_de_mort1.restart or menu_de_mort2.restart:
             restart = True
             return
-
         for game_event in pygame.event.get():
             if game_event.type == pygame.QUIT:
                 menu_principale.run = False

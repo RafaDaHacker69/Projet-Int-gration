@@ -23,6 +23,7 @@ class Bras_Rotatif:
         self.decelerer = False
         self.grosseur_boule_max = 34
         self.facteur_grossissement_boule = 1
+        self.facteur_ralentissement_boule = 0
         if inverse:
             self.theta = self.theta *-1
 
@@ -44,8 +45,12 @@ class Bras_Rotatif:
                 self.theta += self.calcul_de_omega()
         return self.theta
 
-    def tourner_bras(self, rect, screen):
+    def tourner_bras(self, rect, screen,x):
         image_bras = pygame.image.load("IMAGES/arm rot.png").convert_alpha()
+        if x==2:
+            image_bras = pygame.image.load("IMAGES/arm rot(red).png").convert_alpha()
+        if x==3 :
+            image_bras = pygame.image.load("IMAGES/arm rot(blue).png").convert_alpha()
         image = pygame.transform.rotate(image_bras, 90)
         if self.inverse:
             image = pygame.transform.flip(image, True, False)
@@ -154,3 +159,8 @@ class Bras_Rotatif:
     def utlimate_boule(self,ult):
         if self.boule_obj != None :
             self.boule_obj.ult_dmg = ult
+
+
+    # def ralentissement_boule(self):
+    #     print(self.omega)
+    #     self.omega = self.omega * self.facteur_ralentissement_boule
