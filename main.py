@@ -261,12 +261,14 @@ def jeu(): #fortnite
         if player1.mur :
             mur = Obstacle(player1.position_x_mur,player1.position_y_mur,30,120)
             mur.draw(game_display,(255,255,255))
-            player2.bras_obj.boule_obj.check_collision_mur(mur)
+            if player2.bras_obj.boule_obj is not None:
+                player2.bras_obj.boule_obj.check_collision_mur(mur)
 
         if player2.mur :
             mur = Obstacle(player2.position_x_mur,player2.position_y_mur,30,120)
             mur.draw(game_display,(255,255,255))
-            player1.bras_obj.boule_obj.check_collision_mur(mur)
+            if player1.bras_obj.boule_obj is not None:
+                player1.bras_obj.boule_obj.check_collision_mur(mur)
 
         if menu_de_mort1.restart or menu_de_mort2.restart:
             restart = True
