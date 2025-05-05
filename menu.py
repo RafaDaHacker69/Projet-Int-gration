@@ -177,7 +177,7 @@ class menu:
                 if hovered_2:
                     self.fait = False
                     image = pygame.image.load("IMAGES/Red.png").convert_alpha()
-                    texte = "Deuxième personnage : \npersonnage rapide avec 80 hp et 200 stamina.\nforce: normale\nvitesse: vite\nsaut: normal\nhabilité ultime : jsp"
+                    texte = "Deuxième personnage : \npersonnage rapide avec 80 hp et 200 stamina.\nforce: normale\nvitesse: vite\nsaut: normal\nhabilité ultime : boule de feu"
                 if hovered_3:
                     self.fait = False
                     image = pygame.image.load("IMAGES/Blue.png").convert_alpha()

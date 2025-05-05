@@ -39,6 +39,7 @@ class Player:
         self.position_y_mur = 0
         self.ulti_dmg = 0
         self.ult_dmg = False
+        self.compteur = 0
         #Sprite animation
         self.animation_frames = []
         self.frame_index = 0
@@ -287,13 +288,14 @@ class Player:
             return -1
         return 0
 
-    def reset_ulti_dmg(self,compteur):
+    def reset_ulti_dmg(self):
         if self.ult_dmg:
-            compteur+=1
-            print(compteur)
-            if compteur == 300:
+            self.compteur+=1
+            #print(self.compteur)
+            if self.compteur == 900:
                 self.ulti_dmg = 0
                 self.ult_dmg = False
+                self.compteur = 0
                 print("ult terminé")
 
     def draw(self, game_display, color):
