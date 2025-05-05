@@ -107,8 +107,6 @@ def jeu(): #fortnite
 
     mur1_real = True
     mur2_real = True
-    contact1 = 0
-    contact2 = 0
 
     while menu_principale.run:
 
@@ -273,6 +271,8 @@ def jeu(): #fortnite
                 bras_rotatif2.boule_obj.check_collision_mur(mur1)
                 if bras_rotatif2.boule_obj.mur_brise :
                     Obstacle_collision.remove(mur1)
+                    bras_rotatif2.boule_obj.mur_brise = False
+                    mur1_real = True
                     player1.mur = False
 
         if player2.mur:
@@ -285,7 +285,14 @@ def jeu(): #fortnite
                 bras_rotatif.boule_obj.check_collision_mur(mur2)
                 if bras_rotatif.boule_obj.mur_brise :
                     Obstacle_collision.remove(mur2)
+                    bras_rotatif.boule_obj.mur_brise = False
+                    mur2_real = True
                     player2.mur = False
+
+        if bras_rotatif.boule_obj is not None and bras_rotatif.boule_obj.collision:
+            bras_rotatif.boule_obj = None
+        if bras_rotatif2.boule_obj is not None and bras_rotatif2.boule_obj.collision:
+            bras_rotatif2.boule_obj = None
 
         if menu_de_mort1.restart or menu_de_mort2.restart:
             restart = True

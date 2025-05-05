@@ -52,15 +52,12 @@ class Boules_De_Neiges:
         width = screen.get_width()
         if self.x < 0:
             self.x = 0
-            self.lance = False
             self.collision = True
         elif self.x > width:
             self.x = width
-            self.lance = False
             self.collision = True
         elif self.y > 590:
             self.y = 590
-            self.lance = False
             self.collision = True
 
     def check_collision_boule(self,player,screen,menu_de_mort,playerDegat):
@@ -105,11 +102,10 @@ class Boules_De_Neiges:
             print("contact")
             obstacle.contact += 1
             print(obstacle.contact)
-            self.lance = False
+            self.collision = True
             if obstacle.contact == 3:
                 self.mur_brise = True
                 print("wall brisé")
-
 
 
 
