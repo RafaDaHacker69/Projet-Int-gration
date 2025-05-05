@@ -97,7 +97,12 @@ class Boules_De_Neiges:
             menu_de_mort.menu_mort()
 
 
-
+    def check_collision_mur(self,obstacle):
+        counter = 0
+        if self.hitboxe.colliderect(obstacle):
+            counter += 1
+            if counter == 3:
+                print("wall brisé")
 
 
 

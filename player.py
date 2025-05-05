@@ -40,6 +40,8 @@ class Player:
         self.last_direction = -1
         self.inverse = inverse
         self.mur = False
+        self.position_x_mur = 0
+        self.position_y_mur = 0
 
     def load_sprite_sheet(self, path, num_frames):
         sprite_sheet = pygame.image.load(path).convert_alpha()
@@ -157,6 +159,11 @@ class Player:
                 print("utl 2")
             if self.joueurSorte == 3:
                 self.mur = True
+                self.position_x_mur = self.position_x + 90
+                self.position_y_mur = self.position_y - 70
+                if self.inverse:
+                    self.position_x_mur = self.position_x - 80
+                    self.position_y_mur = self.position_y - 70
                 print("utl 3")
 
 
