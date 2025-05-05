@@ -50,16 +50,12 @@ class Player:
             self.animation_frames.append(frame)
 
     def update_animation(self):
-        # Animate only if the player is moving
         if self.position_x != self.previous_position_x:
-            # Calculate speed factor (0 to 1)
-            speed_ratio = abs(self.vitesse_x) / self.vitesse_max_base  # use base max speed to normalize
-            speed_ratio = min(speed_ratio, 1)  # Ensure it doesn't go above 1
+            speed_ratio = abs(self.vitesse_x) / self.vitesse_max_base
+            speed_ratio = min(speed_ratio, 1)
 
-            # Advance animation frame based on speed ratio
             self.frame_timer += speed_ratio
 
-            # When frame_timer exceeds a threshold, advance the frame
             if self.frame_timer >= 1:
                 self.frame_index += 1
                 self.frame_timer = 0
@@ -67,7 +63,7 @@ class Player:
                 if self.frame_index >= len(self.animation_frames):
                     self.frame_index = 0
         else:
-            self.frame_index = 0  # Optional: go back to idle frame when not moving
+            self.frame_index = 0
             self.frame_timer = 0
 
         self.previous_position_x = self.position_x
