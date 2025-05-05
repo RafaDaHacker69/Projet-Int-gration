@@ -3,6 +3,7 @@ import pygame
 class Obstacle:
     def __init__(self, x, y, width, height):
         self.rect = pygame.Rect(x, y, width, height)  # Create a Pygame rectangle
+        self.contact = 0
 
     def draw(self, game_display, color):
         pygame.draw.rect(game_display, color, self.rect)  # Draw the

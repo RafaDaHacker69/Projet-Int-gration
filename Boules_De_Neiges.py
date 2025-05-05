@@ -20,6 +20,7 @@ class Boules_De_Neiges:
         self.dmg = 0
         self.facteur_dmg = 1
         self.ult_dmg = False
+        self.mur_brise = False
 
     def lancement_projectile(self):
         self.theta = math.radians(self.theta) #angle en radians
@@ -97,15 +98,18 @@ class Boules_De_Neiges:
             menu_de_mort.menu_mort()
 
 
-    def check_collision_mur(self,obstacle,contact):
+    def check_collision_mur(self,obstacle):
         rayon = self.r
         self.hitboxe = pygame.Rect(self.x - rayon, self.y - rayon, rayon * 2, rayon * 2)
         if self.hitboxe.colliderect(obstacle):
             print("contact")
-            contact += 1
-            print(contact)
-            if contact == 3:
+            obstacle.contact += 1
+            print(obstacle.contact)
+            self.lance = False
+            if obstacle.contact == 3:
+                self.mur_brise = True
                 print("wall brisé")
+
 
 
 
