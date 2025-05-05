@@ -151,7 +151,7 @@ class Tuto:
                 bras_rotatif.grossir_boule(65, 115)
 
             if bras_rotatif.boule_obj is not None and bras_rotatif.boule_obj.lance:
-                bras_rotatif.boule_obj.trajectoire_projectile(game_display)
+                bras_rotatif.boule_obj.trajectoire_projectile(game_display,Obstacle_collision)
 
             if bras_rotatif.boule_obj is not None:
                 rayon = player1.bras_obj.boule_obj.r
@@ -178,7 +178,7 @@ class Tuto:
             game_display.blit(cible,(1000,400))
 
             if index_texte < len(textes):
-                texte_surface = font.render(textes[index_texte], True, (255, 255, 255))
+                texte_surface = font.render(textes[index_texte], True, (0,0,0))
                 game_display.blit(texte_surface, (50, 300))
 
             if touche:

@@ -215,7 +215,7 @@ def jeu(): #fortnite
         #     bras_rotatif2.ralentissement_boule()
 
         for obstacle in Obstacle_collision:
-            obstacle.draw(game_display, (0, 0, 0))
+            obstacle.draw(game_display, (255, 255, 255))
 
         # Le temps
         if (menu_perso2.choisi):
@@ -257,6 +257,16 @@ def jeu(): #fortnite
 
         bras_rotatif.deceleration()
         bras_rotatif2.deceleration()
+
+        if player1.mur :
+            mur = Obstacle(player1.position_x + 90,player1.position_y - 70,30,120)
+            mur.draw(game_display,(255,255,255))
+
+
+        if player2.mur :
+            mur = Obstacle(player2.position_x - 80,player2.position_y -70,30,120)
+            mur.draw(game_display,(255,255,255))
+
 
         if menu_de_mort1.restart or menu_de_mort2.restart:
             restart = True

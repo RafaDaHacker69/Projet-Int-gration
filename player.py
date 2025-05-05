@@ -39,6 +39,7 @@ class Player:
         self.frame_timer = 0
         self.last_direction = -1
         self.inverse = inverse
+        self.mur = False
 
     def load_sprite_sheet(self, path, num_frames):
         sprite_sheet = pygame.image.load(path).convert_alpha()
@@ -159,6 +160,7 @@ class Player:
                 Bras_Rotatif.utlimate_boule(self.bras_obj,ult)
                 print("utl 2")
             if self.joueurSorte == 3:
+                self.mur = True
                 print("utl 3")
 
 
