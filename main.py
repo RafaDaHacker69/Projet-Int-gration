@@ -98,10 +98,10 @@ def jeu(): #fortnite
 
     Obstacle_collision = [
         Obstacle(100, display_height - 90, 50, 50),
-        # Obstacle(120, display_height - 100, 50, 50),
-        # Obstacle(140, display_height - 110, 50, 50),
-        # Obstacle(160, display_height - 100, 50, 50),
-        # Obstacle(180, display_height - 90, 50, 50),
+        Obstacle(120, display_height - 100, 50, 50),
+        Obstacle(140, display_height - 110, 50, 50),
+        Obstacle(160, display_height - 100, 50, 50),
+        Obstacle(180, display_height - 90, 50, 50),
         Obstacle(320, display_height - 200, 50, 100),
     ]
 
@@ -232,7 +232,7 @@ def jeu(): #fortnite
                 player2.facteur = 0.08
                 if jouerMusique:
                     pygame.mixer.music.stop()
-                    pygame.mixer.music.load("IMAGES/project 11 DRAFT.wav")
+                    pygame.mixer.music.load("IMAGES/project 11(final).wav")
                     pygame.mixer.music.play(loops=-1, start=0.0)
                     jouerMusique = False
             if (timer.is_finished()):
