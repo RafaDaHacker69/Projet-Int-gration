@@ -98,10 +98,10 @@ def jeu(): #fortnite
 
     Obstacle_collision = [
         Obstacle(100, display_height - 90, 50, 50),
-        # Obstacle(120, display_height - 100, 50, 50),
-        # Obstacle(140, display_height - 110, 50, 50),
-        # Obstacle(160, display_height - 100, 50, 50),
-        # Obstacle(180, display_height - 90, 50, 50),
+        Obstacle(120, display_height - 100, 50, 50),
+        Obstacle(140, display_height - 110, 50, 50),
+        Obstacle(160, display_height - 100, 50, 50),
+        Obstacle(180, display_height - 90, 50, 50),
         Obstacle(320, display_height - 200, 50, 100),
     ]
 
