@@ -42,6 +42,13 @@ class Player:
         self.mur = False
         self.position_x_mur = 0
         self.position_y_mur = 0
+        #idle sprite animation
+        self.Idle_animation_frames = []
+        self.Idle_frame_index = 0
+        self.Idle_animation_speed = 0.2
+        self.Idle_frame_timer = 0
+        self.Idle_last_direction = -1
+        self.Idle_inverse = inverse
 
     def load_sprite_sheet(self, path, num_frames):
         sprite_sheet = pygame.image.load(path).convert_alpha()
@@ -50,6 +57,20 @@ class Player:
         for i in range(num_frames):
             frame = sprite_sheet.subsurface((i * frame_width, 0, frame_width, frame_height))
             self.animation_frames.append(frame)
+
+    def load_idle_sprite_sheet(self, path, num_frames):
+        sprite_sheet = pygame.image.load(path).convert_alpha()
+        frame_width = sprite_sheet.get_width() // num_frames
+        frame_height = sprite_sheet.get_height()
+        for i in range(num_frames):
+            frame = sprite_sheet.subsurface((i * frame_width, 0, frame_width, frame_height))
+            self.Idle_animation_frames.append(frame)
+
+    def update_idle_animation(self):
+        self.Idle_frame_timer += self.Idle_animation_speed
+        if self.Idle_frame_timer >= 1:
+            self.Idle_frame_index = (self.Idle_frame_index + 1) % len(self.Idle_animation_frames)
+            self.Idle_frame_timer = 0
 
     def update_animation(self):
         if self.position_x != self.previous_position_x:
@@ -64,14 +85,19 @@ class Player:
 
                 if self.frame_index >= len(self.animation_frames):
                     self.frame_index = 0
+            self.update_idle_animation()
         else:
+            self.update_idle_animation()
             self.frame_index = 0
             self.frame_timer = 0
 
         self.previous_position_x = self.position_x
 
     def get_current_frame(self):
-        return self.animation_frames[self.frame_index]
+        if self.vitesse_x != 0:
+            return self.animation_frames[self.frame_index]
+        else:
+            return self.Idle_animation_frames[self.Idle_frame_index]
 
     def util_stamina(self, nb):
         if self.Stamina >= nb:
@@ -253,7 +279,10 @@ class Player:
         return 0
 
     def draw(self, game_display, color):
-        pygame.draw.rect(game_display, color, (self.position_x, self.position_y, self.largeur, self.hauteur))
+        #pygame.draw.rect(game_display, color, (self.position_x, self.position_y, self.largeur, self.hauteur))
+        current_frame = self.get_current_frame()
+        flipped = pygame.transform.flip(current_frame, self.last_direction == -1, False)
+        game_display.blit(flipped, (self.position_x, self.position_y))
 
     def hitboxes(self,screen):
         if self.inverse :
