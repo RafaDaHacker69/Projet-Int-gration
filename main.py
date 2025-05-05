@@ -198,9 +198,9 @@ def jeu(): #fortnite
         bras_rotatif2.tourner_bras(bras_rect2, game_display,player2.joueurSorte)
 
         if bras_rotatif.boule_obj is not None:
-            bras_rotatif.grossir_boule(65, 115)
+            bras_rotatif.grossir_boule(65, 115,player1)
         if bras_rotatif2.boule_obj is not None:
-            bras_rotatif2.grossir_boule(65, 115)
+            bras_rotatif2.grossir_boule(65, 115,player2)
 
         if bras_rotatif.boule_obj is not None and bras_rotatif.boule_obj.lance:
             bras_rotatif.boule_obj.trajectoire_projectile(game_display, Obstacle_collision)

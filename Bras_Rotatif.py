@@ -78,7 +78,7 @@ class Bras_Rotatif:
             self.ferme = True
 
     def ramasser_boule(self,lim_min, lim_max,screen,player):
-        if self.ferme and not self.boule and lim_min < self.theta < lim_max:
+        if self.ferme and not self.boule and lim_min < self.theta < lim_max and player.au_sol:
             self.boule_obj = Boules_De_Neiges(10, 10)
             self.boule = True
             print(f"Boule de neige {self.boule}:")
@@ -105,8 +105,8 @@ class Bras_Rotatif:
             pygame.draw.rect(rect, (0, 0, 0), (5, 30, 10, 20)) #main droite
         return rect
 
-    def grossir_boule(self, lim_min, lim_max):
-        if self.boule and self.boule_obj and lim_min < self.theta < lim_max and self.ferme and self.boule_obj.r < self.grosseur_boule_max:
+    def grossir_boule(self, lim_min, lim_max,player):
+        if self.boule and self.boule_obj and lim_min < self.theta < lim_max and self.ferme and self.boule_obj.r < self.grosseur_boule_max and player.au_sol:
             self.frame_counter += 1
             if self.frame_counter > 20:
                 self.boule_obj.r += self.facteur_grossissement_boule
