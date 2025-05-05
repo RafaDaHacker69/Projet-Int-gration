@@ -131,7 +131,10 @@ class Bras_Rotatif:
             self.boule_obj.vitesse = ((self.omega * self.longueur + player.vitesse_x)*-1)*0.43
             if self.inverse:
                 self.boule_obj.vitesse = ((self.omega * self.longueur + player.vitesse_x))*0.43
-            pygame.draw.circle(screen, (173, 216, 230), (circle_x, circle_y), self.boule_obj.r)
+            if player.ult_dmg:
+                pygame.draw.circle(screen, (255, 102, 102), (circle_x, circle_y), self.boule_obj.r)
+            else:
+                pygame.draw.circle(screen, (173, 216, 230), (circle_x, circle_y), self.boule_obj.r)
             #print(f"x : {circle_x}, y : {circle_y}")
 
     def deceleration(self):
@@ -155,11 +158,6 @@ class Bras_Rotatif:
                     self.omega = 0
                     self.t = 0
                     self.decelerer = False
-
-    def utlimate_boule(self,ult):
-        if self.boule_obj != None :
-            self.boule_obj.ult_dmg = ult
-
 
     # def ralentissement_boule(self):
     #     print(self.omega)

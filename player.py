@@ -1,4 +1,6 @@
 import pygame
+from PIL.ImageDraw import Outline
+
 from Bras_Rotatif import *
 
 class Player:
@@ -32,6 +34,11 @@ class Player:
         self.image = pygame.image.load("IMAGES/finalmodel.png").convert_alpha()
         self.joueurSorte=1
         self.bras_obj = None
+        self.mur = False
+        self.position_x_mur = 0
+        self.position_y_mur = 0
+        self.ulti_dmg = 0
+        self.ult_dmg = False
         #Sprite animation
         self.animation_frames = []
         self.frame_index = 0
@@ -39,9 +46,6 @@ class Player:
         self.frame_timer = 0
         self.last_direction = -1
         self.inverse = inverse
-        self.mur = False
-        self.position_x_mur = 0
-        self.position_y_mur = 0
         #idle sprite animation
         self.Idle_animation_frames = []
         self.Idle_frame_index = 0
@@ -180,8 +184,8 @@ class Player:
                     self.pv = self.pv_max
                 print(self.pv)
             if self.joueurSorte == 2:
-                ult = True
-                Bras_Rotatif.utlimate_boule(self.bras_obj,ult)
+                self.ulti_dmg = 20
+                self.ult_dmg = True
                 print("utl 2")
             if self.joueurSorte == 3:
                 self.mur = True
@@ -282,6 +286,15 @@ class Player:
         elif self.vitesse_x < 0:
             return -1
         return 0
+
+    def reset_ulti_dmg(self,compteur):
+        if self.ult_dmg:
+            compteur+=1
+            print(compteur)
+            if compteur == 300:
+                self.ulti_dmg = 0
+                self.ult_dmg = False
+                print("ult terminé")
 
     def draw(self, game_display, color):
         #pygame.draw.rect(game_display, color, (self.position_x, self.position_y, self.largeur, self.hauteur))

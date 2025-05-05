@@ -108,6 +108,9 @@ def jeu(): #fortnite
     mur1_real = True
     mur2_real = True
 
+    compteur1_ulti_dmg = 0
+    compteur2_ulti_dmg = 0
+
     while menu_principale.run:
 
         keys = pygame.key.get_pressed()
@@ -293,6 +296,9 @@ def jeu(): #fortnite
             bras_rotatif.boule_obj = None
         if bras_rotatif2.boule_obj is not None and bras_rotatif2.boule_obj.collision:
             bras_rotatif2.boule_obj = None
+
+        player1.reset_ulti_dmg(compteur1_ulti_dmg)
+        player2.reset_ulti_dmg(compteur2_ulti_dmg)
 
         if menu_de_mort1.restart or menu_de_mort2.restart:
             restart = True

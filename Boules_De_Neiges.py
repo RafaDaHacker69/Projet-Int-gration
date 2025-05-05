@@ -73,11 +73,7 @@ class Boules_De_Neiges:
             vf = ((self.m * self.Vx) + (80 * player.vitesse_x)) / (self.m + 80)
             player.vitesse_x = vf
             modVit=math.sqrt(self.Vx**2 + self.Vy**2)
-            if self.ult_dmg:
-                print("lolol")
-                self.dmg = 1000
-            else :
-                self.dmg = self.facteur_dmg*self.m*modVit/(80*15)
+            self.dmg = self.facteur_dmg*self.m*modVit/(80*15)+player.ulti_dmg
             self.degat_inflige(player,menu_de_mort,playerDegat)
 
     def degat_inflige(self,player,menu_de_mort,playerDegat):
