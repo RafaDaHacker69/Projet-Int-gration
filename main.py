@@ -105,6 +105,11 @@ def jeu(): #fortnite
         Obstacle(320, display_height - 200, 50, 100),
     ]
 
+    mur1_real = True
+    mur2_real = True
+    contact1 = 0
+    contact2 = 0
+
     while menu_principale.run:
 
         keys = pygame.key.get_pressed()
@@ -259,16 +264,20 @@ def jeu(): #fortnite
         bras_rotatif2.deceleration()
 
         if player1.mur :
-            mur = Obstacle(player1.position_x_mur,player1.position_y_mur,30,120)
-            mur.draw(game_display,(255,255,255))
-            if player2.bras_obj.boule_obj is not None:
-                player2.bras_obj.boule_obj.check_collision_mur(mur)
+            if mur1_real:
+                mur1 = Obstacle(player1.position_x_mur, player1.position_y_mur, 30, 120)
+                mur1_real = False
+            mur1.draw(game_display,(255,255,255))
+            if bras_rotatif2.boule_obj is not None:
+                bras_rotatif2.boule_obj.check_collision_mur(mur1,contact1)
+
+
 
         if player2.mur :
-            mur = Obstacle(player2.position_x_mur,player2.position_y_mur,30,120)
-            mur.draw(game_display,(255,255,255))
+            mur2 = Obstacle(player2.position_x_mur,player2.position_y_mur,30,120)
+            mur2.draw(game_display,(255,255,255))
             if player1.bras_obj.boule_obj is not None:
-                player1.bras_obj.boule_obj.check_collision_mur(mur)
+                player1.bras_obj.boule_obj.check_collision_mur(mur2,contact2)
 
         if menu_de_mort1.restart or menu_de_mort2.restart:
             restart = True

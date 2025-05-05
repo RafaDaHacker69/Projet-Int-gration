@@ -97,12 +97,16 @@ class Boules_De_Neiges:
             menu_de_mort.menu_mort()
 
 
-    def check_collision_mur(self,obstacle):
-        counter = 0
+    def check_collision_mur(self,obstacle,contact):
+        rayon = self.r
+        self.hitboxe = pygame.Rect(self.x - rayon, self.y - rayon, rayon * 2, rayon * 2)
         if self.hitboxe.colliderect(obstacle):
-            counter += 1
-            if counter == 3:
+            print("contact")
+            contact += 1
+            print(contact)
+            if contact == 3:
                 print("wall brisé")
+
 
 
 
