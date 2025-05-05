@@ -40,6 +40,8 @@ class Player:
         self.last_direction = -1
         self.inverse = inverse
         self.mur = False
+        self.position_x_mur = 0
+        self.position_y_mur = 0
 
     def load_sprite_sheet(self, path, num_frames):
         sprite_sheet = pygame.image.load(path).convert_alpha()
