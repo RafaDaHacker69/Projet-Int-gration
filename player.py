@@ -54,6 +54,7 @@ class Player:
         self.Idle_frame_timer = 0
         self.Idle_last_direction = -1
         self.Idle_inverse = inverse
+        self.nbJoueur=1
 
     def load_sprite_sheet(self, path, num_frames):
         sprite_sheet = pygame.image.load(path).convert_alpha()

@@ -219,7 +219,7 @@ class menu:
             font.render_to(screen, (x, y), ligne, couleur)
             y += espace
 
-    def menu_mort(self):
+    def menu_mort(self,nbJoueur):
         width, height = 1240, 680
         screen = pygame.display.set_mode((width, height))
         retour_menu = Button.Button((width // 2, height // 4 + 20), "Retour")
@@ -228,7 +228,8 @@ class menu:
         while running:
             screen.fill((255, 255, 255))
             font = pygame.font.Font(None, 60)
-            text = font.render("Bravo vous avez gagné !", True, (0, 0, 0))
+            txt = "Victoire du joueur "+str(nbJoueur)+"!"
+            text = font.render(txt, True, (0, 0, 0))
             self.screen.blit(text, (400, 75))
             retour_menu.initialiser(screen)
             retour_menu.verifier(pygame.mouse.get_pos())

@@ -92,7 +92,7 @@ class Boules_De_Neiges:
         print(f"Pv : {player.pv}")
         if player.pv < 0:
             print("Le joueur est mort")
-            menu_de_mort.menu_mort()
+            menu_de_mort.menu_mort(playerDegat.nbJoueur)
 
 
     def check_collision_mur(self,obstacle):

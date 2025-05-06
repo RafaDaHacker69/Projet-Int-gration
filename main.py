@@ -70,6 +70,7 @@ def jeu(): #fortnite
 
     player1 = Player(display_width * 0.2, display_height * 0.8, 30, 40, controles='wasd', pv=100,inverse=False)
     player2 = Player(display_width * 0.7, display_height * 0.8, 30, 40, controles='fleches', pv=100,inverse=True)
+    player2.nbJoueur = 2
     player1.last_direction = 1  # Facing right
     player2.last_direction = -1  # Facing left
 
@@ -241,10 +242,10 @@ def jeu(): #fortnite
                     jouerMusique = False
             if (timer.is_finished()):
                 if player1.pv < player2.pv:
-                    menu_de_mort1.menu_mort()
+                    menu_de_mort1.menu_mort("2")
 
                 if player1.pv > player2.pv:
-                    menu_de_mort2.menu_mort()
+                    menu_de_mort2.menu_mort("1")
 
         health1 = Bar(25, 25, 250, 20, player1.pv_max, player1.pv, "hp")
         health1.draw(game_display)
