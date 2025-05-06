@@ -124,9 +124,9 @@ class menu:
         running = True
         while running:
             screen.fill((255, 255, 255))
-            font = pygame.font.Font(None, 60)
+            font = pygame.font.Font("IMAGES/grand9k-pixel.ttf", 50)
             text = font.render(txt, True, (0, 0, 0))
-            self.screen.blit(text, (400, 75))
+            self.screen.blit(text, (320, 25))
             btn_Joueur_1.initialiser(screen)
             btn_Joueur_2.initialiser(screen)
             btn_Joueur_3.initialiser(screen)
