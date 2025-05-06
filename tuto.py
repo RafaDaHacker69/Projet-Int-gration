@@ -57,7 +57,7 @@ class Tuto:
 
         player1 = Player(display_width * 0.2, display_height * 0.8, 30, 40, controles='wasd', pv=75, facteur = 2, inverse=False)
         player1.load_sprite_sheet("IMAGES/final model-Sheet(black).png", 10)
-        player1.load_idle_sprite_sheet("IMAGES/idle_black.png", 20)
+        player1.load_idle_sprite_sheet("IMAGES/idle_black.png", 28)
         player_image1 = player1.image
         player1.last_direction = 1
 
@@ -147,10 +147,10 @@ class Tuto:
             bras_rotatif.tourner_bras(bras_rect, game_display,1)
 
             if bras_rotatif.boule_obj is not None:
-                bras_rotatif.grossir_boule(65, 115)
+                bras_rotatif.grossir_boule(65, 115, player1)
 
             if bras_rotatif.boule_obj is not None and bras_rotatif.boule_obj.lance:
-                bras_rotatif.boule_obj.trajectoire_projectile(game_display,Obstacle_collision)
+                bras_rotatif.boule_obj.trajectoire_projectile(game_display,Obstacle_collision, player1)
 
             if bras_rotatif.boule_obj is not None:
                 rayon = player1.bras_obj.boule_obj.r
