@@ -58,6 +58,7 @@ def jeu(): #fortnite
     if menu_principale.tuto:
         tuto.tutoriel()
         restart = True
+        
 
 
     frame_index = 0
@@ -297,7 +298,7 @@ def jeu(): #fortnite
         player1.reset_ulti_dmg()
         player2.reset_ulti_dmg()
 
-        print(player1.ulti_dmg)
+        #print(player1.ulti_dmg)
 
         if menu_de_mort1.restart or menu_de_mort2.restart:
             restart = True
