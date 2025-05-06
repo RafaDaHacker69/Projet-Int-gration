@@ -177,15 +177,15 @@ class menu:
                 if hovered_1:
                     self.fait=False
                     image = pygame.image.load("IMAGES/Black.png").convert_alpha()
-                    texte = "Premier personnage :\n personnage de base avec 100 hp et 200 stamina.\nforce: normale\nvitesse: normale\nsaut:normal\nhabilité ultime : regénération de santé"
+                    texte = "Premier personnage :\npersonnage de base avec 100 hp et 100 stamina.\nforce: normale\nvitesse: normale\nsaut:normal\nhabilité ultime : regénération de santé"
                 if hovered_2:
                     self.fait = False
                     image = pygame.image.load("IMAGES/Red.png").convert_alpha()
-                    texte = "Deuxième personnage : \npersonnage rapide avec 80 hp et 200 stamina.\nforce: normale\nvitesse: vite\nsaut: normal\nhabilité ultime : boule de feu"
+                    texte = "Deuxième personnage :\npersonnage rapide avec 80 hp et 100 stamina.\nforce: fort\nvitesse: normal\nsaut: normal\nhabilité ultime : boule de feu"
                 if hovered_3:
                     self.fait = False
                     image = pygame.image.load("IMAGES/Blue.png").convert_alpha()
-                    texte = "Premier personnage :      personnage de base avec 100 hp et 200 stamina.\nforce: normale\nvitesse: normale\nsaut:élevé\nhabilité ultime : construction de mur"
+                    texte = "Troisième personnage :\npersonnage mobile avec 90 hp et 120 stamina.\nforce: normale\nvitesse: vite\nsaut:élevé\nhabilité ultime : construction de mur"
             font = pygame.font.Font(None, 60)
             info = font.render(texte, True, (0, 0, 0))
             self.dessiner_text(self.screen, texte, (25, 175), "IMAGES/grand9k-pixel.ttf", 30, (0, 0, 0), 475)
