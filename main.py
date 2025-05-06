@@ -35,7 +35,7 @@ def jeu(): #fortnite
     tuto = Tuto()
 
     game_clock = pygame.time.Clock()
-    timer = Timer(300, 50, Width / 2 - 100, 25, (255, 255, 255), game_display)
+    timer = Timer(180, 50, Width / 2 - 100, 25, (255, 255, 255), game_display)
 
     BACKGROUND_COLOR = (173, 216, 230)
     loading = LoadingScreen()
