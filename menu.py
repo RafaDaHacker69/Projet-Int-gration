@@ -140,6 +140,7 @@ class menu:
                     self.quitter = True
                     sys.exit()
                 if btn_Joueur_1.clique(event, pygame.mouse.get_pos()):
+                    player.load_sprite_sheet("IMAGES/final model-Sheet(black).png", 10)
                     player.load_idle_sprite_sheet("IMAGES/idle_black.png", 28)
                     player.facteur=0.03
                     time.sleep(0.25)
