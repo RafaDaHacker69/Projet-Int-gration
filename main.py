@@ -68,8 +68,8 @@ def jeu(): #fortnite
     sol = pygame.image.load('IMAGES/sol.png').convert_alpha()
     display_width, display_height = game_display.get_size()
 
-    player1 = Player(display_width * 0.2, display_height * 0.8, 30, 40, controles='wasd', pv=100, facteur=0.01,inverse=False)
-    player2 = Player(display_width * 0.7, display_height * 0.8, 30, 40, controles='fleches', pv=100, facteur=0.01,inverse=True)
+    player1 = Player(display_width * 0.2, display_height * 0.8, 30, 40, controles='wasd', pv=100,inverse=False)
+    player2 = Player(display_width * 0.7, display_height * 0.8, 30, 40, controles='fleches', pv=100,inverse=True)
     player1.last_direction = 1  # Facing right
     player2.last_direction = -1  # Facing left
 
@@ -252,7 +252,7 @@ def jeu(): #fortnite
         health2.draw(game_display)
         stamina1 = Bar(25, 55, 250, 20, player1.max_Stamina, player1.Stamina, "stamina")
         stamina1.draw(game_display)
-        stamina2 = Bar(game_display.get_width() - 275, 55, 250, 20, player1.max_Stamina, player2.Stamina, "stamina")
+        stamina2 = Bar(game_display.get_width() - 275, 55, 250, 20, player2.max_Stamina, player2.Stamina, "stamina")
         stamina2.draw(game_display)
         ult1 = Bar(25, 85, 250, 20, player1.charge_max, player1.charge, "ult")
         ult1.draw(game_display)

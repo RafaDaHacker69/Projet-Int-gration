@@ -140,28 +140,32 @@ class menu:
                     self.quitter = True
                     sys.exit()
                 if btn_Joueur_1.clique(event, pygame.mouse.get_pos()):
-                    player.load_sprite_sheet("IMAGES/final model-Sheet(black).png", 10)
                     player.load_idle_sprite_sheet("IMAGES/idle_black.png", 28)
+                    player.facteur=0.03
                     time.sleep(0.25)
                     self.choisi = True
                     running = False
                 if btn_Joueur_2.clique(event, pygame.mouse.get_pos()):
-                    player.image = pygame.image.load("IMAGES/pinguoin-vert.png").convert_alpha()
                     player.load_sprite_sheet("IMAGES/final model-Sheet(red).png", 10)
                     player.load_idle_sprite_sheet("IMAGES/idle_red.png", 28)
                     player.joueurSorte=2
                     player.pv = 80
                     player.pv_max = 80
+                    player.facteur=0.01
                     bras_rotatif.alpha = 2
                     bras_rotatif.omega0 = 5
                     time.sleep(0.25)
                     self.choisi = True
                     running = False
                 if btn_Joueur_3.clique(event, pygame.mouse.get_pos()):
-                    player.image = pygame.image.load("IMAGES/pinguoin-rouge.png").convert_alpha()
                     player.load_sprite_sheet("IMAGES/final model-Sheet(blue).png", 10)
                     player.load_idle_sprite_sheet("IMAGES/idle_blue.png", 28)
                     player.joueurSorte = 3
+                    player.Stamina=120
+                    player.max_Stamina=120
+                    player.pv = 90
+                    player.pv_max = 90
+                    player.facteur=0.02
                     player.force_saut = 11
                     player.acceleration = 2
                     time.sleep(0.25)

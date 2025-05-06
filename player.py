@@ -4,7 +4,7 @@ from PIL.ImageDraw import Outline
 from Bras_Rotatif import *
 
 class Player:
-    def __init__(self, position_x, position_y, largeur, hauteur, controles, pv, facteur, inverse):
+    def __init__(self, position_x, position_y, largeur, hauteur, controles, pv, inverse):
         self.position_x = position_x
         self.previous_position_x = 0
         self.position_y = position_y
@@ -30,7 +30,7 @@ class Player:
         self.pv_max = 100
         self.charge=0
         self.charge_max = 100
-        self.facteur= facteur
+        self.facteur= 0.01
         self.image = pygame.image.load("IMAGES/finalmodel.png").convert_alpha()
         self.joueurSorte=1
         self.bras_obj = None
