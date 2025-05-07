@@ -2,6 +2,9 @@ import pygame.freetype
 import Button
 from tuto import *
 import time
+from PIL import Image
+import threading
+
 
 class menu:
     def __init__(self, screen):
@@ -182,7 +185,7 @@ class menu:
                     player.joueurSorte = 3
                     player.Stamina=120
                     player.max_Stamina=120
-                    player.pv = 90
+                    player.pv = 1
                     player.pv_max = 90
                     player.facteur=0.02
                     player.force_saut = 11
@@ -250,23 +253,57 @@ class menu:
             font.render_to(screen, (x, y), ligne, couleur)
             y += espace
 
-    def menu_mort(self,nbJoueur):
+    def menu_mort(self, nbJoueur,playerSorte):
         width, height = 1240, 680
         screen = pygame.display.set_mode((width, height))
         pygame.mixer.music.stop()
         pygame.mixer.music.load("IMAGES/win music.wav")
         pygame.mixer.music.play(loops=-1, start=0.0)
+        gif_path = 'IMAGES/winBlack.gif'
+        if playerSorte==2:
+            gif_path = 'IMAGES/winRed.gif'
+        if playerSorte==3:
+            gif_path = 'IMAGES/winBlue.gif'
+        gif = Image.open(gif_path)
+        frames = []
+
+        def extract_gif_frames():
+            try:
+                while True:
+                    frame = pygame.image.fromstring(gif.tobytes(), gif.size, gif.mode)
+                    frame = pygame.transform.scale(frame, (width, height))  # scale to screen size
+                    frames.append(frame)
+                    gif.seek(gif.tell() + 1)
+            except EOFError:
+                pass
+
+        extract_gif_frames()
+
+        frame_index = 0
+        frame_delay = 5
+        frame_counter = 0
+
         retour_menu = Button.Button((width // 2, height // 4 + 20), "Retour")
         clock = pygame.time.Clock()
         running = True
+
         while running:
-            screen.fill((255, 255, 255))
+            if frames:
+                screen.blit(frames[frame_index], (0, 0))
+
+                frame_counter += 1
+                if frame_counter >= frame_delay:
+                    frame_counter = 0
+                    frame_index = (frame_index + 1) % len(frames)
+
             font = pygame.font.Font(None, 60)
-            txt = "Victoire du joueur "+str(nbJoueur)+"!"
+            txt = "Victoire du joueur " + str(nbJoueur) + "!"
             text = font.render(txt, True, (0, 0, 0))
             self.screen.blit(text, (400, 75))
+
             retour_menu.initialiser(screen)
             retour_menu.verifier(pygame.mouse.get_pos())
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     time.sleep(0.25)
@@ -276,5 +313,6 @@ class menu:
                     time.sleep(0.25)
                     running = False
                     self.restart = True
+
             pygame.display.flip()
             clock.tick(60)

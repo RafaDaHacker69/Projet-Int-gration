@@ -270,10 +270,10 @@ def jeu():
                     jouerMusique = False
             if (timer.is_finished()):
                 if player1.pv < player2.pv:
-                    menu_de_mort1.menu_mort("2")
+                    menu_de_mort1.menu_mort("2",player2.joueurSorte)
 
                 if player1.pv > player2.pv:
-                    menu_de_mort2.menu_mort("1")
+                    menu_de_mort2.menu_mort("1",player1.joueurSorte)
 
         health1 = Bar(25, 25, 250, 20, player1.pv_max, player1.pv, "hp")
         health1.draw(game_display)
