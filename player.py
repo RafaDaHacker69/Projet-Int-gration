@@ -239,7 +239,7 @@ class Player:
                 height_diff = obstacle_top - player_bottom
 
                 if 0 < -height_diff <= MAX_STEP_HEIGHT:
-                    self.position_y += height_diff*0.8
+                    self.position_y += height_diff*1
                     self.position_x = obstacle.rect.left - self.largeur if self.vitesse_x > 0 else obstacle.rect.right
                     self.vitesse_y = 0
                     self.au_sol = True
