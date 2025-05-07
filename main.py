@@ -110,7 +110,7 @@ def jeu():
         Obstacle_collision.append(Obstacle(x, y, block_width, block_height))
         #print("block created")
 
-    def shrink_obstacle_under_player_area(player, obstacles, max_radius=70, max_shrink=3):
+    def shrink_obstacle_under_player_area(player, obstacles, max_radius=70, max_shrink=7):
         px = player.hitboxe.centerx
         py = player.hitboxe.bottom + 1
 
