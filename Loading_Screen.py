@@ -14,7 +14,7 @@ class LoadingScreen:
         pygame.display.set_caption("Chargement")
         clock = pygame.time.Clock()
 
-        work = 10000000
+        work = 100000000
 
         font = pygame.font.Font("IMAGES/grand9k-pixel.ttf", 50)
         font_tips = pygame.font.Font("IMAGES/grand9k-pixel.ttf", 25)
@@ -39,16 +39,16 @@ class LoadingScreen:
             "Astuces : Certains pingouins peuvent plonger à plus de 500m dans l'eau !",
             "Astuces : Appuie sur Q/P pour utiliser ton abilité spéciale !",
             "Astuces : Utilise WASD/FLÈCHES pour te déplacer !",
-            "Astuces : Le pingouin noir aime le melon d'eau et le basket !",
+            "Astuces : Le pingouin noir aime le melon d'eau et le basket ~well well well!",
             "Astuces : Lance des boules de neiges pour éliminer l'adversaire !",
-            "Astuces : Anh khoi n'a pas beaucoup travaillé sur ce projet !",
+            "Astuces : Chink n'a pas beaucoup travaillé sur ce projet !",
             "Astuces : Le pingouin rouge est connu pour toucher des enfants  :O !",
             "Astuces : Appuie sur LSHIFT/M pour faire tourner ton bras !",
             "Astuces : Ton personnage possède une capacité spéciale unique !",
             "Astuces : Le pingouin bleu a voté ppc !",
-            "Astuces : Les bébés pingouins s’appellent des poussinots !",
+            "Astuces : Les bébés pingouins s’appellent des pussynots !",
             "Astuces : On retrouve les pingouins uniquement dans l'hémisphère sud !",
-            "Astuces : Bonjour traduit en chinois est 你好"
+            "Astuces : Bonjour traduit en chinois est Nihao fine shyts"
         ]
         index_texte = 0
 

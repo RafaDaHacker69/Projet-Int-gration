@@ -103,7 +103,7 @@ def jeu():
     Obstacle_collision = [
         # Obstacle(100, display_height - 90, 50, 50),
     ]
-    block_width = 20
+    block_width = 1
     block_height = 120
     for x in range(0, display_width, block_width):
         y = display_height-120
@@ -115,13 +115,12 @@ def jeu():
         py = player.hitboxe.bottom + 1
 
         for obstacle in obstacles:
-            # Only consider obstacles under the player vertically
             if abs(obstacle.rect.centery - py) < max_radius * 2:
                 cx = obstacle.rect.centerx
                 distance = abs(cx - px)
 
                 if distance <= max_radius:
-                    factor = 1 - (distance / max_radius)  # 1 = center, 0 = edge
+                    factor = 1 - (distance / max_radius)
                     shrink_amount = max_shrink * factor
 
                     if obstacle.taille_y > 0:
@@ -131,6 +130,8 @@ def jeu():
                         obstacle.rect.y = obstacle.original_y + (obstacle.original_height - obstacle.taille_y)
                         obstacle.rect.height = obstacle.taille_y
                         player.position_y = obstacle.rect.top - player.hauteur
+                        if player.on_ground:
+                            player.on_ground = False
 
     mur1_real = True
     mur2_real = True

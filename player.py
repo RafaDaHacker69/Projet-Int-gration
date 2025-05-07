@@ -161,6 +161,9 @@ class Player:
         if not self.au_sol:
             self.vitesse_y += self.gravite
 
+    def on_ground(self):
+        return self.au_sol
+
     def apply_friction(self):
         if self.vitesse_x > 0:
             self.vitesse_x = max(0, self.vitesse_x - self.friction)
@@ -238,9 +241,9 @@ class Player:
 
                 height_diff = obstacle_top - player_bottom
 
-                if 0 < -height_diff <= MAX_STEP_HEIGHT:
-                    self.position_y += height_diff*1
-                    self.position_x = obstacle.rect.left - self.largeur if self.vitesse_x > 0 else obstacle.rect.right
+                if 0 < -height_diff < MAX_STEP_HEIGHT:
+                    self.position_y += height_diff
+                    #self.position_x = obstacle.rect.left - self.largeur if self.vitesse_x > 0 else obstacle.rect.right
                     self.vitesse_y = 0
                     self.au_sol = True
                     self.sur_plateforme = True
