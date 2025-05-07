@@ -55,7 +55,7 @@ class Tuto:
         game_clock = pygame.time.Clock()
         display_width, display_height = game_display.get_size()
 
-        player1 = Player(display_width * 0.2, display_height * 0.8, 30, 40, controles='wasd', pv=75, facteur = 2, inverse=False)
+        player1 = Player(display_width * 0.2, display_height * 0.8, 30, 40, controles='wasd', pv=75, inverse=False)
         player1.load_sprite_sheet("IMAGES/final model-Sheet(black).png", 10)
         player1.load_idle_sprite_sheet("IMAGES/idle_black.png", 28)
         player_image1 = player1.image
