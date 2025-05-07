@@ -3,6 +3,7 @@ from player import Player
 from Bras_Rotatif import Bras_Rotatif
 from PIL import Image
 from Loading_Screen import *
+import Button
 
 class Tuto:
     def __init__(self):
@@ -14,7 +15,7 @@ class Tuto:
         Width, Height = 1240, 680
         width, height = 800, 400
         game_display = pygame.display.set_mode((Width, Height))
-        pygame.display.set_caption('Tuto')
+
 
         BACKGROUND_COLOR = (173, 216, 230)
         bg = pygame.image.load('IMAGES/backg.jpg').convert_alpha()
@@ -68,6 +69,8 @@ class Tuto:
         player_y_Baseposition = display_height * 0.88
 
         rect_cible = pygame.Rect(1005,410,85,85)
+
+        pygame.display.set_caption('Tuto')
 
         boucle = True
 

@@ -108,7 +108,7 @@ def jeu():
     for x in range(0, display_width, block_width):
         y = display_height-120
         Obstacle_collision.append(Obstacle(x, y, block_width, block_height))
-        print("block created")
+        #print("block created")
 
     def shrink_obstacle_under_player_area(player, obstacles, max_radius=70, max_shrink=3):
         px = player.hitboxe.centerx
