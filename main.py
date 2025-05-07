@@ -122,7 +122,6 @@ def jeu(): #fortnite
                 if distance <= max_radius:
                     factor = 1 - (distance / max_radius)  # 1 = center, 0 = edge
                     shrink_amount = max_shrink * factor
-                    print("fewhi")
 
                     if obstacle.taille_y > 0:
                         obstacle.taille_y -= shrink_amount
@@ -246,6 +245,7 @@ def jeu(): #fortnite
         #     bras_rotatif2.ralentissement_boule()
 
         for obstacle in Obstacle_collision:
+            obstacle.regrow()
             obstacle.draw(game_display, (255, 255, 255))
 
         # Le temps
