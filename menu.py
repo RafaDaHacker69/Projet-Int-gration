@@ -4,6 +4,7 @@ from tuto import *
 import time
 from PIL import Image
 import threading
+from Button import *
 
 
 class menu:
@@ -59,9 +60,9 @@ class menu:
 
         background = pygame.image.load("IMAGES/bg2.png")
         background = pygame.transform.scale(background, (width, height))
-        btnJouer = Button.Button((width // 2, height // 4 + 20), "Jouer")
-        btnQuitter = Button.Button((width // 2, height // 4 + 176 + 20), "Quitter")
-        btnTuto = Button.Button((width // 2, height // 4 + 88 + 20), "Tutoriel")
+        btnJouer = Button((width // 2, height // 4 + 20), "Jouer")
+        btnQuitter = Button((width // 2, height // 4 + 176 + 20), "Quitter")
+        btnTuto = Button((width // 2, height // 4 + 88 + 20), "Tutoriel")
         clock = pygame.time.Clock()
 
         shockwaves = []
@@ -139,9 +140,9 @@ class menu:
 
         current_frames = None  # To store the active hover animation
 
-        btn_Joueur_1 = Button.Button((width // 2, height // 4 + 20), "Perso 1")
-        btn_Joueur_2 = Button.Button((width // 2, height // 4 + 88  + 20), "Perso 2")
-        btn_Joueur_3 = Button.Button((width // 2, height // 4 + 176 + 20), "Perso 3")
+        btn_Joueur_1 = Button((width // 2, height // 4 + 20), "Perso 1")
+        btn_Joueur_2 = Button((width // 2, height // 4 + 88  + 20), "Perso 2")
+        btn_Joueur_3 = Button((width // 2, height // 4 + 176 + 20), "Perso 3")
 
         running = True
         while running:
@@ -255,7 +256,7 @@ class menu:
             y += espace
 
     def menu_mort(self, nbJoueur,playerSorte):
-        width, height = 1240, 680
+        width, height = 800, 400
         screen = pygame.display.set_mode((width, height))
         pygame.mixer.music.stop()
         pygame.mixer.music.load("IMAGES/win music.wav")
@@ -271,8 +272,9 @@ class menu:
         def extract_gif_frames():
             try:
                 while True:
-                    frame = pygame.image.fromstring(gif.tobytes(), gif.size, gif.mode)
-                    frame = pygame.transform.scale(frame, (width, height))  # scale to screen size
+                    converted = gif.convert('RGBA')  # Ensure alpha is preserved
+                    frame = pygame.image.fromstring(converted.tobytes(), gif.size, 'RGBA')
+                    frame = pygame.transform.scale(frame, (width, height))
                     frames.append(frame)
                     gif.seek(gif.tell() + 1)
             except EOFError:
@@ -284,7 +286,7 @@ class menu:
         frame_delay = 5
         frame_counter = 0
 
-        retour_menu = Button.Button((width // 2, height // 4 + 20), "Retour")
+        retour_menu = Button((width // 2, height // 4 + 20), "Retour")
         clock = pygame.time.Clock()
         running = True
 
@@ -297,10 +299,10 @@ class menu:
                     frame_counter = 0
                     frame_index = (frame_index + 1) % len(frames)
 
-            font = pygame.font.Font(None, 60)
+            font = pygame.font.Font("IMAGES/grand9k-pixel.ttf", 30)
             txt = "Victoire du joueur " + str(nbJoueur) + "!"
             text = font.render(txt, True, (0, 0, 0))
-            self.screen.blit(text, (400, 75))
+            self.screen.blit(text, (250, 10))
 
             retour_menu.initialiser(screen)
             retour_menu.verifier(pygame.mouse.get_pos())
