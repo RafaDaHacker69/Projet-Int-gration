@@ -108,7 +108,7 @@ def jeu():
         Obstacle_collision.append(Obstacle(x, y, block_width, block_height))
         print("block created")
 
-    def shrink_obstacle_under_player_area(player, obstacles, max_radius=60, max_shrink=8):
+    def shrink_obstacle_under_player_area(player, obstacles, max_radius=70, max_shrink=3):
         px = player.hitboxe.centerx
         py = player.hitboxe.bottom + 1
 
@@ -128,6 +128,7 @@ def jeu():
                             obstacle.taille_y = 0
                         obstacle.rect.y = obstacle.original_y + (obstacle.original_height - obstacle.taille_y)
                         obstacle.rect.height = obstacle.taille_y
+                        player.position_y = obstacle.rect.top - player.hauteur
 
     mur1_real = True
     mur2_real = True
@@ -244,7 +245,9 @@ def jeu():
         #     bras_rotatif2.ralentissement_boule()
 
         for obstacle in Obstacle_collision:
-            obstacle.regrow()
+            players_on_obstacle = any(obstacle.is_player_on_top(player) for player in [player1, player2])
+            if not players_on_obstacle:
+                obstacle.regrow()
             obstacle.draw(game_display, (255, 255, 255))
 
         # Le temps
