@@ -1,5 +1,4 @@
-import pygame
-from PIL.ImageDraw import Outline
+
 
 from Bras_Rotatif import *
 

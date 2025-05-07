@@ -14,7 +14,7 @@ class LoadingScreen:
         pygame.display.set_caption("Chargement")
         clock = pygame.time.Clock()
 
-        work = 100000000 * 1
+        work = 10000000
 
         font = pygame.font.Font("IMAGES/grand9k-pixel.ttf", 50)
         font_tips = pygame.font.Font("IMAGES/grand9k-pixel.ttf", 25)
