@@ -20,7 +20,6 @@ def jeu():
 
     game_display = pygame.display.set_mode((Width, Height))
     menu_display = pygame.display.set_mode((1, 1))
-    pygame.display.set_caption('CP (Club Penguin)')
 
     menu_principale = menu(menu_display)
     menu_principale.menu()
@@ -86,6 +85,8 @@ def jeu():
         menu_perso1.selection_perso(player1, bras_rotatif, "Sélection du Joueur 1")
         menu_perso2 = menu(menu_display)
         menu_perso2.selection_perso(player2, bras_rotatif2, "Sélection du Joueur 2")
+
+    pygame.display.set_caption('CP (Club Penguin)')
 
     # player_image1 = player1.image
     # player_image2 = player2.image

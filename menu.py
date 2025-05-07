@@ -121,6 +121,7 @@ class menu:
 
     def selection_perso(self,player,bras_rotatif,txt):
         width, height = 1240, 680
+        pygame.display.set_caption('Sélection du perso')
         screen = pygame.display.set_mode((width, height))
         clock = pygame.time.Clock()
         self.fait=True
@@ -144,7 +145,7 @@ class menu:
 
         running = True
         while running:
-            screen.fill((255, 255, 255))
+            self.screen.fill((160, 200, 220))
             font = pygame.font.Font("IMAGES/grand9k-pixel.ttf", 50)
             text = font.render(txt, True, (0, 0, 0))
             self.screen.blit(text, (320, 25))
