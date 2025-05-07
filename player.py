@@ -129,7 +129,7 @@ class Player:
                     self.vitesse_y = -self.force_saut
                     self.au_sol = False
                     self.sur_plateforme = False
-                    self.util_stamina(5)
+                    self.util_stamina(2)
             elif self.controles == 'fleches':
                 if keys[pygame.K_LEFT]:
                     direction_mouvement = -1
@@ -143,7 +143,7 @@ class Player:
                     self.vitesse_y = -self.force_saut
                     self.au_sol = False
                     self.sur_plateforme = False
-                    self.util_stamina(5)
+                    self.util_stamina(2)
 
         self.vitesse_x += direction_mouvement * self.acceleration
         self.vitesse_x = max(-self.vitesse_max, min(self.vitesse_x, self.vitesse_max))
