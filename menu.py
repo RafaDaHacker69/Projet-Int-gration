@@ -254,7 +254,7 @@ class menu:
             y += espace
 
     def menu_mort(self, nbJoueur,playerSorte):
-        width, height = 1240, 680
+        width, height = 800, 400
         screen = pygame.display.set_mode((width, height))
         pygame.mixer.music.stop()
         pygame.mixer.music.load("IMAGES/win music.wav")
@@ -270,8 +270,9 @@ class menu:
         def extract_gif_frames():
             try:
                 while True:
-                    frame = pygame.image.fromstring(gif.tobytes(), gif.size, gif.mode)
-                    frame = pygame.transform.scale(frame, (width, height))  # scale to screen size
+                    converted = gif.convert('RGBA')  # Ensure alpha is preserved
+                    frame = pygame.image.fromstring(converted.tobytes(), gif.size, 'RGBA')
+                    frame = pygame.transform.scale(frame, (width, height))
                     frames.append(frame)
                     gif.seek(gif.tell() + 1)
             except EOFError:
@@ -296,10 +297,10 @@ class menu:
                     frame_counter = 0
                     frame_index = (frame_index + 1) % len(frames)
 
-            font = pygame.font.Font(None, 60)
+            font = pygame.font.Font("IMAGES/grand9k-pixel.ttf", 30)
             txt = "Victoire du joueur " + str(nbJoueur) + "!"
             text = font.render(txt, True, (0, 0, 0))
-            self.screen.blit(text, (400, 75))
+            self.screen.blit(text, (250, 10))
 
             retour_menu.initialiser(screen)
             retour_menu.verifier(pygame.mouse.get_pos())
