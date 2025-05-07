@@ -1,6 +1,7 @@
 import pygame.freetype
 import Button
 from tuto import *
+import time
 
 class menu:
     def __init__(self, screen):
