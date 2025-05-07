@@ -60,6 +60,7 @@ class Tuto:
         player1.load_idle_sprite_sheet("IMAGES/idle_black.png", 28)
         player_image1 = player1.image
         player1.last_direction = 1
+        player1.charge=player1.charge_max
 
         bras_rotatif = Bras_Rotatif(1, 0, 4, False)
         player1.bras_obj = bras_rotatif
