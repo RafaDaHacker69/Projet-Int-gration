@@ -253,6 +253,9 @@ class menu:
     def menu_mort(self,nbJoueur):
         width, height = 1240, 680
         screen = pygame.display.set_mode((width, height))
+        pygame.mixer.music.stop()
+        pygame.mixer.music.load("IMAGES/win music.wav")
+        pygame.mixer.music.play(loops=-1, start=0.0)
         retour_menu = Button.Button((width // 2, height // 4 + 20), "Retour")
         clock = pygame.time.Clock()
         running = True
