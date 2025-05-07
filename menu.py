@@ -12,6 +12,18 @@ class menu:
         self.tuto = False
         self.quitter = False
 
+    def charger_sprite_sheet(self, chemin, lignes, colonnes):
+        sheet = pygame.image.load(chemin).convert_alpha()
+        frames = []
+        sheet_width, sheet_height = sheet.get_size()
+        frame_width = sheet_width // colonnes
+        frame_height = sheet_height // lignes
+        for i in range(lignes):
+            for j in range(colonnes):
+                frame = sheet.subsurface(pygame.Rect(j * frame_width, i * frame_height, frame_width, frame_height))
+                frames.append(frame)
+        return frames
+
     def menu(self):
         pygame.mixer.music.load("IMAGES/project 9 DRAFT.wav")
         pygame.mixer.music.play(loops=-1, start=0.0)
@@ -104,8 +116,6 @@ class menu:
             pygame.display.flip()
             clock.tick(60)
 
-
-
     def selection_perso(self,player,bras_rotatif,txt):
         width, height = 1240, 680
         screen = pygame.display.set_mode((width, height))
@@ -115,6 +125,15 @@ class menu:
             texte = " "
             image =pygame.image.load("IMAGES/blank.png").convert_alpha()
 
+        black_frames = self.charger_sprite_sheet("IMAGES/idle_black.png", 1, 28)
+        red_frames = self.charger_sprite_sheet("IMAGES/idle_red.png", 1, 28)
+        blue_frames = self.charger_sprite_sheet("IMAGES/idle_blue.png", 1, 28)
+
+        frame_delay_2 = 5
+        frame_index_2 = 0
+        frame_counter_2 = 0
+
+        current_frames = None  # To store the active hover animation
 
         btn_Joueur_1 = Button.Button((width // 2, height // 4 + 20), "Perso 1")
         btn_Joueur_2 = Button.Button((width // 2, height // 4 + 88  + 20), "Perso 2")
@@ -174,19 +193,32 @@ class menu:
                 hovered_1 = btn_Joueur_1.rect.collidepoint(pygame.mouse.get_pos())
                 hovered_2 = btn_Joueur_2.rect.collidepoint(pygame.mouse.get_pos())
                 hovered_3 = btn_Joueur_3.rect.collidepoint(pygame.mouse.get_pos())
+
                 if hovered_1:
-                    self.fait=False
-                    image = pygame.image.load("IMAGES/Black.png").convert_alpha()
+                    current_frames = black_frames
                     texte = "Premier personnage :\npersonnage de base avec 100 hp et 100 stamina.\nforce: normale\nvitesse: normale\nsaut:normal\nhabilité ultime : regénération de santé"
-                if hovered_2:
-                    self.fait = False
-                    image = pygame.image.load("IMAGES/Red.png").convert_alpha()
+                elif hovered_2:
+                    current_frames = red_frames
                     texte = "Deuxième personnage :\npersonnage agressif avec 80 hp et 100 stamina.\nforce: fort\nvitesse: normal\nsaut: normal\nhabilité ultime : boule de feu"
-                if hovered_3:
-                    self.fait = False
-                    image = pygame.image.load("IMAGES/Blue.png").convert_alpha()
+                elif hovered_3:
+                    current_frames = blue_frames
                     texte = "Troisième personnage :\npersonnage mobile avec 90 hp et 120 stamina.\nforce: normale\nvitesse: vite\nsaut:élevé\nhabilité ultime : construction de mur"
-            font = pygame.font.Font(None, 60)
+                else:
+                    current_frames = None
+                    font = pygame.font.Font(None, 60)
+
+            if current_frames:
+                frame_counter_2 += 1
+                if frame_counter_2 >= frame_delay_2:
+                    frame_counter_2 = 0
+                    frame_index_2 = (frame_index_2 + 1) % len(current_frames)
+
+                frame_image = current_frames[frame_index_2]
+                frame_image = pygame.transform.smoothscale(frame_image, (
+                int(frame_image.get_width() * 1.5), int(frame_image.get_height() * 1.5)))
+                screen.blit(frame_image,
+                            (width - frame_image.get_width() - 50, height // 2 - frame_image.get_height() // 2))
+
             info = font.render(texte, True, (0, 0, 0))
             self.dessiner_text(self.screen, texte, (25, 175), "IMAGES/grand9k-pixel.ttf", 30, (0, 0, 0), 475)
             imageFinale = pygame.transform.smoothscale(image,(int(image.get_width() * 1.5), int(image.get_height() * 1.5)))
