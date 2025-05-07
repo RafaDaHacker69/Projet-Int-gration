@@ -45,6 +45,7 @@ class LoadingScreen:
             "Astuces : Le pingouin rouge est connu pour toucher des enfants  :O !",
             "Astuces : Appuie sur LSHIFT/M pour faire tourner ton bras !",
             "Astuces : Ton personnage possède une capacité spéciale unique !",
+            "Astuces : Étienne s'tun tweaker",
             "Astuces : Le pingouin bleu a voté ppc !",
             "Astuces : Les bébés pingouins s’appellent des pussynots !",
             "Astuces : On retrouve les pingouins uniquement dans l'hémisphère sud !",
