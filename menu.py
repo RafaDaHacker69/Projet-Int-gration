@@ -125,9 +125,9 @@ class menu:
             texte = " "
             image =pygame.image.load("IMAGES/blank.png").convert_alpha()
 
-        black_frames = self.charger_sprite_sheet("IMAGES/idle_black.png", 1, 28)
-        red_frames = self.charger_sprite_sheet("IMAGES/idle_red.png", 1, 28)
-        blue_frames = self.charger_sprite_sheet("IMAGES/idle_blue.png", 1, 28)
+        black_frames = self.charger_sprite_sheet("IMAGES/Menu idle black.png", 1, 20)
+        red_frames = self.charger_sprite_sheet("IMAGES/Menu idle red.png", 1, 20)
+        blue_frames = self.charger_sprite_sheet("IMAGES/Menu idle blue.png", 1, 20)
 
         frame_delay_2 = 5
         frame_index_2 = 0
