@@ -1,6 +1,5 @@
 import math
 import pygame
-import time
 
 class Boules_De_Neiges:
 
