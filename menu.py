@@ -186,7 +186,7 @@ class menu:
                     player.joueurSorte = 3
                     player.Stamina=120
                     player.max_Stamina=120
-                    player.pv = 0.1
+                    player.pv = 90
                     player.pv_max = 90
                     player.facteur=0.02
                     player.force_saut = 11
