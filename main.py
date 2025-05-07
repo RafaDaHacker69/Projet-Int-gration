@@ -11,7 +11,7 @@ import threading
 
 restart = False
 
-def jeu(): #fortnite
+def jeu():
     global restart
     pygame.init()
 
