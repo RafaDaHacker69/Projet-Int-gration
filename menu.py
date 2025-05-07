@@ -4,6 +4,7 @@ from tuto import *
 import time
 from PIL import Image
 import threading
+from Button import *
 
 
 class menu:
@@ -59,9 +60,9 @@ class menu:
 
         background = pygame.image.load("IMAGES/bg2.png")
         background = pygame.transform.scale(background, (width, height))
-        btnJouer = Button.Button((width // 2, height // 4 + 20), "Jouer")
-        btnQuitter = Button.Button((width // 2, height // 4 + 176 + 20), "Quitter")
-        btnTuto = Button.Button((width // 2, height // 4 + 88 + 20), "Tutoriel")
+        btnJouer = Button((width // 2, height // 4 + 20), "Jouer")
+        btnQuitter = Button((width // 2, height // 4 + 176 + 20), "Quitter")
+        btnTuto = Button((width // 2, height // 4 + 88 + 20), "Tutoriel")
         clock = pygame.time.Clock()
 
         shockwaves = []
@@ -138,9 +139,9 @@ class menu:
 
         current_frames = None  # To store the active hover animation
 
-        btn_Joueur_1 = Button.Button((width // 2, height // 4 + 20), "Perso 1")
-        btn_Joueur_2 = Button.Button((width // 2, height // 4 + 88  + 20), "Perso 2")
-        btn_Joueur_3 = Button.Button((width // 2, height // 4 + 176 + 20), "Perso 3")
+        btn_Joueur_1 = Button((width // 2, height // 4 + 20), "Perso 1")
+        btn_Joueur_2 = Button((width // 2, height // 4 + 88  + 20), "Perso 2")
+        btn_Joueur_3 = Button((width // 2, height // 4 + 176 + 20), "Perso 3")
 
         running = True
         while running:
@@ -185,7 +186,7 @@ class menu:
                     player.joueurSorte = 3
                     player.Stamina=120
                     player.max_Stamina=120
-                    player.pv = 90
+                    player.pv = 0.1
                     player.pv_max = 90
                     player.facteur=0.02
                     player.force_saut = 11
@@ -284,7 +285,7 @@ class menu:
         frame_delay = 5
         frame_counter = 0
 
-        retour_menu = Button.Button((width // 2, height // 4 + 20), "Retour")
+        retour_menu = Button((width // 2, height // 4 + 20), "Retour")
         clock = pygame.time.Clock()
         running = True
 

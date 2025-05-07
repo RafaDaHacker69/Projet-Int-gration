@@ -3,6 +3,7 @@ from player import Player
 from Bras_Rotatif import Bras_Rotatif
 from PIL import Image
 from Loading_Screen import *
+from Button import *
 
 class Tuto:
     def __init__(self):
@@ -23,7 +24,7 @@ class Tuto:
         gif_path = 'IMAGES/anim neige(REAL).gif'  # Remplace par le chemin de ton GIF
         gif = Image.open(gif_path)
 
-        btnMenu = Button.Button((1000,100), "Menu")
+        btnMenu = Button((1000,100), "Menu")
 
         font = pygame.font.SysFont(None, 36)
         loading = LoadingScreen()

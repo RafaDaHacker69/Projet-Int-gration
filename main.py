@@ -7,6 +7,7 @@ from Timer import *
 from PIL import Image
 from Loading_Screen import *
 import threading
+from Button import *
 
 restart = False
 
