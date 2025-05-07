@@ -260,7 +260,7 @@ class menu:
         screen = pygame.display.set_mode((width, height))
         pygame.mixer.music.stop()
         pygame.mixer.music.load("IMAGES/win music.wav")
-        pygame.mixer.music.play(loops=-1, start=0.0)
+        pygame.mixer.music.play(loops=0, start=0.0)
         gif_path = 'IMAGES/winBlack.gif'
         if playerSorte==2:
             gif_path = 'IMAGES/winRed.gif'
