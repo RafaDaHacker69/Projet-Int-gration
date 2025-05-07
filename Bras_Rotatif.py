@@ -112,6 +112,10 @@ class Bras_Rotatif:
                 self.boule_obj.r += self.facteur_grossissement_boule
                 self.boule_obj.m = self.boule_obj.r ** 2
                 self.frame_counter = 0
+                return True
+        else:
+            return False
+        return False
         #print(f"rayon : {self.boule_obj.r}, masse : {self.boule_obj.m}")
 
     def dessiner_cercle_main(self, screen, player):

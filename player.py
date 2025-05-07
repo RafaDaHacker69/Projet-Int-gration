@@ -22,8 +22,12 @@ class Player:
         self.vitesse_max_base = 6
         self.gravite = 0.2
         self.force_saut = 7
-        self.acceleration = 0.5
-        self.friction = 0.1
+        self.acceleration = 0.6
+        self.snow_acceleration = 0.6
+        self.ice_acceleration= 0.2
+        self.friction = 0.3
+        self.snow_friction = 0.2
+        self.ice_friction = 0.05
         self.controles = controles
         self.hitboxe = None
         self.pv = pv
@@ -169,11 +173,17 @@ class Player:
             self.position_y = ground_level - self.hauteur
             self.vitesse_y = 0
             self.au_sol = True
+            self.friction = self.ice_friction
+            self.acceleration = self.ice_acceleration
+            print("friction:" + str(self.friction))
         else:
             if self.sur_plateforme == True:
                 self.au_sol = True
             else:
                 self.au_sol = False
+                self.friction = self.snow_friction
+                self.acceleration = self.snow_acceleration
+                print("friction:" + str(self.friction))
 
     def ult(self):
         if self.charge>=self.charge_max:
@@ -220,31 +230,28 @@ class Player:
                         self.vitesse_y += self.gravite
                         self.sur_plateforme = False
 
+        MAX_STEP_HEIGHT = 40
         for obstacle in obstacles:
             if rect_joueur_x.colliderect(obstacle.rect):
-                if self.vitesse_x > 0:
-                    if ((obstacle.get_y_pos()+obstacle.get_height())-self.position_y) >= 80:
-                        if self.vitesse_y == 0:
-                            self.position_x = obstacle.rect.left - self.largeur
-                            self.position_y = obstacle.rect.top - self.hauteur
-                            self.vitesse_y = 0
-                            self.au_sol = True
-                            self.sur_plateforme = True
-                            self.dernier_obstacle = obstacle
-                    else:
+                obstacle_top = obstacle.rect.top
+                obstacle_bottom = obstacle.rect.bottom
+                player_bottom = self.position_y + self.hauteur
+
+                height_diff = obstacle_top - player_bottom
+
+                if 0 < -1*height_diff <= MAX_STEP_HEIGHT:
+                    self.position_y += height_diff
+                    self.position_x = obstacle.rect.left - self.largeur if self.vitesse_x > 0 else obstacle.rect.right
+                    self.vitesse_y = 0
+                    self.au_sol = True
+                    self.sur_plateforme = True
+                    self.dernier_obstacle = obstacle
+                else:
+                    if self.vitesse_x > 0:
                         self.position_x = obstacle.rect.left - self.largeur
-                elif self.vitesse_x < 0:
-                    if ((obstacle.get_y_pos() + obstacle.get_height()) - self.position_y) >= 80:
-                        if self.vitesse_y == 0:
-                            self.position_x = obstacle.rect.right
-                            self.position_y = obstacle.rect.top - self.hauteur
-                            self.vitesse_y = 0
-                            self.au_sol = True
-                            self.sur_plateforme = True
-                            self.dernier_obstacle = obstacle
                     else:
                         self.position_x = obstacle.rect.right
-                self.vitesse_x = 0
+                    self.vitesse_x = 0
                 break
 
         for obstacle in obstacles:

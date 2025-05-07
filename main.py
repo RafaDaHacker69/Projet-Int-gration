@@ -5,6 +5,7 @@ from player import Player
 from Bras_Rotatif import Bras_Rotatif
 from Timer import *
 from PIL import Image
+import math
 from Loading_Screen import *
 import threading
 
@@ -100,12 +101,35 @@ def jeu(): #fortnite
 
     Obstacle_collision = [
         # Obstacle(100, display_height - 90, 50, 50),
-        # Obstacle(120, display_height - 100, 50, 50),
-        # Obstacle(140, display_height - 110, 50, 50),
-        # Obstacle(160, display_height - 100, 50, 50),
-        # Obstacle(180, display_height - 90, 50, 50),
-        # Obstacle(320, display_height - 200, 50, 100),
     ]
+    block_width = 5
+    block_height = 120
+    for x in range(0, display_width, block_width):
+        y = display_height-120
+        Obstacle_collision.append(Obstacle(x, y, block_width, block_height))
+        print("block created")
+
+    def shrink_obstacle_under_player_area(player, obstacles, max_radius=70, max_shrink=10):
+        px = player.hitboxe.centerx
+        py = player.hitboxe.bottom + 1
+
+        for obstacle in obstacles:
+            # Only consider obstacles under the player vertically
+            if abs(obstacle.rect.centery - py) < max_radius * 2:
+                cx = obstacle.rect.centerx
+                distance = abs(cx - px)
+
+                if distance <= max_radius:
+                    factor = 1 - (distance / max_radius)  # 1 = center, 0 = edge
+                    shrink_amount = max_shrink * factor
+                    print("fewhi")
+
+                    if obstacle.taille_y > 0:
+                        obstacle.taille_y -= shrink_amount
+                        if obstacle.taille_y < 0:
+                            obstacle.taille_y = 0
+                        obstacle.rect.y = obstacle.original_y + (obstacle.original_height - obstacle.taille_y)
+                        obstacle.rect.height = obstacle.taille_y
 
     mur1_real = True
     mur2_real = True
@@ -200,9 +224,11 @@ def jeu(): #fortnite
         bras_rotatif2.tourner_bras(bras_rect2, game_display,player2.joueurSorte)
 
         if bras_rotatif.boule_obj is not None:
-            bras_rotatif.grossir_boule(65, 115,player1)
+            if bras_rotatif.grossir_boule(65, 115,player1):
+                shrink_obstacle_under_player_area(player1, Obstacle_collision)
         if bras_rotatif2.boule_obj is not None:
-            bras_rotatif2.grossir_boule(65, 115,player2)
+            if bras_rotatif2.grossir_boule(65, 115,player2):
+                shrink_obstacle_under_player_area(player2, Obstacle_collision)
 
         if bras_rotatif.boule_obj is not None and bras_rotatif.boule_obj.lance:
             bras_rotatif.boule_obj.trajectoire_projectile(game_display, Obstacle_collision,player1)
