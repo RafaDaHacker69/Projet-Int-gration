@@ -1,4 +1,3 @@
-from menu import *
 from Bar import *
 from player import Player
 from Bras_Rotatif import Bras_Rotatif

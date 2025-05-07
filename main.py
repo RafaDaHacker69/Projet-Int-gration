@@ -5,13 +5,12 @@ from player import Player
 from Bras_Rotatif import Bras_Rotatif
 from Timer import *
 from PIL import Image
-import math
 from Loading_Screen import *
 import threading
 
 restart = False
 
-def jeu(): #fortnite
+def jeu():
     global restart
     pygame.init()
 

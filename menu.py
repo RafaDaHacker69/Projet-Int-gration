@@ -1,5 +1,3 @@
-import pygame
-import time
 import pygame.freetype
 import Button
 from tuto import *
