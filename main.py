@@ -109,7 +109,7 @@ def jeu(): #fortnite
         Obstacle_collision.append(Obstacle(x, y, block_width, block_height))
         print("block created")
 
-    def shrink_obstacle_under_player_area(player, obstacles, max_radius=70, max_shrink=10):
+    def shrink_obstacle_under_player_area(player, obstacles, max_radius=60, max_shrink=8):
         px = player.hitboxe.centerx
         py = player.hitboxe.bottom + 1
 
