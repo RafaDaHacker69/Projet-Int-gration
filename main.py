@@ -101,7 +101,7 @@ def jeu():
     Obstacle_collision = [
         # Obstacle(100, display_height - 90, 50, 50),
     ]
-    block_width = 10
+    block_width = 15
     block_height = 120
     for x in range(0, display_width, block_width):
         y = display_height-120
