@@ -174,7 +174,7 @@ class Player:
             self.au_sol = True
             self.friction = self.ice_friction
             self.acceleration = self.ice_acceleration
-            print("friction:" + str(self.friction))
+            #print("friction:" + str(self.friction))
         else:
             if self.sur_plateforme == True:
                 self.au_sol = True
@@ -182,7 +182,7 @@ class Player:
                 self.au_sol = False
                 self.friction = self.snow_friction
                 self.acceleration = self.snow_acceleration
-                print("friction:" + str(self.friction))
+                #print("friction:" + str(self.friction))
 
     def ult(self):
         if self.charge>=self.charge_max:
