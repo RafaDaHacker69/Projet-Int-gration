@@ -10,7 +10,7 @@ class Obstacle:
         self.taille_y = height
         self.growth_speed = 0.6
         self.last_growth_time = pygame.time.get_ticks()
-        self.growth_delay = 3000
+        self.growth_delay = 2000
 
     def draw(self, game_display, color):
         pygame.draw.rect(game_display, color, self.rect)
@@ -27,7 +27,7 @@ class Obstacle:
     def is_player_on_top(self, player):
         player_rect = player.hitboxe
         obstacle_top = self.rect.top
-        return player_rect.bottom >= obstacle_top and player_rect.bottom <= obstacle_top + 10 and player_rect.colliderect(
+        return player_rect.bottom >= obstacle_top and player_rect.bottom <= obstacle_top + 20 and player_rect.colliderect(
             self.rect)
 
     def regrow(self):
